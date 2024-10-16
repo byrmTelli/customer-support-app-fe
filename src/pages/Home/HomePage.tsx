@@ -9,28 +9,32 @@ const fastLink = [
     title: "Yeni Destek Talebi",
     icon: <FaHandsHelping />,
     content: "Content here",
+    path: "/support/create",
   },
   {
     title: "Sıkça Sorulan Sorular",
     icon: <TbMessageQuestion />,
     content: "Content here",
+    path: "/popular-questions",
   },
   {
     title: "Topluluk",
     icon: <FaPeopleGroup />,
     content: "Content here",
+    path: "/community",
   },
   {
     title: "Hizmet Geçmişi",
     icon: <MdOutlineContentPasteSearch />,
     content: "Content here",
+    path: "/ticket-history",
   },
 ];
 
 export default function HomePage() {
   return (
-    <div className="w-full h-full flex flex-col gap-4 items-center justify-center text-gray-800">
-      <div className="h-1/5">
+    <div className="w-full h-screen flex flex-col gap-4 items-center text-gray-800">
+      <div className="h-1/2 flex flex-col items-center bg-orange-200 w-full justify-center">
         <h1 className="text-3xl font-semibold">
           Welcome <span className="text-teal-700">Bayram Telli!</span>
         </h1>
@@ -55,6 +59,7 @@ export default function HomePage() {
             icon={item.icon}
             title={item.title}
             content={item.content}
+            path={item.path}
           />
         ))}
       </div>

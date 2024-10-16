@@ -6,7 +6,7 @@ export default function Navbar() {
   console.log(location.pathname);
 
   return (
-    <div className="md:h-[90px] flex items-center justify-between p-4">
+    <div className="md:h-[90px] flex items-center justify-between p-4 bg-teal-700 border-b border-gray-200 text-gray-200">
       <div className="">
         <span className="text-xl font-bold">Customer Support Service</span>
       </div>
@@ -14,7 +14,9 @@ export default function Navbar() {
         <ul className="flex gap-2">
           <li
             className={`${
-              location.pathname == "/" ? "border border-b-teal-700" : ""
+              location.pathname == "/"
+                ? " border border-teal-700 border-b-gray-200"
+                : ""
             } font-semibold`}
           >
             <Link to={"/"}>Home</Link>

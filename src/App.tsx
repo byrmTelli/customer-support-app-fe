@@ -2,26 +2,80 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/Home/HomePage";
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
-import CustomerPanel from "./pages/CustomerPanel/AdminPanel";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./pages/Login/Login";
 import Footer from "./components/Footer/Footer";
+import CreateNewSupport from "./pages/CreateNewSupport/CreateNewSupport";
+import PopularQuestionsPage from "./pages/PopularQuestions/PopularQuestionsPage";
+import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
+import Register from "./pages/Register/Register";
+import TicketHistoryPage from "./pages/TicketHistory/TicketHistoryPage";
+
+export const pages = [
+  {
+    title: "Home",
+    path: "/",
+    breadCrum: "/",
+    component: <HomePage />,
+  },
+  {
+    title: "Yönetim Paneli",
+    path: "/admin",
+    breadCrum: "/admin",
+    component: <AdminPanel />,
+  },
+  {
+    title: "Yeni Destek Talebi",
+    path: "/support/create",
+    breadCrum: "/support/create",
+    component: <CreateNewSupport />,
+  },
+  {
+    title: "Login",
+    path: "/login",
+    breadCrum: "/login",
+    component: <Login />,
+  },
+  {
+    title: "Sıkça Sorulan Sorular",
+    path: "/popular-questions",
+    breadCrum: "/popular-questions",
+    component: <PopularQuestionsPage />,
+  },
+  {
+    title: "Şiremi Unuttum",
+    path: "/forget-password",
+    breadCrum: "/forget-password",
+    component: <ForgetPassword />,
+  },
+  {
+    title: "Kayıt Ol",
+    path: "/register",
+    breadCrum: "/register",
+    component: <Register />,
+  },
+  {
+    title: "Hizmet Geçmişi",
+    path: "/ticket-history",
+    breadCrum: "/ticket-history",
+    component: <TicketHistoryPage />,
+  },
+];
 
 function App() {
   return (
-    <div className="w-full h-screen flex flex-col overflow-hidden">
-      <div className="h-[60px]">
+    <div className="w-full h-screen flex flex-col">
+      <div className="">
         <Navbar />
       </div>
-      <div className="flex-grow overflow-auto">
+      <div className="flex flex-col gap-4">
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<AdminPanel />} />
-          <Route path="/customer" element={<CustomerPanel />} />
+          {pages.map((item, index) => (
+            <Route key={index} path={item.path} element={item.component} />
+          ))}
         </Routes>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }
