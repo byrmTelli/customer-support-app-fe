@@ -11,6 +11,9 @@ import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import Register from "./pages/Register/Register";
 import TicketHistoryPage from "./pages/TicketHistory/TicketHistoryPage";
 import Dashboard from "./pages/AdminPanel/Dashboard/Dashboard";
+import NotFoundPage from "./pages/NotFound/NotFoundPage";
+import CustomersPanel from "./pages/AdminPanel/Customers/CustomersPanel";
+import UsersPanel from "./pages/AdminPanel/Users/UsersPanel";
 
 export const pages = [
   {
@@ -30,6 +33,18 @@ export const pages = [
     path: "/admin/dashboard",
     breadCrum: "/admin/dashboard",
     component: <Dashboard />,
+  },
+  {
+    title: "Customers",
+    path: "/admin/customers",
+    breadCrum: "/admin/customers",
+    component: <CustomersPanel />,
+  },
+  {
+    title: "Users",
+    path: "/admin/users",
+    breadCrum: "/admin/users",
+    component: <UsersPanel />,
   },
   {
     title: "Yeni Destek Talebi",
@@ -80,6 +95,7 @@ function App() {
           {pages.map((item, index) => (
             <Route key={index} path={item.path} element={item.component} />
           ))}
+          <Route path="/*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
       </div>

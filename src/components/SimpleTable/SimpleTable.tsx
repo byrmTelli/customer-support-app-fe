@@ -54,9 +54,7 @@ export default function SimpleTable<T extends Record<string, any>>({
       <div className="w-full pr-[0.5px] bg-teal-700 border-b border-b-gray-200">
         <div className=" flex items-center  ml-[0.5px]">
           <div className="w-1/2   p-3">
-            <h1 className="font-semibold text-gray-200">
-              Geçmiş Hizmet Listesi
-            </h1>
+            <h1 className="font-semibold text-gray-200">{title}</h1>
           </div>
           <div className="w-1/2 p-3  flex justify-between gap-4">
             <div className="flex w-1/2  items-center justify-end">
