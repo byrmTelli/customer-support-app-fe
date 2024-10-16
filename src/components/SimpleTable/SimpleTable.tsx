@@ -68,6 +68,7 @@ export default function SimpleTable<T extends Record<string, any>>({
               type="text"
               className="outline-none py-1 px-3 text-sm w-1/2"
               placeholder="Search"
+              onChange={(e) => setFiltering(e.target.value)}
             />
           </div>
         </div>

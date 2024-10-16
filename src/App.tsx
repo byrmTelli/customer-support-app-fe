@@ -10,6 +10,7 @@ import PopularQuestionsPage from "./pages/PopularQuestions/PopularQuestionsPage"
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import Register from "./pages/Register/Register";
 import TicketHistoryPage from "./pages/TicketHistory/TicketHistoryPage";
+import Dashboard from "./pages/AdminPanel/Dashboard/Dashboard";
 
 export const pages = [
   {
@@ -23,6 +24,12 @@ export const pages = [
     path: "/admin",
     breadCrum: "/admin",
     component: <AdminPanel />,
+  },
+  {
+    title: "Yönetim Paneli",
+    path: "/admin/dashboard",
+    breadCrum: "/admin/dashboard",
+    component: <Dashboard />,
   },
   {
     title: "Yeni Destek Talebi",
