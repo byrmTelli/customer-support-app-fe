@@ -42,15 +42,17 @@ const monthlyData = groupByMonth(supportRequests);
 
 export default function MonthlySupportRequestsBarChart() {
   return (
-    <ResponsiveContainer width={"100%"} height={250}>
-      <BarChart data={monthlyData}>
-        <XAxis dataKey="month" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="opened" fill="#82ca9d" name="Açılan Talepler" />
-        <Bar dataKey="closed" fill="#8884d8" name="Kapanan Talepler" />
-      </BarChart>
-    </ResponsiveContainer>
+    <div className="w-full h-full px-2 py-8">
+      <ResponsiveContainer width={"100%"} height={"100%"}>
+        <BarChart data={monthlyData}>
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="opened" fill="#82ca9d" name="Açılan Talepler" />
+          <Bar dataKey="closed" fill="#8884d8" name="Kapanan Talepler" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 }

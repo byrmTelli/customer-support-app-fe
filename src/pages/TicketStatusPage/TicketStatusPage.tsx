@@ -19,8 +19,8 @@ export default function TicketStatusPage() {
   return (
     <div>
       <BreadCrum />
-      <div className="grid grid-cols-5 w-full gap-2 items-center justify-center p-4">
-        <div className="col-span-3 col-start-2 flex flex-col items-center gap-4 p-2">
+      <div className="grid grid-cols-6 w-full gap-2 items-center justify-center p-4 mt-4">
+        <div className="col-span-4 col-start-2 flex flex-col items-center gap-4 p-2 border border-gray-400 rounded-lg p-8">
           <div className="flex w-full gap-2 font-bold text-xl">
             <h1>Subject:</h1>
             <h1>Request Title</h1>
@@ -41,7 +41,7 @@ export default function TicketStatusPage() {
 
             <div className="flex gap-2">
               <h1>Status: </h1>
-              <p>Waiting</p>
+              <p className="text-teal-700">Waiting</p>
             </div>
             <div className="flex gap-2">
               <h1>Created At: </h1>
@@ -61,6 +61,12 @@ export default function TicketStatusPage() {
             </p>
           </div>
           <div className="w-full">
+            <h1>Files</h1>
+            <div className="">
+              {/* files will be here */}
+            </div>
+          </div>
+          <div className="w-full mt-8">
             <h1 className="text-xl font-semibold">Comments</h1>
             <div className="flex flex-col gap-3 mt-4">
               <Comment />

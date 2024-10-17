@@ -8,7 +8,7 @@ export default function Dashboard() {
     <div className="w-full p-4">
       <BreadCrum />
       <div className=""></div>
-      <div className="w-full grid grid-cols-5 grid-rows-5 gap-2">
+      <div className="w-full grid grid-cols-3 grid-rows-5 gap-2">
         <DashboardCard
           title="Users"
           score="60"
@@ -30,9 +30,6 @@ export default function Dashboard() {
           icon={<PiUsersFourLight />}
           className="flex flex-col items-center justify-center h-full"
         />
-        <div className="border border-gray-400 col-span-2 row-span-5">
-          <h1>title</h1>
-        </div>
         <div className="border border-gray-400 col-span-3 row-span-2 p-4">
           <div className="p-4">
             <MonthlyPieCharts />

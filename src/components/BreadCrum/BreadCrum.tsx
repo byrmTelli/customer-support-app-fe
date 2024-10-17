@@ -12,7 +12,7 @@ export default function BreadCrum() {
     .map((slice) => slice.replace("-", " "));
 
   return (
-    <div className="h-[80px] shadow  w-full flex pl-10 gap-3 items-center text-gray-700">
+    <div className="h-[80px] shadow  w-full flex pl-10 gap-3 items-center text-gray-700 mb-4">
       <h1 className="text-lg font-semibold">{currentPage?.title}</h1>
       <div className="flex gap-1 items-center">
         <SiHomepage className="" />

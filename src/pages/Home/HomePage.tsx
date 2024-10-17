@@ -34,7 +34,7 @@ const fastLink = [
 export default function HomePage() {
   return (
     <div className="w-full h-screen flex flex-col gap-4 items-center text-gray-800">
-      <div className="h-1/2 flex flex-col items-center bg-orange-200 w-full justify-center">
+      <div className="h-1/2 flex flex-col items-center bg-yellow-100 w-full justify-center">
         <h1 className="text-3xl font-semibold">
           Welcome <span className="text-teal-700">Bayram Telli!</span>
         </h1>
