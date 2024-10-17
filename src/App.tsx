@@ -14,6 +14,7 @@ import Dashboard from "./pages/AdminPanel/Dashboard/Dashboard";
 import NotFoundPage from "./pages/NotFound/NotFoundPage";
 import CustomersPanel from "./pages/AdminPanel/Customers/CustomersPanel";
 import UsersPanel from "./pages/AdminPanel/Users/UsersPanel";
+import TicketStatusPage from "./pages/TicketStatusPage/TicketStatusPage";
 
 export const pages = [
   {
@@ -81,6 +82,12 @@ export const pages = [
     path: "/ticket-history",
     breadCrum: "/ticket-history",
     component: <TicketHistoryPage />,
+  },
+  {
+    title: "Ticket Status",
+    path: "/ticket-status/:id",
+    breadCrum: "/ticket-status",
+    component: <TicketStatusPage />,
   },
 ];
 

@@ -1,4 +1,6 @@
 import BreadCrum from "../../../components/BreadCrum/BreadCrum";
+import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
+import InspectButton from "../../../components/Buttons/InspectButton/InspectButton";
 import SimpleTable from "../../../components/SimpleTable/SimpleTable";
 import { customers } from "./constants";
 
@@ -32,12 +34,8 @@ export default function CustomersPanel() {
               header: "Actions",
               cell: () => (
                 <div className="flex gap-2">
-                  <button className="bg-blue-500 text-white px-3 py-1 rounded">
-                    Edit
-                  </button>
-                  <button className="bg-red-500 text-white px-3 py-1 rounded">
-                    Delete
-                  </button>
+                  <InspectButton color="primary" />
+                  <DeleteButton className="" />
                 </div>
               ),
             },

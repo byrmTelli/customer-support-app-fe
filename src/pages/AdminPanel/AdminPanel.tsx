@@ -30,7 +30,10 @@ export default function AdminPanel() {
             <MdErrorOutline className="text-2xl lg:text-5xl" />
             <h1 className="text-sm lg:text-lg">Logs</h1>
           </div>
-          <div className="rounded-lg flex flex-col items-center justify-center bg-pink-700 hover:bg-pink-500 text-gray-200 font-semibold">
+          <div
+            onClick={() => navigate("/ticket-history")}
+            className="rounded-lg flex flex-col items-center justify-center bg-pink-700 hover:bg-pink-500 text-gray-200 font-semibold"
+          >
             <IoStatsChart className="text-2xl lg:text-5xl" />
             <h1 className="text-sm lg:text-lg">Tickets</h1>
           </div>
