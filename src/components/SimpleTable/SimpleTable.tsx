@@ -14,12 +14,9 @@ import MovingIcon from "@mui/icons-material/Moving";
 import { RiFileExcel2Line } from "react-icons/ri";
 
 export default function SimpleTable<T extends Record<string, any>>({
-  exportable,
   data,
   columns,
   title,
-  toolbarActions,
-  addItemModalHandler,
 }: SimpleTableProps<T>) {
   const [pagination, setPagination] = useState({
     pageIndex: 0,
@@ -29,7 +26,7 @@ export default function SimpleTable<T extends Record<string, any>>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [filtering, setFiltering] = useState("");
 
-  const tableState = useMemo(() => data, []);
+  // const tableState = useMemo(() => data, [data]);
 
   const table = useReactTable({
     data,

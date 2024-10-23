@@ -15,6 +15,7 @@ import NotFoundPage from "./pages/NotFound/NotFoundPage";
 import CustomersPanel from "./pages/AdminPanel/Customers/CustomersPanel";
 import UsersPanel from "./pages/AdminPanel/Users/UsersPanel";
 import TicketStatusPage from "./pages/TicketStatusPage/TicketStatusPage";
+import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 
 export const pages = [
   {
@@ -22,85 +23,107 @@ export const pages = [
     path: "/",
     breadCrum: "/",
     component: <HomePage />,
+    auth: [],
   },
   {
     title: "Yönetim Paneli",
     path: "/admin",
     breadCrum: "/admin",
     component: <AdminPanel />,
+    auth: ["admin"],
   },
   {
     title: "Yönetim Paneli",
     path: "/admin/dashboard",
     breadCrum: "/admin/dashboard",
     component: <Dashboard />,
+    auth: ["admin"],
   },
   {
     title: "Customers",
     path: "/admin/customers",
     breadCrum: "/admin/customers",
     component: <CustomersPanel />,
+    auth: ["admin"],
   },
   {
     title: "Users",
     path: "/admin/users",
     breadCrum: "/admin/users",
     component: <UsersPanel />,
+    auth: ["admin"],
   },
   {
     title: "Yeni Destek Talebi",
     path: "/support/create",
     breadCrum: "/support/create",
     component: <CreateNewSupport />,
+    auth: ["customer"],
   },
   {
     title: "Login",
     path: "/login",
     breadCrum: "/login",
     component: <Login />,
+    auth: [],
   },
   {
     title: "Sıkça Sorulan Sorular",
     path: "/popular-questions",
     breadCrum: "/popular-questions",
     component: <PopularQuestionsPage />,
+    auth: [],
   },
   {
     title: "Şiremi Unuttum",
     path: "/forget-password",
     breadCrum: "/forget-password",
     component: <ForgetPassword />,
+    auth: [],
   },
   {
     title: "Kayıt Ol",
     path: "/register",
     breadCrum: "/register",
     component: <Register />,
+    auth: [],
   },
   {
     title: "Hizmet Geçmişi",
     path: "/ticket-history",
     breadCrum: "/ticket-history",
     component: <TicketHistoryPage />,
+    auth: ["admin", "helpdesk"],
   },
   {
     title: "Ticket Status",
     path: "/ticket-status/:id",
     breadCrum: "/ticket-status",
     component: <TicketStatusPage />,
+    auth: ["admin"],
   },
 ];
 
 function App() {
   return (
     <div className="w-full h-screen flex flex-col">
-      <div className="">
-        <Navbar />
-      </div>
-      <div className="flex flex-col gap-4">
+      <Navbar />
+      <div className="flex h-full flex-col gap-4">
         <Routes>
           {pages.map((item, index) => (
-            <Route key={index} path={item.path} element={item.component} />
+            <Route
+              key={index}
+              path={item.path}
+              element={
+                item.auth.length > 0 ? (
+                  <ProtectedRoute allowedRoles={item.auth}>
+                    {item.component}
+                  </ProtectedRoute>
+                ) : (
+                  item.component
+                )
+              }
+            />
           ))}
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>

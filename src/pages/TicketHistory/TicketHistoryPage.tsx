@@ -1,8 +1,15 @@
 import BreadCrum from "../../components/BreadCrum/BreadCrum";
-import { supportRequests } from "../../components/SimpleTable/constants";
 import SimpleTable from "../../components/SimpleTable/SimpleTable";
+import { apiTicket } from "../../store/api/enhances/enhancedApiTicket";
+import { ticketStatus } from "../../utils/utilsTicket";
 
 export default function TicketHistoryPage() {
+  // States
+  // Queries
+  const getTicketsQuery = apiTicket.useGetApiTicketGetTicketsQuery();
+  const tickets = getTicketsQuery.data?.data ?? [];
+  // Hooks
+  // Handlers
   return (
     <div className="">
       <BreadCrum />
@@ -25,8 +32,38 @@ export default function TicketHistoryPage() {
                   header: "Title",
                   accessorFn: (cell) => cell.title,
                 },
+                {
+                  header: "Status",
+                  cell: (cell) => (
+                    <div className="p-2">
+                      {ticketStatus(cell.row.original.status ?? 0)}
+                    </div>
+                  ),
+                },
+                {
+                  header: "Category",
+                  accessorFn: (cell) => cell.category?.name ?? "",
+                },
+                {
+                  header: "Creator",
+                  cell: (cell) => (
+                    <div className="p-2">
+                      {cell.row.original.creator?.fullName}
+                    </div>
+                  ),
+                },
+                {
+                  header: "Actions",
+                  cell: () => (
+                    <div className="p-2">
+                      <button className="bg-green-300 p-2 text-sm rounded-lg font-semibold">
+                        Assign to me
+                      </button>
+                    </div>
+                  ),
+                },
               ]}
-              data={supportRequests}
+              data={tickets}
             />
           </div>
         </div>

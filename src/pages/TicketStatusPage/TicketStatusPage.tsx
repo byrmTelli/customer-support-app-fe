@@ -3,27 +3,47 @@ import BreadCrum from "../../components/BreadCrum/BreadCrum";
 import Comment from "./Comment/Comment";
 import { IoSendSharp } from "react-icons/io5";
 import { AiFillFilePdf, AiFillFile } from "react-icons/ai";
+import { apiTicket } from "../../store/api/enhances/enhancedApiTicket";
+import { useParams } from "react-router-dom";
+import { ticketStatus } from "../../utils/utilsTicket";
+import { formatDateTime } from "../../utils/utilsDate";
 
 export default function TicketStatusPage() {
+  // States
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const params = useParams();
+  const ticketId = Number(params.id);
 
-  // Desteklenen resim türleri
+  // Image file types
   const imageTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
 
-  // Dosya yükleme işlemi
+  // File upload
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files: File[] = Array.from(e.target.files || []);
     setUploadedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
+  // Queries
+  const getTicketByIdQuery = apiTicket.useGetApiTicketGetTicketByIdQuery({
+    id: ticketId,
+  });
+
+  const ticketData = getTicketByIdQuery.data?.data ?? {};
+  // Hooks
+  // Handlers
+
+  // Utils
+  const status = ticketStatus(ticketData.status ?? 0);
+  const date = formatDateTime(ticketData.createdAt ?? "");
+
   return (
     <div>
       <BreadCrum />
       <div className="grid grid-cols-6 w-full gap-2 items-center justify-center p-4 mt-4">
-        <div className="col-span-4 col-start-2 flex flex-col items-center gap-4 p-2 border border-gray-400 rounded-lg p-8">
+        <div className="col-span-4 col-start-2 flex flex-col items-center gap-4 border border-gray-400 rounded-lg p-8">
           <div className="flex w-full gap-2 font-bold text-xl">
             <h1>Subject:</h1>
-            <h1>Request Title</h1>
+            <h1>{ticketData.title}</h1>
           </div>
           {/* Properties */}
           <div className="flex items-center justify-between w-full text-sm font-semibold">
@@ -35,47 +55,34 @@ export default function TicketStatusPage() {
                   alt=""
                   className="size-[30px] rounded-full"
                 />
-                <p>Bayram Telli</p>
+                <p>{ticketData.creator?.fullName}</p>
               </div>
             </div>
 
             <div className="flex gap-2">
               <h1>Status: </h1>
-              <p className="text-teal-700">Waiting</p>
+              <p className="text-teal-700">{status}</p>
             </div>
             <div className="flex gap-2">
-              <h1>Created At: </h1>
-              <p>10-02-2025</p>
+              <h1>Date: </h1>
+              <p>{date}</p>
             </div>
           </div>
           {/* Content */}
-          <div className="col-span-3 col-start-2 flex text-justify">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quod
-              quasi architecto explicabo laboriosam nihil officiis quia ullam
-              aliquam asperiores praesentium qui minus earum neque assumenda
-              voluptatibus, perspiciatis autem dicta adipisci voluptas cumque
-              dolorum doloribus quidem libero. Quis dolores nam enim
-              consequuntur harum ut soluta facilis, aperiam excepturi, vel
-              similique!
-            </p>
+          <div className="col-span-3 w-full col-start-2 flex flex-col text-justify">
+            <h1 className="font-semibold">Description:</h1>
+            <p className="">{ticketData.content}</p>
           </div>
           <div className="w-full">
-            <h1>Files</h1>
-            <div className="">
-              {/* files will be here */}
-            </div>
+            <h1 className="font-semibold">Files:</h1>
+            <div className="">{/* files will be here */}</div>
           </div>
           <div className="w-full mt-8">
             <h1 className="text-xl font-semibold">Comments</h1>
             <div className="flex flex-col gap-3 mt-4">
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
+              {ticketData.comments?.map((item, key) => (
+                <Comment data={item} key={key} />
+              ))}
             </div>
           </div>
 

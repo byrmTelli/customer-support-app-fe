@@ -1,4 +1,9 @@
-export default function Comment() {
+import { formatDateTime } from "../../../utils/utilsDate";
+import { CommentProps } from "./types";
+
+export default function Comment({ data }: CommentProps) {
+  // Utils
+  const date = formatDateTime(data.createdAt ?? "");
   return (
     <div className="p-2 border border-gray-400 rounded-lg flex flex-col gap-2 py-4">
       <div className="flex items-center justify-between border-b border-b-gray-400 py-2">
@@ -8,14 +13,11 @@ export default function Comment() {
             alt=""
             className="size-[40px] rounded-full"
           />
-          <h1 className="font-semibold">Customer Service</h1>
+          <h1 className="font-semibold">{data.creator?.fullName}</h1>
         </div>
-        <h1 className="text-sm font-semibold">12-02-2025</h1>
+        <h1 className="text-sm font-semibold">{date}</h1>
       </div>
-      <p className="">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur
-        sequi eius possimus illo ex quis molestiae officia nostrum iure quaerat?
-      </p>
+      <p className="">{data.message}</p>
     </div>
   );
 }
