@@ -5,7 +5,6 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginFormDefaults, loginFormSchema } from "./constants";
 import { useEvent } from "react-use-event-hook";
-import useSetSafeTimeout from "use-set-safe-timeout";
 import useAuthenticationControl from "../../hooks/useAuthenticationControl";
 import { FormEventHandler } from "react";
 
@@ -14,7 +13,6 @@ export default function Login() {
   const navigate = useNavigate();
 
   // Hooks
-  const setSafeTimeout = useSetSafeTimeout();
   const authenticationControl = useAuthenticationControl();
 
   // Queries
@@ -52,9 +50,7 @@ export default function Login() {
 
         authenticationControl.login({ token });
 
-        setSafeTimeout(() => {
-          navigate("/");
-        }, 500);
+        navigate("/");
       });
   });
 

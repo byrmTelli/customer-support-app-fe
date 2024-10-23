@@ -18,10 +18,6 @@ export default function SimpleTable<T extends Record<string, any>>({
   columns,
   title,
 }: SimpleTableProps<T>) {
-  const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: 10,
-  });
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [filtering, setFiltering] = useState("");
@@ -34,13 +30,10 @@ export default function SimpleTable<T extends Record<string, any>>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    pageCount: Math.ceil(data.length / pagination.pageSize),
     state: {
-      pagination,
       sorting: sorting,
       globalFilter: filtering,
     },
-    onPaginationChange: setPagination,
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
     onGlobalFilterChange: setFiltering,

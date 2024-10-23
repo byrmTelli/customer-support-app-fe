@@ -12,14 +12,13 @@ export default function ProtectedRoute({
 }: ProtectedRouteProps) {
   const user = useAppSelector((state) => state.user);
 
-  console.log("USER: ", user);
-  if (!user || !user.role) {
-    return <div>Loading...</div>;
+  if (!user.isAuthenticated || !user.role?.name) {
+    return <Navigate to="/" />; 
   }
 
   const userRole = user.role?.name || "";
 
-  if (!user.isAuthenticated || !allowedRoles.includes(userRole)) {
+  if (!allowedRoles.includes(userRole)) {
     return <Navigate to="/not-found" />;
   }
 
