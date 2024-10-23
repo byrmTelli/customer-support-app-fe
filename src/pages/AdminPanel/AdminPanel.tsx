@@ -31,7 +31,7 @@ export default function AdminPanel() {
             <h1 className="text-sm lg:text-lg">Logs</h1>
           </div>
           <div
-            onClick={() => navigate("/ticket-history")}
+            onClick={() => navigate("/admin/tickets")}
             className="rounded-lg flex flex-col items-center justify-center bg-pink-700 hover:bg-pink-500 text-gray-200 font-semibold"
           >
             <IoStatsChart className="text-2xl lg:text-5xl" />

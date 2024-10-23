@@ -1,15 +1,18 @@
 import { useState } from "react";
-import BreadCrum from "../../components/BreadCrum/BreadCrum";
-import Button from "../../components/Buttons/Button/Button";
-import SimpleTable from "../../components/SimpleTable/SimpleTable";
-import { apiTicket } from "../../store/api/enhances/enhancedApiTicket";
-import { ticketStatus } from "../../utils/utilsTicket";
+import BreadCrum from "../../../components/BreadCrum/BreadCrum";
+import Button from "../../../components/Buttons/Button/Button";
+import SimpleTable from "../../../components/SimpleTable/SimpleTable";
+import { apiTicket } from "../../../store/api/enhances/enhancedApiTicket";
+import { ticketStatus } from "../../../utils/utilsTicket";
 import AssignTicketModal from "./AssignTicketModal/AssignTicketModal";
-export default function TicketHistoryPage() {
+import { AdminPanelTicketsTableViewModel } from "../../../store/api/generated/generatedApiTicket";
+export default function TicketListPage() {
   // States
+  const [selectedData, setSelectedData] =
+    useState<AdminPanelTicketsTableViewModel | null>(null);
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
   // Queries
-  const getTicketsQuery = apiTicket.useGetApiTicketGetTicketsQuery();
+  const getTicketsQuery = apiTicket.useGetApiTicketGetAllTicketForAdminQuery();
   // Data
   const tickets = getTicketsQuery.data?.data ?? [];
   // Hooks
@@ -18,6 +21,7 @@ export default function TicketHistoryPage() {
     <div className="">
       {isAssignModalOpen && (
         <AssignTicketModal
+          selectedData={selectedData}
           isOpen={isAssignModalOpen}
           onClose={() => setIsAssignModalOpen(false)}
         />
@@ -32,7 +36,7 @@ export default function TicketHistoryPage() {
           </div>
           <div className="min-h-96 border border-gray-400 p-4 w-full">
             <SimpleTable
-              title=""
+              title="Ticket History"
               columns={[
                 {
                   header: "No",
@@ -44,11 +48,7 @@ export default function TicketHistoryPage() {
                 },
                 {
                   header: "Status",
-                  cell: (cell) => (
-                    <div className="p-2">
-                      {ticketStatus(cell.row.original.status ?? 0)}
-                    </div>
-                  ),
+                  accessorFn: (cell) => cell.status,
                 },
                 {
                   header: "Category",
@@ -63,14 +63,36 @@ export default function TicketHistoryPage() {
                   ),
                 },
                 {
+                  header: "Assigned to",
+                  cell: (cell) =>
+                    cell.row.original.assignedTo != null ? (
+                      <div className="p-2">
+                        {cell.row.original.assignedTo?.fullName}
+                      </div>
+                    ) : (
+                      <div className="p-2">
+                        <span className="py-1 px-1 lg:px-3 rounded-lg bg-orange-400 font-semibold text-gray-200 text-xs">
+                          Not Assigned
+                        </span>
+                      </div>
+                    ),
+                },
+                {
                   header: "Actions",
                   cell: (cell) => (
                     <div className="p-2">
-                      <Button
-                        onClick={() => setIsAssignModalOpen(true)}
-                        className=" p-2 text-sm rounded-lg font-semibold"
-                        title="Assign"
-                      />
+                      {cell.row.original.assignedTo == null ? (
+                        <Button
+                          onClick={() => {
+                            setIsAssignModalOpen(true);
+                            setSelectedData(cell.row.original);
+                          }}
+                          className=" p-2 text-sm rounded-lg font-semibold"
+                          title="Assign"
+                        />
+                      ) : (
+                        ""
+                      )}
                     </div>
                   ),
                 },

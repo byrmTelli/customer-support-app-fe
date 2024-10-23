@@ -2,11 +2,21 @@ import BreadCrum from "../../../components/BreadCrum/BreadCrum";
 import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
 import InspectButton from "../../../components/Buttons/InspectButton/InspectButton";
 import SimpleTable from "../../../components/SimpleTable/SimpleTable";
+import { apiUser } from "../../../store/api/enhances/enhancedApiUser";
 import { customers } from "../Customers/constants";
 
 export default function UsersPanel() {
+  // States
+  // Queries
+  const getHelpdesksQuery =
+    apiUser.useGetApiUserGetHeldesksProfileListForAdminPanelQuery();
+
+  // Memo
+  const helpdeskUserList = getHelpdesksQuery.data?.data ?? [];
+  // Forms
+  // Handlers
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <BreadCrum />
       <div className="p-4">
         <SimpleTable
@@ -17,18 +27,20 @@ export default function UsersPanel() {
               accessorFn: (cell) => cell.id,
             },
             {
-              header: "User",
-              accessorFn: (cell) => {
-                return `${cell.firstName} ${cell.lastName}`;
-              },
+              header: "Full Name",
+              accessorFn: (cell) => cell.fullName,
+            },
+            {
+              header: "Username",
+              accessorFn: (cell) => cell.username,
             },
             {
               header: "Email",
               accessorFn: (cell) => cell.email,
             },
             {
-              header: "Kayıt Tarihi",
-              accessorFn: (cell) => cell.registeredAt,
+              header: "Role",
+              accessorFn: (cell) => cell.role?.name,
             },
             {
               header: "Actions",
@@ -40,7 +52,7 @@ export default function UsersPanel() {
               ),
             },
           ]}
-          data={customers}
+          data={helpdeskUserList}
         />
       </div>
     </div>

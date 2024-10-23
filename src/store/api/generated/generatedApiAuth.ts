@@ -39,6 +39,7 @@ export type UserProfileViewModel = {
   email?: string | null;
   phoneNumber?: string | null;
   adress?: string | null;
+  createdAt?: string;
   role?: RoleViewModel;
 };
 export type UserProfileViewModelIDataResult = {

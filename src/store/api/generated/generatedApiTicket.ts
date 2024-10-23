@@ -11,11 +11,11 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.addCommentToTicketRequestModel,
       }),
     }),
-    getApiTicketGetTickets: build.query<
-      GetApiTicketGetTicketsApiResponse,
-      GetApiTicketGetTicketsApiArg
+    getApiTicketGetAllTicketForAdmin: build.query<
+      GetApiTicketGetAllTicketForAdminApiResponse,
+      GetApiTicketGetAllTicketForAdminApiArg
     >({
-      query: () => ({ url: `/api/Ticket/GetTickets` }),
+      query: () => ({ url: `/api/Ticket/GetAllTicketForAdmin` }),
     }),
     postApiTicketAssignTicketToMe: build.mutation<
       PostApiTicketAssignTicketToMeApiResponse,
@@ -105,9 +105,9 @@ export type PostApiCommentAddCommentToTicketApiResponse =
 export type PostApiCommentAddCommentToTicketApiArg = {
   addCommentToTicketRequestModel: AddCommentToTicketRequestModel;
 };
-export type GetApiTicketGetTicketsApiResponse =
-  /** status 200 OK */ TicketViewModelListIDataResultRead;
-export type GetApiTicketGetTicketsApiArg = void;
+export type GetApiTicketGetAllTicketForAdminApiResponse =
+  /** status 200 OK */ AdminPanelTicketsTableViewModelListIDataResultRead;
+export type GetApiTicketGetAllTicketForAdminApiArg = void;
 export type PostApiTicketAssignTicketToMeApiResponse =
   /** status 200 OK */ IResultRead;
 export type PostApiTicketAssignTicketToMeApiArg = {
@@ -155,8 +155,11 @@ export type AddCommentToTicketRequestModel = {
   message?: string | null;
   creatorId?: number;
 };
-export type TicketViewModelListIDataResult = {};
-export type TicketStatus = 1 | 2 | 3;
+export type AdminPanelTicketsTableViewModelListIDataResult = {};
+export type CategoryViewModel = {
+  id?: number;
+  name?: string | null;
+};
 export type RoleViewModel = {
   name?: string | null;
 };
@@ -165,10 +168,28 @@ export type HelpdeskViewModel = {
   fullName?: string | null;
   role?: RoleViewModel;
 };
-export type CategoryViewModel = {
+export type CreatorViewModel = {
   id?: number;
-  name?: string | null;
+  username?: string | null;
+  fullName?: string | null;
 };
+export type AdminPanelTicketsTableViewModel = {
+  id?: number;
+  title?: string | null;
+  content?: string | null;
+  category?: CategoryViewModel;
+  status?: string | null;
+  assignedTo?: HelpdeskViewModel;
+  creator?: CreatorViewModel;
+  createdAt?: string;
+};
+export type AdminPanelTicketsTableViewModelListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: AdminPanelTicketsTableViewModel[] | null;
+};
+export type TicketViewModelListIDataResult = {};
 export type UserViewModel = {
   id?: number;
   fullName?: string | null;
@@ -189,7 +210,7 @@ export type TicketViewModel = {
   id?: number;
   title?: string | null;
   content?: string | null;
-  status?: TicketStatus;
+  status?: string | null;
   assignedTo?: HelpdeskViewModel;
   category?: CategoryViewModel;
   creator?: UserViewModel;
@@ -222,6 +243,6 @@ export type UpdateTicketRequestModel = {
   id?: number;
   title?: string | null;
   content?: string | null;
-  status?: TicketStatus;
+  status?: string | null;
   categoryId?: number;
 };

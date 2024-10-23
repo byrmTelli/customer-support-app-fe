@@ -2,9 +2,19 @@ import BreadCrum from "../../../components/BreadCrum/BreadCrum";
 import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
 import InspectButton from "../../../components/Buttons/InspectButton/InspectButton";
 import SimpleTable from "../../../components/SimpleTable/SimpleTable";
+import { apiUser } from "../../../store/api/enhances/enhancedApiUser";
+import { formatDateTime } from "../../../utils/utilsDate";
 import { customers } from "./constants";
 
 export default function CustomersPanel() {
+  // States
+  // Queries
+  const getCustomersProfileListQuery =
+    apiUser.useGetApiUserGetCustomerProfileListForAdminPanelQuery();
+
+  const customersProfileList = getCustomersProfileListQuery.data?.data ?? [];
+  // Forms
+  // Handlers
   return (
     <div className="w-full">
       <BreadCrum />
@@ -17,18 +27,24 @@ export default function CustomersPanel() {
               accessorFn: (cell) => cell.id,
             },
             {
-              header: "User",
-              accessorFn: (cell) => {
-                return `${cell.firstName} ${cell.lastName}`;
-              },
+              header: "Username",
+              accessorFn: (cell) => cell.username,
             },
             {
               header: "Email",
               accessorFn: (cell) => cell.email,
             },
             {
-              header: "Kayıt Tarihi",
-              accessorFn: (cell) => cell.registeredAt,
+              header: "Status",
+              accessorFn: (cell) => cell.isApproved,
+            },
+            {
+              header: "Phone",
+              accessorFn: (cell) => cell.phoneNumber,
+            },
+            {
+              header: "Register Date",
+              accessorFn: (cell) => formatDateTime(cell.createdAt ?? ""),
             },
             {
               header: "Actions",
@@ -40,7 +56,7 @@ export default function CustomersPanel() {
               ),
             },
           ]}
-          data={customers}
+          data={customersProfileList}
         />
       </div>
     </div>

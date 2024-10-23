@@ -35,7 +35,7 @@ export default function Navbar() {
             <li className="font-semibold">
               <Link to={"/support"}>Support</Link>
             </li>
-            {user.role?.name == "admin" && (
+            {user.role?.name == "Admin" && (
               <li className="font-semibold">
                 <Link to={"/admin"}>Admin Panel</Link>
               </li>

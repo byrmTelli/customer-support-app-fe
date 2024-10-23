@@ -18,6 +18,24 @@ const injectedRtkApi = api.injectEndpoints({
         },
       }),
     }),
+    getApiUserGetCustomerProfileListForAdminPanel: build.query<
+      GetApiUserGetCustomerProfileListForAdminPanelApiResponse,
+      GetApiUserGetCustomerProfileListForAdminPanelApiArg
+    >({
+      query: () => ({ url: `/api/User/GetCustomerProfileListForAdminPanel` }),
+    }),
+    getApiUserGetHeldesksProfileListForAdminPanel: build.query<
+      GetApiUserGetHeldesksProfileListForAdminPanelApiResponse,
+      GetApiUserGetHeldesksProfileListForAdminPanelApiArg
+    >({
+      query: () => ({ url: `/api/User/GetHeldesksProfileListForAdminPanel` }),
+    }),
+    getApiUserGetHelpdesks: build.query<
+      GetApiUserGetHelpdesksApiResponse,
+      GetApiUserGetHelpdesksApiArg
+    >({
+      query: () => ({ url: `/api/User/GetHelpdesks` }),
+    }),
     putApiUserUpdateUser: build.mutation<
       PutApiUserUpdateUserApiResponse,
       PutApiUserUpdateUserApiArg
@@ -82,6 +100,15 @@ export type GetApiTicketGetTicketsOfUserApiResponse =
 export type GetApiTicketGetTicketsOfUserApiArg = {
   id?: number;
 };
+export type GetApiUserGetCustomerProfileListForAdminPanelApiResponse =
+  /** status 200 OK */ CustomerProfileViewModelListIDataResultRead;
+export type GetApiUserGetCustomerProfileListForAdminPanelApiArg = void;
+export type GetApiUserGetHeldesksProfileListForAdminPanelApiResponse =
+  /** status 200 OK */ UserProfileViewModelListIDataResultRead;
+export type GetApiUserGetHeldesksProfileListForAdminPanelApiArg = void;
+export type GetApiUserGetHelpdesksApiResponse =
+  /** status 200 OK */ HelpdeskViewModelListIDataResultRead;
+export type GetApiUserGetHelpdesksApiArg = void;
 export type PutApiUserUpdateUserApiResponse = /** status 200 OK */ IResultRead;
 export type PutApiUserUpdateUserApiArg = {
   updateUserRequestModel: UpdateUserRequestModel;
@@ -115,6 +142,7 @@ export type UserProfileViewModel = {
   email?: string | null;
   phoneNumber?: string | null;
   adress?: string | null;
+  createdAt?: string;
   role?: RoleViewModel;
 };
 export type UserProfileViewModelIDataResult = {
@@ -127,7 +155,6 @@ export type UserProfileViewModelIDataResultRead = {
   data?: UserProfileViewModel;
 };
 export type TicketViewModelListIDataResult = {};
-export type TicketStatus = 1 | 2 | 3;
 export type HelpdeskViewModel = {
   id?: number;
   fullName?: string | null;
@@ -157,7 +184,7 @@ export type TicketViewModel = {
   id?: number;
   title?: string | null;
   content?: string | null;
-  status?: TicketStatus;
+  status?: string | null;
   assignedTo?: HelpdeskViewModel;
   category?: CategoryViewModel;
   creator?: UserViewModel;
@@ -170,6 +197,38 @@ export type TicketViewModelListIDataResultRead = {
   message?: string | null;
   code?: number;
   data?: TicketViewModel[] | null;
+};
+export type CustomerProfileViewModelListIDataResult = {};
+export type CustomerProfileViewModel = {
+  id?: number;
+  username?: string | null;
+  fullName?: string | null;
+  email?: string | null;
+  phoneNumber?: string | null;
+  adress?: string | null;
+  createdAt?: string;
+  role?: RoleViewModel;
+  isApproved?: string | null;
+};
+export type CustomerProfileViewModelListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: CustomerProfileViewModel[] | null;
+};
+export type UserProfileViewModelListIDataResult = {};
+export type UserProfileViewModelListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: UserProfileViewModel[] | null;
+};
+export type HelpdeskViewModelListIDataResult = {};
+export type HelpdeskViewModelListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: HelpdeskViewModel[] | null;
 };
 export type IResult = {};
 export type IResultRead = {

@@ -9,7 +9,7 @@ import CreateNewSupport from "./pages/CreateNewSupport/CreateNewSupport";
 import PopularQuestionsPage from "./pages/PopularQuestions/PopularQuestionsPage";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import Register from "./pages/Register/Register";
-import TicketHistoryPage from "./pages/TicketHistory/TicketHistoryPage";
+import TicketListPage from "./pages/AdminPanel/TicketList/TicketList";
 import Dashboard from "./pages/AdminPanel/Dashboard/Dashboard";
 import NotFoundPage from "./pages/NotFound/NotFoundPage";
 import CustomersPanel from "./pages/AdminPanel/Customers/CustomersPanel";
@@ -30,35 +30,35 @@ export const pages = [
     path: "/admin",
     breadCrum: "/admin",
     component: <AdminPanel />,
-    auth: ["admin"],
+    auth: ["Admin"],
   },
   {
     title: "Yönetim Paneli",
     path: "/admin/dashboard",
     breadCrum: "/admin/dashboard",
     component: <Dashboard />,
-    auth: ["admin"],
+    auth: ["Admin"],
   },
   {
     title: "Customers",
     path: "/admin/customers",
     breadCrum: "/admin/customers",
     component: <CustomersPanel />,
-    auth: ["admin"],
+    auth: ["Admin"],
   },
   {
     title: "Users",
     path: "/admin/users",
     breadCrum: "/admin/users",
     component: <UsersPanel />,
-    auth: ["admin"],
+    auth: ["Admin"],
   },
   {
     title: "Yeni Destek Talebi",
     path: "/support/create",
     breadCrum: "/support/create",
     component: <CreateNewSupport />,
-    auth: ["customer"],
+    auth: ["Customer"],
   },
   {
     title: "Login",
@@ -90,17 +90,17 @@ export const pages = [
   },
   {
     title: "Hizmet Geçmişi",
-    path: "/ticket-history",
-    breadCrum: "/ticket-history",
-    component: <TicketHistoryPage />,
-    auth: ["admin", "helpdesk"],
+    path: "/admin/tickets",
+    breadCrum: "/admin/tickets",
+    component: <TicketListPage />,
+    auth: ["Admin"],
   },
   {
     title: "Ticket Status",
     path: "/ticket-status/:id",
     breadCrum: "/ticket-status",
     component: <TicketStatusPage />,
-    auth: ["admin"],
+    auth: ["Admin"],
   },
 ];
 
