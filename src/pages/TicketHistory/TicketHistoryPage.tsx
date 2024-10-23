@@ -1,17 +1,27 @@
+import { useState } from "react";
 import BreadCrum from "../../components/BreadCrum/BreadCrum";
+import Button from "../../components/Buttons/Button/Button";
 import SimpleTable from "../../components/SimpleTable/SimpleTable";
 import { apiTicket } from "../../store/api/enhances/enhancedApiTicket";
 import { ticketStatus } from "../../utils/utilsTicket";
-
+import AssignTicketModal from "./AssignTicketModal/AssignTicketModal";
 export default function TicketHistoryPage() {
   // States
+  const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
   // Queries
   const getTicketsQuery = apiTicket.useGetApiTicketGetTicketsQuery();
+  // Data
   const tickets = getTicketsQuery.data?.data ?? [];
   // Hooks
   // Handlers
   return (
     <div className="">
+      {isAssignModalOpen && (
+        <AssignTicketModal
+          isOpen={isAssignModalOpen}
+          onClose={() => setIsAssignModalOpen(false)}
+        />
+      )}
       <BreadCrum />
       <div className="w-full h-full flex justify-center pt-4">
         <div className="w-full flex flex-col items-center p-2">
@@ -54,11 +64,13 @@ export default function TicketHistoryPage() {
                 },
                 {
                   header: "Actions",
-                  cell: () => (
+                  cell: (cell) => (
                     <div className="p-2">
-                      <button className="bg-green-300 p-2 text-sm rounded-lg font-semibold">
-                        Assign to me
-                      </button>
+                      <Button
+                        onClick={() => setIsAssignModalOpen(true)}
+                        className=" p-2 text-sm rounded-lg font-semibold"
+                        title="Assign"
+                      />
                     </div>
                   ),
                 },
