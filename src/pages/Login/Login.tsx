@@ -7,6 +7,7 @@ import { loginFormDefaults, loginFormSchema } from "./constants";
 import { useEvent } from "react-use-event-hook";
 import useAuthenticationControl from "../../hooks/useAuthenticationControl";
 import { FormEventHandler } from "react";
+import Button from "../../components/Buttons/Button/Button";
 
 export default function Login() {
   // States
@@ -16,7 +17,7 @@ export default function Login() {
   const authenticationControl = useAuthenticationControl();
 
   // Queries
-  const [login] = apiAuth.usePostApiAuthLoginMutation();
+  const [login, loginMutation] = apiAuth.usePostApiAuthLoginMutation();
 
   // Form
   const form = useForm({
@@ -118,19 +119,39 @@ export default function Login() {
               </div>
             </div>
             <div className="text-xs flex flex-row-reverse justify-between gap-2 w-3/4">
-              <button
+              <Button
+                isLoading={loginMutation.isLoading}
+                title="Login"
+                size="sm"
+                varient="success"
                 tabIndex={3}
                 onClick={form.handleSubmit(handleLoginButtonClick)}
-                className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-teal-700 font-semibold text-gray-200 w-[7rem] h-[2.3rem]"
-              >
-                Login
-              </button>
+                className=""
+              />
               <button
                 onClick={() => navigate("/register")}
                 className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-teal-700 font-semibold text-gray-200 w-[7rem] h-[2.3rem]"
               >
                 Register
               </button>
+            </div>
+            <div className="w-3/4 px-4 text-xs mt-2">
+              {loginMutation.error ? (
+                <div className="py-2 bg-rose-200 text-center rounded-xl">
+                  <p className="text-rose-500 font-semibold">Login Error:</p>
+                  <p className="w-full text-center text-rose-500">
+                    {loginMutation.error.data?.message ||
+                      "An unknown error occurred."}
+                  </p>
+                </div>
+              ) : null}
+              {loginMutation.isSuccess ? (
+                <div className="py-2 bg-green-200 text-center rounded-xl">
+                  <p className="w-full text-center text-teal-500">
+                    {loginMutation.data?.message}
+                  </p>
+                </div>
+              ) : null}
             </div>
           </div>
         </form>

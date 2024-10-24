@@ -10,17 +10,18 @@ export default function Navbar() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  console.log(user);
   // Handlers
   const handleLogoutButtonClick = () => {
     dispatch(userLogout());
   };
 
   return (
-    <div className="md:h-[90px] shadow flex items-center justify-between p-4 bg-teal-700 border-b border-gray-200 text-gray-200 mb-4">
-      <div onClick={() => navigate("/")} className="cursor-pointer">
+    <div className="md:h-[90px] shadow flex flex-col gap-2 md:flex-row items-center justify-between p-4 bg-teal-700 border-b border-gray-200 text-gray-200 mb-4">
+      <div onClick={() => navigate("/")} className="cursor-pointer order-1">
         <span className="text-xl font-bold">Customer Support Service</span>
       </div>
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center order-3 md:order-2">
         {user.isAuthenticated ? (
           <ul className="flex gap-2">
             <li
@@ -46,7 +47,7 @@ export default function Navbar() {
         )}
       </div>
       {user.isAuthenticated ? (
-        <div className="flex gap-4 items-center justify-center py-2 px-4">
+        <div className="flex gap-4 items-center justify-center py-2 px-4 bg-gray-200 text-gray-800 rounded-3xl order-2 md:order-3">
           <div className="flex p-2 items-center">
             <button onClick={handleLogoutButtonClick}>
               <RiLogoutCircleLine className="text-xl" />
@@ -57,13 +58,17 @@ export default function Navbar() {
             <p className="text-xs font-semibold">{user.role?.name}</p>
           </div>
           <img
-            src="https://www.strasys.uk/wp-content/uploads/2022/02/Depositphotos_484354208_S.jpg"
+            src={
+              user.profileImage != null
+                ? user.profileImage
+                : "https://www.strasys.uk/wp-content/uploads/2022/02/Depositphotos_484354208_S.jpg"
+            }
             alt=""
-            className="size-[50px] rounded-full"
+            className="size-[50px] rounded-full object-cover"
           />
         </div>
       ) : (
-        <div className="flex p-2 gap-2 items-center justify-center">
+        <div className="flex p-2 gap-2 items-center justify-center order-3">
           <button
             className=" flex gap-2 py-1 px-2 items-center justify-center rounded-lg hover:bg-teal-600 transition-colors duration-300"
             onClick={() => navigate("/login")}

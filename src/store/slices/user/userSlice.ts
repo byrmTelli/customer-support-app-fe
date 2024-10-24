@@ -13,6 +13,7 @@ const initialState: UserProfileInitialProps = {
   fullName: "",
   email: "",
   phoneNumber: "",
+  profileImage: "",
   adress: "",
   role: {},
   accessToken: "",
@@ -34,6 +35,7 @@ export const userSlice = createSlice({
       s.username = p.username;
       s.fullName = p.fullName;
       s.email = p.email;
+      s.profileImage = p.profileImage;
       s.phoneNumber = p.phoneNumber;
       s.adress = p.adress;
       s.role = p.role;

@@ -41,6 +41,7 @@ export type UserProfileViewModel = {
   adress?: string | null;
   createdAt?: string;
   role?: RoleViewModel;
+  profileImage?: string | null;
 };
 export type UserProfileViewModelIDataResult = {
   data?: UserProfileViewModel;

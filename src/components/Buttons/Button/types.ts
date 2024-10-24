@@ -5,6 +5,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   size?: "sm" | "md" | "lg";
   icon?: JSX.Element;
-  varient?: "light" | "dark";
+  varient?: "light" | "dark" | "success";
   isLoading?: boolean;
 }

@@ -29,6 +29,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
               phoneNumber: data?.phoneNumber,
               adress: data?.adress,
               role: data?.role,
+              profileImage: data?.profileImage,
               accessToken: accessToken,
             })
           );

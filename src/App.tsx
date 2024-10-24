@@ -16,7 +16,8 @@ import CustomersPanel from "./pages/AdminPanel/Customers/CustomersPanel";
 import UsersPanel from "./pages/AdminPanel/Users/UsersPanel";
 import TicketStatusPage from "./pages/TicketStatusPage/TicketStatusPage";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const pages = [
   {
     title: "Home",
@@ -107,6 +108,18 @@ export const pages = [
 function App() {
   return (
     <div className="w-full h-screen flex flex-col">
+      <ToastContainer
+        rtl={false}
+        closeOnClick
+        draggable
+        pauseOnHover
+        theme="dark"
+        pauseOnFocusLoss
+        hideProgressBar
+        newestOnTop={false}
+        position="top-left"
+        autoClose={500}
+      />
       <Navbar />
       <div className="flex h-full flex-col gap-4">
         <Routes>
