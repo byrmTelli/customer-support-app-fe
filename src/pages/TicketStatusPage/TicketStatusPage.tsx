@@ -1,16 +1,20 @@
 import { useState } from "react";
 import BreadCrum from "../../components/BreadCrum/BreadCrum";
-import Comment from "./Comment/Comment";
 import { IoSendSharp } from "react-icons/io5";
 import { AiFillFilePdf, AiFillFile } from "react-icons/ai";
 import { apiTicket } from "../../store/api/enhances/enhancedApiTicket";
 import { useParams } from "react-router-dom";
 import { ticketStatus } from "../../utils/utilsTicket";
 import { formatDateTime } from "../../utils/utilsDate";
+import { useAppSelector } from "../../store/hooks";
+import { TicketStatusTypes } from "../../constants/ticketStatus";
+import Comment from "./CommentsComponent/Comment/Comment";
+import CommentsComponent from "./CommentsComponent/CommentsComponent";
 
 export default function TicketStatusPage() {
   // States
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const user = useAppSelector((state) => state.user);
   const params = useParams();
   const ticketId = Number(params.id);
 
@@ -25,7 +29,7 @@ export default function TicketStatusPage() {
 
   // Queries
   const getTicketByIdQuery = apiTicket.useGetApiTicketGetTicketByIdQuery({
-    id: ticketId,
+    ticketId: ticketId,
   });
 
   const ticketData = getTicketByIdQuery.data?.data ?? {};
@@ -33,9 +37,8 @@ export default function TicketStatusPage() {
   // Handlers
 
   // Utils
-  const status = ticketStatus(ticketData.status ?? 0);
   const date = formatDateTime(ticketData.createdAt ?? "");
-
+  const myData = undefined;
   return (
     <div>
       <BreadCrum />
@@ -61,7 +64,7 @@ export default function TicketStatusPage() {
 
             <div className="flex gap-2">
               <h1>Status: </h1>
-              <p className="text-teal-700">{status}</p>
+              <p className="text-teal-700">{ticketData.status}</p>
             </div>
             <div className="flex gap-2">
               <h1>Date: </h1>
@@ -77,14 +80,7 @@ export default function TicketStatusPage() {
             <h1 className="font-semibold">Files:</h1>
             <div className="">{/* files will be here */}</div>
           </div>
-          <div className="w-full mt-8">
-            <h1 className="text-xl font-semibold">Comments</h1>
-            <div className="flex flex-col gap-3 mt-4">
-              {ticketData.comments?.map((item, key) => (
-                <Comment data={item} key={key} />
-              ))}
-            </div>
-          </div>
+          <CommentsComponent comments={ticketData.comments ?? []} />
 
           {/* Yüklenen Dosyaları Gösterme */}
           <div className="w-full mt-4">
@@ -112,20 +108,24 @@ export default function TicketStatusPage() {
 
           {/* Dosya Yükleme ve Yorum Yazma */}
           <div className="w-full flex flex-col gap-2 p-2">
-            <h1 className="text-gray-600 font-semibold">Comment</h1>
-            <textarea className="w-full min-h-24 outline-none p-2  border border-gray-400 rounded-lg" />
-            <div className="w-full flex items-center justify-between">
-              {/* Dosya Yükleme Input'u */}
-              <input
-                type="file"
-                multiple
-                onChange={handleFileUpload}
-                className="file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100"
-              />
-              <button className="border border-gray-400 rounded-lg p-2 w-[6rem] flex items-center justify-center text-gray-600">
-                <IoSendSharp />
-              </button>
-            </div>
+            {ticketData.status === TicketStatusTypes.Waiting && (
+              <>
+                <h1 className="text-gray-600 font-semibold">Comment</h1>
+                <textarea className="w-full min-h-24 outline-none p-2  border border-gray-400 rounded-lg" />
+                <div className="w-full flex items-center justify-between">
+                  {/* Dosya Yükleme Input'u */}
+                  <input
+                    type="file"
+                    multiple
+                    onChange={handleFileUpload}
+                    className="file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100"
+                  />
+                  <button className="border border-gray-400 rounded-lg p-2 w-[6rem] flex items-center justify-center text-gray-600">
+                    <IoSendSharp />
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { formatDateTime } from "../../../utils/utilsDate";
+import { formatDateTime } from "../../../../utils/utilsDate";
 import { CommentProps } from "./types";
 
 export default function Comment({ data }: CommentProps) {

@@ -3,11 +3,13 @@ import BreadCrum from "../../../components/BreadCrum/BreadCrum";
 import Button from "../../../components/Buttons/Button/Button";
 import SimpleTable from "../../../components/SimpleTable/SimpleTable";
 import { apiTicket } from "../../../store/api/enhances/enhancedApiTicket";
-import { ticketStatus } from "../../../utils/utilsTicket";
+import { BiDetail } from "react-icons/bi";
 import AssignTicketModal from "./AssignTicketModal/AssignTicketModal";
 import { AdminPanelTicketsTableViewModel } from "../../../store/api/generated/generatedApiTicket";
+import { useNavigate } from "react-router-dom";
 export default function TicketListPage() {
   // States
+  const navigate = useNavigate();
   const [selectedData, setSelectedData] =
     useState<AdminPanelTicketsTableViewModel | null>(null);
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
@@ -93,6 +95,14 @@ export default function TicketListPage() {
                       ) : (
                         ""
                       )}
+                      <Button
+                        onClick={() =>
+                          navigate(`/ticket-status/${cell.row.original.id}`)
+                        }
+                        size="sm"
+                        title="Detail"
+                        icon={<BiDetail />}
+                      />
                     </div>
                   ),
                 },
