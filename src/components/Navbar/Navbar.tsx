@@ -34,7 +34,7 @@ export default function Navbar() {
               <Link to={"/"}>Home</Link>
             </li>
             <li className="font-semibold">
-              <Link to={"/support"}>Support</Link>
+              <Link to={`/profile/${user.id}`}>Profile</Link>
             </li>
             {user.role?.name == "Admin" && (
               <li className="font-semibold">

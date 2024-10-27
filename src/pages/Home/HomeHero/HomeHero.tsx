@@ -34,7 +34,7 @@ const fastLink = [
 export default function HomeHero() {
   const user = useAppSelector((state) => state.user);
   return (
-    <div className="w-full h-screen grid px-4 justify-center">
+    <div className="w-full min-h-screen grid px-4 justify-center">
       <div className="flex flex-col items-center justify-center">
         <div className="lg:h-2/3 flex flex-col items-center justify-center">
           {user.isAuthenticated ? (
@@ -64,7 +64,7 @@ export default function HomeHero() {
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <div className="grid lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {fastLink.map((item, index) => (
             <NavigationCard
               key={index}

@@ -18,6 +18,7 @@ import TicketStatusPage from "./pages/TicketStatusPage/TicketStatusPage";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Profile from "./pages/UserPanel/Profile/Profile";
 export const pages = [
   {
     title: "Home",
@@ -102,6 +103,13 @@ export const pages = [
     breadCrum: "/ticket-status",
     component: <TicketStatusPage />,
     auth: ["Admin"],
+  },
+  {
+    title: "Profile",
+    path: "/profile/:id",
+    breadCrum: "/profile",
+    component: <Profile />,
+    auth: [],
   },
 ];
 
