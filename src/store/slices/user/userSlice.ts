@@ -6,7 +6,13 @@ interface UserProfileExtraProps {
 }
 
 type UserProfileInitialProps = UserProfileViewModel & UserProfileExtraProps;
-
+type UserProfileUpdateProps = {
+  username: string;
+  fullName: string;
+  phoneNumber: string;
+  profileImage: string;
+  adress: string;
+};
 const initialState: UserProfileInitialProps = {
   id: 0,
   username: "",
@@ -57,6 +63,19 @@ export const userSlice = createSlice({
     setRole: (state, action: PayloadAction<object>) => {
       state.role = action.payload;
     },
+    updateUserProfile: (
+      state,
+      action: PayloadAction<UserProfileUpdateProps>
+    ) => {
+      const s = state;
+      const p = action.payload;
+
+      s.username = p.username;
+      s.fullName = p.fullName;
+      s.profileImage = p.profileImage;
+      s.phoneNumber = p.phoneNumber;
+      s.adress = p.adress;
+    },
   },
 });
 
@@ -65,6 +84,7 @@ export const {
   logout: userLogout,
   setAccessToken: setUserAccessToken,
   setRole: setUserRole,
+  updateUserProfile: updateUserProfile,
 } = userSlice.actions;
 
 export default userSlice.reducer;

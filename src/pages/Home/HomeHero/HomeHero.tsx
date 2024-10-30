@@ -1,81 +1,69 @@
 import { FaHandsHelping } from "react-icons/fa";
-import NavigationCard from "../../../components/NavigationCard/NavigationCard";
-import { useAppSelector } from "../../../store/hooks";
 import { TbMessageQuestion } from "react-icons/tb";
-import { FaPeopleGroup } from "react-icons/fa6";
-import { MdOutlineContentPasteSearch } from "react-icons/md";
+import { FaPhoneVolume } from "react-icons/fa6";
+import { HomeHeroProps } from "./types";
 const fastLink = [
   {
-    title: "Yeni Destek Talebi",
+    title: "Call Center",
     icon: <FaHandsHelping />,
     content: "Content here",
     path: "/support/create",
   },
   {
-    title: "Sıkça Sorulan Sorular",
+    title: "Popular Questions",
     icon: <TbMessageQuestion />,
     content: "Content here",
     path: "/popular-questions",
   },
-  {
-    title: "Topluluk",
-    icon: <FaPeopleGroup />,
-    content: "Content here",
-    path: "/community",
-  },
-  {
-    title: "Hizmet Geçmişi",
-    icon: <MdOutlineContentPasteSearch />,
-    content: "Content here",
-    path: "/ticket-history",
-  },
 ];
 
-export default function HomeHero() {
-  const user = useAppSelector((state) => state.user);
+export default function HomeHero({ ...props }: HomeHeroProps) {
   return (
-    <div className="w-full min-h-screen grid px-4 justify-center">
-      <div className="flex flex-col items-center justify-center">
-        <div className="lg:h-2/3 flex flex-col items-center justify-center">
-          {user.isAuthenticated ? (
-            <h1 className="text-2xl md:text-3xl font-semibold">
-              Welcome{" "}
-              <span className="text-teal-700">{user.fullName ?? ""}!</span>
+    <div className="w-full min-h-screen grid grid-rows-3 bg-[url('https://img.freepik.com/free-photo/colleagues-working-together-call-center-with-headphones_23-2149256081.jpg?t=st=1730119912~exp=1730123512~hmac=91d294786dc14117be758078d568a25bbea2576eb34c8fc7e053c95f90bfcd07&w=1380')] relative">
+      <div className="lg:h-1/4 p-4 w-full lg:w-1/3 gap-2 bg-white bg-opacity-20 absolute top-3/4 z-10 rounded-full  left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid grid-cols-2">
+        <div
+          onClick={props.scrollToCallCenter}
+          className=" p-2 bg-teal-700 hover:bg-teal-600 rounded-full flex flex-col items-center justify-center"
+        >
+          <div className="w-full p-2 flex items-center justify-center lg:h-1/2">
+            <FaPhoneVolume className="text-5xl lg:text-7xl text-gray-200" />
+          </div>
+          <div className="flex flex-col gap-2 p-4">
+            <h1 className="font-semibold text-sm lg:text-xl text-gray-200 text-center">
+              Call Center
             </h1>
-          ) : (
-            <h1 className="text-3xl font-semibold">
-              We are{" "}
-              <span className="text-teal-700 capitalize">+1.5 mil. now!</span>
+          </div>
+        </div>
+        <div
+          onClick={props.scrollToQuestions}
+          className=" p-2 bg-teal-700 rounded-full flex flex-col items-center justify-center"
+        >
+          <div className="w-full p-2 flex items-center justify-center lg:h-1/2">
+            <TbMessageQuestion className="text-5xl lg:text-7xl text-gray-200" />
+          </div>
+          <div className="flex flex-col gap-2 p-4">
+            <h1 className="font-semibold text-sm lg:text-xl text-gray-200 text-center">
+              Most Popular Questions
             </h1>
-          )}
-          <h1 className="text-3xl md:text-5xl font-bold">
-            You always deserve <span className="text-teal-700">better...</span>
+          </div>
+        </div>
+      </div>
+      <div className="row-span-2 flex items-center justify-center bg-opacity-50 bg-teal-700 relative">
+        <div className="h-2/4">
+          <h1 className="text-6xl text-gray-200">
+            <span className="text-teal-500 font-bold">67 </span> Country,{" "}
+            <span className="text-teal-500 font-bold">148 </span>
+            Plant!
+          </h1>
+          <h1 className="text-gray-200 text-5xl">
+            Here to help, Anytime, Anywhere...
+          </h1>
+          <h1 className="text-3xl text-gray-200 mt-4 text-center">
+            You deserve better!
           </h1>
         </div>
-        <div className="flex w-full lg:w-3/4 p-1 mt-4 text-sm md:text-base">
-          <input
-            type="text"
-            className="h-[50px] w-full border border-teal-700 rounded-l-lg outline-none p-2"
-            placeholder="Ara..."
-          />
-          <button className="bg-teal-700 text-gray-200 hover:bg-teal-600 w-1/4 md:w-1/6 rounded-r-lg">
-            Ara
-          </button>
-        </div>
       </div>
-      <div className="flex items-center justify-center">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          {fastLink.map((item, index) => (
-            <NavigationCard
-              key={index}
-              icon={item.icon}
-              title={item.title}
-              content={item.content}
-              path={item.path}
-            />
-          ))}
-        </div>
-      </div>
+      <div className="row-span-1 bg-white opacity-50"></div>
     </div>
   );
 }

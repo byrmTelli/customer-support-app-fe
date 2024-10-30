@@ -12,7 +12,7 @@ export default function Tooltip({
   return (
     <TooltipComponent
       overlay={
-        <div className="text-white dark:text-black bg-gray-50 border border-gray-400 w-full h-full py-2 px-4 rounded-lg">
+        <div className="text-white  bg-teal-700 w-full h-full py-2 px-4 rounded-lg">
           {title}
         </div>
       }

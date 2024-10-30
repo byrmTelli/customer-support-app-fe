@@ -9,7 +9,7 @@ export default function DashboardCard({
 }: DashboardCardProps) {
   return (
     <div
-      className={`border border-gray-400 rounded-lg text-gray-700 select-none hover:bg-gray-200 ${className}`}
+      className={`border border-gray-400 rounded-lg py-4 text-gray-700 select-none hover:bg-gray-200 ${className}`}
     >
       <div className="text-4xl">{icon}</div>
       <h1 className="text-xl font-bold">{title}</h1>

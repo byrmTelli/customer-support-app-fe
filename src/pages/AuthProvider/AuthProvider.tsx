@@ -4,6 +4,7 @@ import { apiAuth } from "../../store/api/enhances/enhancedApiAuth";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { userLogin } from "../../store/slices/user/userSlice";
 import { getValidToken } from "../../utils/utilsAuth";
+import LoadingPage from "../Loading/LoadingPage";
 
 export default function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState(true);
@@ -47,7 +48,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   }, [accessToken, isAuthenticated, dispatch, getUserAuth]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   return <>{children}</>;

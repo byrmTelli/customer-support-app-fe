@@ -1,3 +1,5 @@
+import { AiFillFile, AiFillFilePdf } from "react-icons/ai";
+
 export default function AddCommentForm() {
   return (
     <div className="w-full">

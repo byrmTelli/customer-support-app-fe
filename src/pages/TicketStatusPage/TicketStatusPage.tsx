@@ -4,12 +4,13 @@ import { IoSendSharp } from "react-icons/io5";
 import { AiFillFilePdf, AiFillFile } from "react-icons/ai";
 import { apiTicket } from "../../store/api/enhances/enhancedApiTicket";
 import { useParams } from "react-router-dom";
-import { ticketStatus } from "../../utils/utilsTicket";
 import { formatDateTime } from "../../utils/utilsDate";
 import { useAppSelector } from "../../store/hooks";
 import { TicketStatusTypes } from "../../constants/ticketStatus";
-import Comment from "./CommentsComponent/Comment/Comment";
 import CommentsComponent from "./CommentsComponent/CommentsComponent";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import LoadingPage from "../Loading/LoadingPage";
+import UnauthorizedPage from "../UnauthorizedPage/UnauthorizedPage";
 
 export default function TicketStatusPage() {
   // States
@@ -28,17 +29,25 @@ export default function TicketStatusPage() {
   };
 
   // Queries
-  const getTicketByIdQuery = apiTicket.useGetApiTicketGetTicketByIdQuery({
-    ticketId: ticketId,
-  });
+  const { data: getTicketByIdQuery, error } =
+    apiTicket.useGetApiTicketGetTicketByIdQuery({
+      ticketId: ticketId,
+    });
 
-  const ticketData = getTicketByIdQuery.data?.data ?? {};
+  if (error) {
+    const errorStatus = error as FetchBaseQueryError;
+    if (errorStatus.status == 400) {
+      console.log("giremedin.");
+      return <UnauthorizedPage />;
+    }
+  }
+
+  const ticketData = getTicketByIdQuery?.data ?? {};
   // Hooks
   // Handlers
-
   // Utils
   const date = formatDateTime(ticketData.createdAt ?? "");
-  const myData = undefined;
+
   return (
     <div>
       <BreadCrum />

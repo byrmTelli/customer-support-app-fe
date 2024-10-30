@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4db6ac;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #26a69a;
+}
+
+.swiper-slide-custom {
+  transition: transform 0.3s ease;
+  transform: scale(0.8);
+}
+
+.swiper-slide-active {
+  transform: scale(1);
+}
+
+.question-slider {
+  height: 400px;
+}

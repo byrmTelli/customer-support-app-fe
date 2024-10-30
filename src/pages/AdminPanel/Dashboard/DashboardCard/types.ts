@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface DashboardCardComponentProps {
   title: string;
-  score: string;
+  score: number;
   hint: string;
   icon: ReactNode;
   className: string;

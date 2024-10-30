@@ -60,6 +60,12 @@ export default function Login() {
     handleLoginButtonClick();
   });
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleLoginButtonClick();
+    }
+  };
+
   return (
     <div className="w-full h-full flex items-center justify-center">
       <div className="size-96 border border-gray-400 rounded-lg shadow-lg p-4">
@@ -102,6 +108,7 @@ export default function Login() {
                     className="w-full outline-none"
                     autoComplete="off"
                     tabIndex={2}
+                    onKeyDown={handleKeyDown}
                   />
                 )}
               />
@@ -129,6 +136,7 @@ export default function Login() {
                 className=""
               />
               <button
+                type="button"
                 onClick={() => navigate("/register")}
                 className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-teal-700 font-semibold text-gray-200 w-[7rem] h-[2.3rem]"
               >

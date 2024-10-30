@@ -1,13 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import BreadCrum from "../../../components/BreadCrum/BreadCrum";
 import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
 import InspectButton from "../../../components/Buttons/InspectButton/InspectButton";
 import SimpleTable from "../../../components/SimpleTable/SimpleTable";
 import { apiUser } from "../../../store/api/enhances/enhancedApiUser";
 import { formatDateTime } from "../../../utils/utilsDate";
-import { customers } from "./constants";
 
 export default function CustomersPanel() {
   // States
+  const navigate = useNavigate();
   // Queries
   const getCustomersProfileListQuery =
     apiUser.useGetApiUserGetCustomerProfileListForAdminPanelQuery();
@@ -48,10 +49,17 @@ export default function CustomersPanel() {
             },
             {
               header: "Actions",
-              cell: () => (
+              cell: (cell) => (
                 <div className="flex gap-2">
-                  <InspectButton color="primary" />
-                  <DeleteButton className="" />
+                  <InspectButton
+                    onClick={() =>
+                      navigate(`/admin/user/${cell.row.original.id}`)
+                    }
+                    color="primary"
+                    title="Inspect"
+                    size="sm"
+                  />
+                  <DeleteButton size="sm" title="Delete" className="" />
                 </div>
               ),
             },

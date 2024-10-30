@@ -18,6 +18,29 @@ const injectedRtkApi = api.injectEndpoints({
         },
       }),
     }),
+    postApiUserApproveUser: build.mutation<
+      PostApiUserApproveUserApiResponse,
+      PostApiUserApproveUserApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/User/ApproveUser`,
+        method: "POST",
+        params: {
+          id: queryArg.id,
+        },
+      }),
+    }),
+    getApiUserGetUserProfileForAdminPanel: build.query<
+      GetApiUserGetUserProfileForAdminPanelApiResponse,
+      GetApiUserGetUserProfileForAdminPanelApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/User/GetUserProfileForAdminPanel`,
+        params: {
+          id: queryArg.id,
+        },
+      }),
+    }),
     getApiUserGetCustomerProfileListForAdminPanel: build.query<
       GetApiUserGetCustomerProfileListForAdminPanelApiResponse,
       GetApiUserGetCustomerProfileListForAdminPanelApiArg
@@ -98,6 +121,16 @@ export type GetApiAuthGetUserProfileApiArg = void;
 export type GetApiTicketGetTicketsOfUserApiResponse =
   /** status 200 OK */ TicketViewModelListIDataResultRead;
 export type GetApiTicketGetTicketsOfUserApiArg = {
+  id?: number;
+};
+export type PostApiUserApproveUserApiResponse =
+  /** status 200 OK */ IResultRead;
+export type PostApiUserApproveUserApiArg = {
+  id?: number;
+};
+export type GetApiUserGetUserProfileForAdminPanelApiResponse =
+  /** status 200 OK */ UserProfileForAdminPanelViewModelIDataResultRead;
+export type GetApiUserGetUserProfileForAdminPanelApiArg = {
   id?: number;
 };
 export type GetApiUserGetCustomerProfileListForAdminPanelApiResponse =
@@ -199,6 +232,33 @@ export type TicketViewModelListIDataResultRead = {
   code?: number;
   data?: TicketViewModel[] | null;
 };
+export type IResult = {};
+export type IResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+};
+export type UserProfileForAdminPanelViewModel = {
+  id?: number;
+  username?: string | null;
+  fullName?: string | null;
+  email?: string | null;
+  phoneNumber?: string | null;
+  adress?: string | null;
+  createdAt?: string;
+  role?: RoleViewModel;
+  profileImage?: string | null;
+  isApproved?: boolean;
+};
+export type UserProfileForAdminPanelViewModelIDataResult = {
+  data?: UserProfileForAdminPanelViewModel;
+};
+export type UserProfileForAdminPanelViewModelIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: UserProfileForAdminPanelViewModel;
+};
 export type CustomerProfileViewModelListIDataResult = {};
 export type CustomerProfileViewModel = {
   id?: number;
@@ -209,6 +269,7 @@ export type CustomerProfileViewModel = {
   adress?: string | null;
   createdAt?: string;
   role?: RoleViewModel;
+  profileImage?: string | null;
   isApproved?: string | null;
 };
 export type CustomerProfileViewModelListIDataResultRead = {
@@ -231,12 +292,6 @@ export type HelpdeskViewModelListIDataResultRead = {
   code?: number;
   data?: HelpdeskViewModel[] | null;
 };
-export type IResult = {};
-export type IResultRead = {
-  success?: boolean;
-  message?: string | null;
-  code?: number;
-};
 export type UpdateUserRequestModel = {
   id?: number;
   username: string;
@@ -245,6 +300,7 @@ export type UpdateUserRequestModel = {
   email: string;
   phoneNumber?: string | null;
   address?: string | null;
+  profileImage?: string | null;
 };
 export type RegisterUserRequestModel = {
   username: string;

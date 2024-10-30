@@ -11,6 +11,12 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.addCommentToTicketRequestModel,
       }),
     }),
+    getApiTicketGetTicketsOfHelpdesk: build.query<
+      GetApiTicketGetTicketsOfHelpdeskApiResponse,
+      GetApiTicketGetTicketsOfHelpdeskApiArg
+    >({
+      query: () => ({ url: `/api/Ticket/GetTicketsOfHelpdesk` }),
+    }),
     getApiTicketGetAllTicketForAdmin: build.query<
       GetApiTicketGetAllTicketForAdminApiResponse,
       GetApiTicketGetAllTicketForAdminApiArg
@@ -60,7 +66,7 @@ const injectedRtkApi = api.injectEndpoints({
       query: (queryArg) => ({
         url: `/api/Ticket/CreateTicket`,
         method: "POST",
-        body: queryArg.createTicketRequestModel,
+        body: queryArg.body,
       }),
     }),
     putApiTicketUpdateTicket: build.mutation<
@@ -105,6 +111,9 @@ export type PostApiCommentAddCommentToTicketApiResponse =
 export type PostApiCommentAddCommentToTicketApiArg = {
   addCommentToTicketRequestModel: AddCommentToTicketRequestModel;
 };
+export type GetApiTicketGetTicketsOfHelpdeskApiResponse =
+  /** status 200 OK */ HelpdeskTicketsTableViewModelListIDataResultRead;
+export type GetApiTicketGetTicketsOfHelpdeskApiArg = void;
 export type GetApiTicketGetAllTicketForAdminApiResponse =
   /** status 200 OK */ AdminPanelTicketsTableViewModelListIDataResultRead;
 export type GetApiTicketGetAllTicketForAdminApiArg = void;
@@ -127,7 +136,13 @@ export type GetApiTicketGetTicketsOfUserApiArg = {
 export type PostApiTicketCreateTicketApiResponse =
   /** status 200 OK */ IResultRead;
 export type PostApiTicketCreateTicketApiArg = {
-  createTicketRequestModel: CreateTicketRequestModel;
+  body: {
+    Title?: string;
+    Content?: string;
+    CategoryId?: number;
+    CreatorId?: number;
+    Files?: Blob[];
+  };
 };
 export type PutApiTicketUpdateTicketApiResponse =
   /** status 200 OK */ TicketViewModelIDataResultRead;
@@ -155,11 +170,32 @@ export type AddCommentToTicketRequestModel = {
   message?: string | null;
   creatorId?: number;
 };
-export type AdminPanelTicketsTableViewModelListIDataResult = {};
+export type HelpdeskTicketsTableViewModelListIDataResult = {};
 export type CategoryViewModel = {
   id?: number;
   name?: string | null;
 };
+export type CreatorViewModel = {
+  id?: number;
+  username?: string | null;
+  fullName?: string | null;
+};
+export type HelpdeskTicketsTableViewModel = {
+  id?: number;
+  title?: string | null;
+  content?: string | null;
+  category?: CategoryViewModel;
+  status?: string | null;
+  creator?: CreatorViewModel;
+  createdAt?: string;
+};
+export type HelpdeskTicketsTableViewModelListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: HelpdeskTicketsTableViewModel[] | null;
+};
+export type AdminPanelTicketsTableViewModelListIDataResult = {};
 export type RoleViewModel = {
   name?: string | null;
 };
@@ -167,11 +203,6 @@ export type HelpdeskViewModel = {
   id?: number;
   fullName?: string | null;
   role?: RoleViewModel;
-};
-export type CreatorViewModel = {
-  id?: number;
-  username?: string | null;
-  fullName?: string | null;
 };
 export type AdminPanelTicketsTableViewModel = {
   id?: number;
@@ -223,12 +254,6 @@ export type TicketViewModelListIDataResultRead = {
   message?: string | null;
   code?: number;
   data?: TicketViewModel[] | null;
-};
-export type CreateTicketRequestModel = {
-  title?: string | null;
-  content?: string | null;
-  categoryId?: number;
-  creatorId?: number;
 };
 export type TicketViewModelIDataResult = {
   data?: TicketViewModel;

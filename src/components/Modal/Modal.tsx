@@ -61,6 +61,6 @@ Modal.Header = function Header({ children }: ModalHeaderProps) {
 
 Modal.Content = function Content({ children }: ModalContentProps) {
   return (
-    <div className="h-[400px] bg-gray-200 p-4 flex w-full">{children}</div>
+    <div className="min-h-[400px] bg-gray-200 p-4 flex w-full">{children}</div>
   );
 };

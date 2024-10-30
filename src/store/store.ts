@@ -5,6 +5,7 @@ import { apiComment } from "./api/enhances/enhancedApiComment";
 import { apiTicket } from "./api/enhances/enhancedApiTicket";
 import { apiUser } from "./api/enhances/enhancedApiUser";
 import { userSlice } from "./slices/user/userSlice";
+import { apiAdmin } from "./api/enhances/enhancedApiAdmin";
 
 const middlewares: Middleware[] = [
   apiAuth.middleware,
@@ -22,6 +23,7 @@ export const store = configureStore({
     [apiComment.reducerPath]: apiComment.reducer,
     [apiTicket.reducerPath]: apiTicket.reducer,
     [apiUser.reducerPath]: apiUser.reducer,
+    [apiAdmin.reducerPath]: apiAdmin.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(middlewares),

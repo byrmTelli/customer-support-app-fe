@@ -5,7 +5,6 @@ import AdminPanel from "./pages/AdminPanel/AdminPanel";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./pages/Login/Login";
 import Footer from "./components/Footer/Footer";
-import CreateNewSupport from "./pages/CreateNewSupport/CreateNewSupport";
 import PopularQuestionsPage from "./pages/PopularQuestions/PopularQuestionsPage";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import Register from "./pages/Register/Register";
@@ -18,98 +17,109 @@ import TicketStatusPage from "./pages/TicketStatusPage/TicketStatusPage";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Profile from "./pages/UserPanel/Profile/Profile";
+import UserProfile from "./pages/AdminPanel/Users/UserProfile/UserProfile";
+import CreateNewSupport from "./pages/CustomerPanel/CreateNewSupport/CreateNewSupport";
+import CustomerProfile from "./pages/CustomerPanel/CustomerProfile/CustomerProfile";
+import HelpdeskProfile from "./pages/HelpdeskPanel/HelpdeskProfile/HelpdeskProfile";
+import AdminProfile from "./pages/AdminPanel/AdminProfile/AdminProfile";
+
 export const pages = [
   {
-    title: "Home",
     path: "/",
-    breadCrum: "/",
+    breadCrum: "",
     component: <HomePage />,
     auth: [],
   },
   {
-    title: "Yönetim Paneli",
+    title: "Profile",
+    path: "/admin/profile",
+    breadCrum: "/admin/profile",
+    component: <AdminProfile />,
+    auth: ["Admin"],
+  },
+  {
     path: "/admin",
-    breadCrum: "/admin",
+    breadCrum: "admin",
     component: <AdminPanel />,
     auth: ["Admin"],
   },
   {
-    title: "Yönetim Paneli",
     path: "/admin/dashboard",
     breadCrum: "/admin/dashboard",
     component: <Dashboard />,
     auth: ["Admin"],
   },
   {
-    title: "Customers",
     path: "/admin/customers",
     breadCrum: "/admin/customers",
     component: <CustomersPanel />,
     auth: ["Admin"],
   },
   {
-    title: "Users",
     path: "/admin/users",
     breadCrum: "/admin/users",
     component: <UsersPanel />,
     auth: ["Admin"],
   },
   {
-    title: "Yeni Destek Talebi",
-    path: "/support/create",
-    breadCrum: "/support/create",
-    component: <CreateNewSupport />,
-    auth: ["Customer"],
+    path: "/admin/user/:id",
+    breadCrum: "/User Informations",
+    component: <UserProfile />,
+    auth: ["Admin"],
   },
   {
-    title: "Login",
+    path: "customer/ticket/create",
+    breadCrum: "customer/ticket/create",
+    component: <CreateNewSupport />,
+    auth: ["Admin", "Customer"],
+  },
+  {
     path: "/login",
-    breadCrum: "/login",
+    breadCrum: "login",
     component: <Login />,
     auth: [],
   },
   {
-    title: "Sıkça Sorulan Sorular",
     path: "/popular-questions",
-    breadCrum: "/popular-questions",
+    breadCrum: "popular-questions",
     component: <PopularQuestionsPage />,
     auth: [],
   },
   {
-    title: "Şiremi Unuttum",
     path: "/forget-password",
-    breadCrum: "/forget-password",
+    breadCrum: "forget-password",
     component: <ForgetPassword />,
     auth: [],
   },
   {
-    title: "Kayıt Ol",
     path: "/register",
-    breadCrum: "/register",
+    breadCrum: "register",
     component: <Register />,
     auth: [],
   },
   {
-    title: "Hizmet Geçmişi",
     path: "/admin/tickets",
     breadCrum: "/admin/tickets",
     component: <TicketListPage />,
     auth: ["Admin"],
   },
   {
-    title: "Ticket Status",
     path: "/ticket-status/:id",
-    breadCrum: "/ticket-status",
+    breadCrum: "ticket-status",
     component: <TicketStatusPage />,
-    auth: ["Admin"],
+    auth: ["Admin", "Customer Support", "Customer"],
   },
   {
-    title: "Profile",
-    path: "/profile/:id",
-    breadCrum: "/profile",
-    component: <Profile />,
-    auth: [],
+    path: "customer/profile",
+    breadCrum: "/customer/profile",
+    component: <CustomerProfile />,
+    auth: ["Customer"],
+  },
+  {
+    path: "customer-support/profile",
+    breadCrum: "/customer-support/profile",
+    component: <HelpdeskProfile />,
+    auth: ["Customer Support"],
   },
 ];
 
@@ -129,7 +139,7 @@ function App() {
         autoClose={500}
       />
       <Navbar />
-      <div className="flex h-full flex-col gap-4">
+      <div className="flex h-full flex-col">
         <Routes>
           {pages.map((item, index) => (
             <Route

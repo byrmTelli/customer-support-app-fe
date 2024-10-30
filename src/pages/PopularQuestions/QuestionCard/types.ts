@@ -4,7 +4,6 @@ interface QuestionCardContent {
 }
 
 interface QuestionCardComponentProps {
-  isOpen: boolean;
   data: QuestionCardContent;
 }
 

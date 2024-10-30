@@ -1,5 +1,6 @@
 import { VscInspect } from "react-icons/vsc";
 import { InspectButtonProps } from "./types";
+import { Tooltip } from "../../Tooltip";
 
 export default function InspectButton({
   className,
@@ -25,15 +26,17 @@ export default function InspectButton({
   const currentVarient = varients[varient ? varient : "light"];
   const currentSize = sizes[size ? size : "md"];
   return (
-    <button
-      className={`lg:px-3 lg:py-2  select-none group border font-semibold lg:w-[6rem] flex items-center justify-center gap-2 transition-color duration-200 rounded-md ${className} ${currentVarient} ${currentSize}`}
-      type={type}
-      {...props}
-    >
-      <span className="group-hover:animate-shake">
-        <VscInspect />
-      </span>
-      {title}
-    </button>
+    <Tooltip placement={"bottom"} title={"Inspect"}>
+      <button
+        className={`lg:px-3 lg:py-2  select-none group border font-semibold lg:w-[6rem] flex items-center justify-center gap-2 transition-color duration-200 rounded-md ${className} ${currentVarient} ${currentSize}`}
+        type={type}
+        {...props}
+      >
+        <span className="group-hover:animate-shake">
+          <VscInspect />
+        </span>
+        {title}
+      </button>
+    </Tooltip>
   );
 }

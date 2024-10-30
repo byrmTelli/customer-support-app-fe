@@ -1,37 +1,22 @@
-import { IoIosArrowDown } from "react-icons/io";
 import { QuestionCardProps } from "./types";
 import { FaQuestion } from "react-icons/fa";
 
-interface Props extends QuestionCardProps {
-  isOpen: boolean;
-  onClick: () => void;
-}
-
-export default function QuestionCard({ isOpen, onClick, data }: Props) {
+export default function QuestionCard({ data }: QuestionCardProps) {
   return (
-    <div className="w-full border border-teal-700">
+    <div className="w-full h-[400px]">
       <div
-        onClick={onClick}
-        className={`p-3  flex justify-between ${
-          isOpen ? "bg-teal-700 text-gray-200" : ""
-        } cursor-pointer select-none`}
+        className={`p-3 flex justify-between 
+           bg-teal-700 text-gray-200 rounded-t-3xl  cursor-pointer select-none`}
       >
         <div className="flex gap-2 items-center">
-          <div className="p-2 border border-teal-700 rounded-full">
-            <FaQuestion className="text-teal-700 text-xl" />
+          <div className="p-2 border  rounded-full">
+            <FaQuestion className="text-gray-200 text-xl" />
           </div>
           <h1 className="text-lg font-semibold">{data.title}</h1>
         </div>
-        <IoIosArrowDown
-          className={`text-lg transition-transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
       </div>
       <div
-        className={`${
-          isOpen ? "block" : "hidden"
-        } ease-in-out duration-300 transition-all p-3`}
+        className={`bg-gray-200 bg-opacity-80 duration-300 ease-in-out overflow-y-auto p-4 h-2/3 rounded-b-3xl`}
       >
         {data.content}
       </div>

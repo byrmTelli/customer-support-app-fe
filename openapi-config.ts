@@ -19,6 +19,7 @@ const config: ConfigFile = {
   apiFile: "./src/store/api/customerSupportAppApi.ts",
   apiImport: "customerSupportAppApi",
   outputFiles: {
+    ...generateOutputFile("Admin"),
     ...generateOutputFile("Auth"),
     ...generateOutputFile("Category"),
     ...generateOutputFile("Comment"),
