@@ -18,4 +18,5 @@ export const customerSupportAppApi = createApi({
     },
   }),
   endpoints: () => ({}),
+  tagTypes: ["GetTicketsOfUser"],
 });

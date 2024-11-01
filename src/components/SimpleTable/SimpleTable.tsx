@@ -7,18 +7,16 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { SimpleTableProps } from "./types";
-import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import MovingIcon from "@mui/icons-material/Moving";
 import { RiFileExcel2Line } from "react-icons/ri";
+import { FaArrowDownShortWide, FaArrowUpShortWide } from "react-icons/fa6";
 
 export default function SimpleTable<T extends Record<string, any>>({
   data,
   columns,
   title,
 }: SimpleTableProps<T>) {
-
   const [sorting, setSorting] = useState<SortingState>([]);
   const [filtering, setFiltering] = useState("");
 
@@ -77,9 +75,9 @@ export default function SimpleTable<T extends Record<string, any>>({
                   )}
                   {header.column.getIsSorted() ? (
                     header.column.getIsSorted() === "asc" ? (
-                      <MovingIcon color="action" />
+                      <FaArrowUpShortWide />
                     ) : (
-                      <TrendingDownIcon color="action" />
+                      <FaArrowDownShortWide />
                     )
                   ) : null}
                 </td>

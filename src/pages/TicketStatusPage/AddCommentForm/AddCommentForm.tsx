@@ -1,53 +1,94 @@
-import { AiFillFile, AiFillFilePdf } from "react-icons/ai";
+import {
+  AddCommentFormComponentProps,
+  AddCommentFormModel,
+  AddCommentFormSchema,
+} from "./constants";
+import { TicketStatusTypes } from "../../../constants/ticketStatus";
+import { FaRegArrowAltCircleUp } from "react-icons/fa";
+import { Controller, useForm } from "react-hook-form";
+import { Textarea } from "../../../components/Textarea";
+import { useAppSelector } from "../../../store/hooks";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { apiTicket } from "../../../store/api/enhances/enhancedApiTicket";
+import { toast } from "react-toastify";
 
-export default function AddCommentForm() {
+export default function AddCommentForm({
+  ticket,
+}: AddCommentFormComponentProps) {
+  // States
+  const user = useAppSelector((state) => state.user);
+  // Queries
+  const [addCommentToTicket, addCommentToTickeTMutation] =
+    apiTicket.usePostApiCommentAddCommentToTicketMutation();
+  // Forms
+  const form = useForm<AddCommentFormModel>({
+    defaultValues: {
+      creatorId: user.id ?? 0,
+      ticketId: ticket.id ?? 0,
+      message: "",
+    },
+    resolver: yupResolver(AddCommentFormSchema),
+  });
+  // Handlers
+  const handleSubmitButtonClick = () => {
+    const f = form.getValues();
+
+    addCommentToTicket({
+      addCommentToTicketRequestModel: {
+        creatorId: user.id,
+        ticketId: ticket.id,
+        message: f.message,
+      },
+    })
+      .unwrap()
+      .then((res) => {
+        if (res.success) {
+          toast.success(res.message);
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      })
+      .finally();
+
+    form.reset();
+  };
+
   return (
-    <div className="w-full">
-      {/* Yüklenen Dosyaları Gösterme */}
-      <div className="w-full mt-4">
-        <h1 className="text-gray-600 font-semibold">Uploaded Files</h1>
-        <div className="grid grid-cols-8 gap-4 mt-4">
-          {uploadedFiles.map((file, index) => (
-            <div key={index} className="flex flex-col items-center gap-2">
-              {/* Dosyanın türüne göre gösterim */}
-              {imageTypes.includes(file.type) ? (
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt={file.name}
-                  className="size-14 object-cover"
-                />
-              ) : file.type === "application/pdf" ? (
-                <AiFillFilePdf size={40} className="text-red-600" />
-              ) : (
-                <AiFillFile size={40} className="text-gray-500" />
-              )}
-              <p className="text-xs text-gray-700">{file.name}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
+    <div className="w-full flex gap-2 py-2">
       {/* Dosya Yükleme ve Yorum Yazma */}
-      <div className="w-full flex flex-col gap-2 p-2">
-        {ticketData.status === TicketStatusTypes.Waiting && (
-          <>
-            <h1 className="text-gray-600 font-semibold">Comment</h1>
-            <textarea className="w-full min-h-24 outline-none p-2  border border-gray-400 rounded-lg" />
-            <div className="w-full flex items-center justify-between">
-              {/* Dosya Yükleme Input'u */}
-              <input
-                type="file"
-                multiple
-                onChange={handleFileUpload}
-                className="file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100"
+      {ticket.status === TicketStatusTypes.Waiting && (
+        <div className="w-full flex flex-col gap-2 ">
+          <h1 className="font-semibold px-4">Comment</h1>
+          <form
+            className="w-full flex"
+            onSubmit={form.handleSubmit(handleSubmitButtonClick)}
+          >
+            <div className="w-full flex items-center">
+              <Controller
+                name="message"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Textarea
+                    {...field}
+                    invalid={fieldState.error?.message}
+                    className="w-full h-full p-2 outline-none rounded-l-lg italic focus:not-italic"
+                    placeholder="Do you need more help? Please let us know..."
+                  />
+                )}
               />
-              <button className="border border-gray-400 rounded-lg p-2 w-[6rem] flex items-center justify-center text-gray-600">
-                <IoSendSharp />
-              </button>
             </div>
-          </>
-        )}
-      </div>
+            <button
+              type="submit"
+              onClick={form.handleSubmit(handleSubmitButtonClick)}
+              className="border border-gray-400 rounded-r-lg p-2 w-[6rem] flex items-center justify-center text-gray-200 bg-teal-700"
+            >
+              <FaRegArrowAltCircleUp className="text-2xl" />
+            </button>
+            {}
+          </form>
+        </div>
+      )}
     </div>
   );
 }

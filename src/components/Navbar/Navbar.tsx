@@ -1,13 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { userLogout } from "../../store/slices/user/userSlice";
 import { RoleViewModel } from "../../store/api/generated/generatedApiAuth";
 import { FaPowerOff } from "react-icons/fa6";
-import { IoLogIn } from "react-icons/io5";
 
 export default function Navbar() {
-  const location = useLocation();
   const user = useAppSelector((state) => state.user);
 
   const roleBasedProfileRoute = (role: RoleViewModel) => {
@@ -84,7 +81,7 @@ export default function Navbar() {
               )}
               {user.role?.name == "Customer" && (
                 <li className="font-semibold">
-                  <Link to={"/ticket/create"}>New Ticket</Link>
+                  <Link to={"/customer/ticket/create"}>New Ticket</Link>
                 </li>
               )}
             </ul>

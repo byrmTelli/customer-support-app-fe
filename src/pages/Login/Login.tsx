@@ -125,7 +125,7 @@ export default function Login() {
                 <label htmlFor="">Remember Me</label>
               </div>
             </div>
-            <div className="text-xs flex flex-row-reverse justify-between gap-2 w-3/4">
+            <div className="text-xs flex flex-col justify-between gap-2 w-3/4">
               <Button
                 isLoading={loginMutation.isLoading}
                 title="Login"
@@ -133,15 +133,16 @@ export default function Login() {
                 varient="success"
                 tabIndex={3}
                 onClick={form.handleSubmit(handleLoginButtonClick)}
-                className=""
+                className="w-full py-2"
               />
-              <button
+              <Button
                 type="button"
+                size="sm"
+                varient="success"
                 onClick={() => navigate("/register")}
-                className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-teal-700 font-semibold text-gray-200 w-[7rem] h-[2.3rem]"
-              >
-                Register
-              </button>
+                className="w-full border border-teal-700 py-2 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-teal-700 font-semibold text-gray-200"
+                title="Register"
+              />
             </div>
             <div className="w-3/4 px-4 text-xs mt-2">
               {loginMutation.error ? (

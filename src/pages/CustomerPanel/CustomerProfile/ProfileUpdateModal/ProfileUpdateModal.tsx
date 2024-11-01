@@ -3,7 +3,7 @@ import Modal from "../../../../components/Modal/Modal";
 import { Input } from "../../../../components/Input";
 import { useState } from "react";
 import { apiUser } from "../../../../store/api/enhances/enhancedApiUser";
-import { UpdateProfileFormModelProps, UpdateProfileModalProps } from "./types";
+import { UpdateProfileModalProps } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ProfileUpdateFormSchema } from "./constants";
 import { toast } from "react-toastify";

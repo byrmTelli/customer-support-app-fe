@@ -7,15 +7,16 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsFiletypePdf } from "react-icons/bs";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCategory } from "../../../store/api/enhances/enhancedApiCategory";
-import { getValidToken } from "../../../utils/utilsAuth";
 import BreadCrum from "../../../components/BreadCrum/BreadCrum";
 import { Input } from "../../../components/Input";
 import { Select } from "../../../components/Select";
 import { Textarea } from "../../../components/Textarea";
+import { apiTicket } from "../../../store/api/enhances/enhancedApiTicket";
+import { extendedCustomerSupportAppApi } from "../../../store/api/extendedCSApi";
 
 export default function CreateNewSupport() {
   // States
@@ -25,6 +26,8 @@ export default function CreateNewSupport() {
   const getCategoriesQuery = apiCategory.useGetApiCategoryGetCategoriesQuery();
   const categories = getCategoriesQuery.data?.data ?? [];
 
+  const [createTicket, CreateTicketMutation] =
+    extendedCustomerSupportAppApi.useCreateTicketMutation();
   // Forms
   const form = useForm<CreateNewSupportFormModel>({
     defaultValues: CreateNewSupportFormDefaults,
@@ -33,8 +36,6 @@ export default function CreateNewSupport() {
 
   // Handlers
   const handleCreateNewSupportButtonClick = () => {
-    const errors = form.formState.errors;
-    console.log(errors);
     const f = form.getValues();
 
     const formData = new FormData();
@@ -47,34 +48,33 @@ export default function CreateNewSupport() {
       formData.append("files", file);
     });
 
-    const tokenFromStorage = localStorage.getItem("accessToken");
-    const validToken = getValidToken(tokenFromStorage);
-
-    fetch(`https://localhost:7051/api/Ticket/CreateTicket`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${validToken}`,
-      },
-      body: formData,
-    })
-      .then((response) => response.json())
+    createTicket(formData)
+      .unwrap()
       .then((res) => {
         toast.success(res.message);
         form.reset();
         setSelectedFiles([]);
+        apiTicket.util.invalidateTags(["GetTicketsOfUser"]);
       })
       .catch((err) => {
         toast.error(err.message);
-      });
+      })
+      .finally();
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = Array.from(event.target.files || []);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
+  };
 
-    // Mevcut dosyaları ve yeni dosyaları birleştirip güncelle
+  useEffect(() => {
+    // selectedFiles değiştiğinde form value'yu günceller
+    form.setValue("files", selectedFiles);
+  }, [selectedFiles, form.setValue]);
+
+  const removeFile = (index: number) => {
     setSelectedFiles((prevFiles) => {
-      const updatedFiles = [...prevFiles, ...newFiles];
-      form.setValue("files", updatedFiles); // Formdaki dosyaları güncel listeye ayarla
+      const updatedFiles = prevFiles.filter((_, i) => i !== index);
       return updatedFiles;
     });
   };
@@ -168,26 +168,23 @@ export default function CreateNewSupport() {
                 </span>
               </h1>
               {selectedFiles.length > 0 ? (
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-4 mt-4">
                   {selectedFiles.map((file, index) => (
                     <div
                       key={index}
                       className="text-gray-600 flex flex-col gap-1 items-center space-x-2"
                     >
                       {file.type.startsWith("image/") ? (
-                        // Resim dosyası için küçük resim önizleme
                         <img
                           src={URL.createObjectURL(file)}
                           alt={file.name}
                           className="w-16 h-16 object-cover rounded"
                         />
                       ) : file.type === "application/pdf" ? (
-                        // PDF dosyası için simge
                         <div className="w-16 h-16 flex items-center justify-center bg-gray-200 rounded">
                           <BsFiletypePdf className="text-2xl text-red-500" />
                         </div>
                       ) : (
-                        // Diğer dosya türleri için dosya adını göster
                         <span className="text-gray-600 text-xs">
                           {file.name}
                         </span>
@@ -195,48 +192,56 @@ export default function CreateNewSupport() {
                       <span className="text-xs text-gray-600">
                         {file.name.slice(0, 15)}
                       </span>
+                      <button
+                        className="text-red-500 text-xs mt-2"
+                        onClick={() => removeFile(index)}
+                      >
+                        Kaldır
+                      </button>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className=" p-2">
+                <div className="p-2 mt-4">
                   <h1 className="text-sm italic text-gray-600">
-                    There is no file uploaded yet.
+                    Henüz dosya yüklenmedi.
                   </h1>
                 </div>
               )}
             </div>
 
             <div className="w-full">
-              <label
-                htmlFor="file-upload"
-                className="cursor-pointer flex items-center gap-4 justify-center px-4 py-2 bg-teal-700 text-white font-semibold rounded-lg hover:bg-teal-600"
-              >
-                <FaFileImport />
-                Dosya Seç
-              </label>
               <Controller
                 name="files"
                 control={form.control}
                 render={({ field }) => (
-                  <Input
-                    id="file-upload"
-                    type="file"
-                    multiple
-                    onChange={(event) => {
-                      handleFileChange(event);
-                      field.onChange(event.target.files);
-                    }}
-                    onBlur={field.onBlur}
-                    className="hidden"
-                    accept=".jpg,.png,.pdf"
-                  />
+                  <>
+                    <label
+                      htmlFor="file-upload"
+                      className="cursor-pointer flex items-center gap-4 justify-center px-4 py-2 bg-teal-700 text-white font-semibold rounded-lg hover:bg-teal-600"
+                    >
+                      <FaFileImport />
+                      Dosya Seç
+                    </label>
+                    <Input
+                      id="file-upload"
+                      type="file"
+                      multiple
+                      onChange={(event) => {
+                        handleFileChange(event);
+                        field.onChange(event.target.files);
+                      }}
+                      onBlur={field.onBlur}
+                      className="hidden"
+                      accept=".jpg,.png,.pdf"
+                    />
+                  </>
                 )}
               />
             </div>
             <div className="w-full">
               <button
-                onClick={handleCreateNewSupportButtonClick}
+                onClick={form.handleSubmit(handleCreateNewSupportButtonClick)}
                 className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-teal-700 font-semibold text-gray-200 w-full h-[2.3rem]"
               >
                 Onayla

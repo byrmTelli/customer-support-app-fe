@@ -1,4 +1,3 @@
-import { Maybe } from "yup";
 import { ModalProps } from "../../../../components/Modal/types";
 
 interface UpdateProfileModalComponentProps {}

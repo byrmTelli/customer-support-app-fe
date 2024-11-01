@@ -12,7 +12,7 @@ function Textarea(
   const isInvalid = typeof invalid !== "undefined";
 
   return (
-    <div>
+    <div className="w-full h-full">
       {label && (
         <Tooltip title={label} placement="bottomLeft">
           <label
@@ -33,7 +33,7 @@ function Textarea(
         disabled={disabled}
         {...textareaProps}
         className={twMerge(
-          classNames(" sm:text-sm rounded-lg block w-full p-2.5", {
+          classNames(" sm:text-sm block w-full p-2.5", {
             "bg-gray-50 border border-gray-400 text-gray-900 focus:ring-cyan-600 focus:border-cyan-600":
               isInvalid === false,
             "bg-red-50 border border-red-500 text-red-900 placeholder-red-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500":

@@ -225,6 +225,7 @@ export type UserViewModel = {
   id?: number;
   fullName?: string | null;
   userName?: string | null;
+  profileImage?: string | null;
 };
 export type CommentViewModel = {
   id?: number;
@@ -237,6 +238,11 @@ export type LogActivityViewModel = {
   description?: string | null;
   createdAt?: string;
 };
+export type TicketAttacmentViewModel = {
+  fileName?: string | null;
+  file?: string | null;
+  fileType?: string | null;
+};
 export type TicketViewModel = {
   id?: number;
   title?: string | null;
@@ -248,6 +254,7 @@ export type TicketViewModel = {
   comments?: CommentViewModel[] | null;
   activities?: LogActivityViewModel[] | null;
   createdAt?: string;
+  files?: TicketAttacmentViewModel[] | null;
 };
 export type TicketViewModelListIDataResultRead = {
   success?: boolean;

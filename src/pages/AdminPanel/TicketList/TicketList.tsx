@@ -82,7 +82,7 @@ export default function TicketListPage() {
                 {
                   header: "Actions",
                   cell: (cell) => (
-                    <div className="p-2">
+                    <div className="p-2 flex gap-2 w-full">
                       {cell.row.original.assignedTo == null ? (
                         <Button
                           onClick={() => {
