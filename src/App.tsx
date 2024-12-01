@@ -22,6 +22,7 @@ import CreateNewSupport from "./pages/CustomerPanel/CreateNewSupport/CreateNewSu
 import CustomerProfile from "./pages/CustomerPanel/CustomerProfile/CustomerProfile";
 import HelpdeskProfile from "./pages/HelpdeskPanel/HelpdeskProfile/HelpdeskProfile";
 import AdminProfile from "./pages/AdminPanel/AdminProfile/AdminProfile";
+import CategoriesPage from "./pages/AdminPanel/CategoriesPage/CategoriesPage";
 
 export const pages = [
   {
@@ -53,6 +54,12 @@ export const pages = [
     path: "/admin/customers",
     breadCrum: "/admin/customers",
     component: <CustomersPanel />,
+    auth: ["Admin"],
+  },
+  {
+    path: "/admin/categories/:id",
+    breadCrum: "/admin/categories",
+    component: <CategoriesPage />,
     auth: ["Admin"],
   },
   {

@@ -1,6 +1,17 @@
 import { customerSupportAppApi as api } from "../customerSupportAppApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
+    getApiAdminGetCategoriesPageStatistics: build.query<
+      GetApiAdminGetCategoriesPageStatisticsApiResponse,
+      GetApiAdminGetCategoriesPageStatisticsApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/Admin/GetCategoriesPageStatistics`,
+        params: {
+          categoryId: queryArg.categoryId,
+        },
+      }),
+    }),
     getApiAdminGetDashboardStats: build.query<
       GetApiAdminGetDashboardStatsApiResponse,
       GetApiAdminGetDashboardStatsApiArg
@@ -40,6 +51,11 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as generatedAdmin };
+export type GetApiAdminGetCategoriesPageStatisticsApiResponse =
+  /** status 200 OK */ CategoriesPageViewModelIDataResultRead;
+export type GetApiAdminGetCategoriesPageStatisticsApiArg = {
+  categoryId?: number;
+};
 export type GetApiAdminGetDashboardStatsApiResponse =
   /** status 200 OK */ DashboardViewModelIDataResultRead;
 export type GetApiAdminGetDashboardStatsApiArg = void;
@@ -57,6 +73,70 @@ export type GetApiUserGetCustomerProfileListForAdminPanelApiArg = void;
 export type GetApiUserGetHeldesksProfileListForAdminPanelApiResponse =
   /** status 200 OK */ UserProfileViewModelListIDataResultRead;
 export type GetApiUserGetHeldesksProfileListForAdminPanelApiArg = void;
+export type CategoryViewModel = {
+  id?: number;
+  name?: string | null;
+};
+export type RoleViewModel = {
+  name?: string | null;
+};
+export type HelpdeskViewModel = {
+  id?: number;
+  fullName?: string | null;
+  role?: RoleViewModel;
+};
+export type UserViewModel = {
+  id?: number;
+  fullName?: string | null;
+  userName?: string | null;
+  profileImage?: string | null;
+};
+export type CommentViewModel = {
+  id?: number;
+  message?: string | null;
+  creator?: UserViewModel;
+  createdAt?: string;
+};
+export type LogActivityViewModel = {
+  id?: number;
+  description?: string | null;
+  createdAt?: string;
+};
+export type TicketAttacmentViewModel = {
+  fileName?: string | null;
+  file?: string | null;
+  fileType?: string | null;
+};
+export type TicketViewModel = {
+  id?: number;
+  title?: string | null;
+  content?: string | null;
+  status?: string | null;
+  assignedTo?: HelpdeskViewModel;
+  category?: CategoryViewModel;
+  creator?: UserViewModel;
+  comments?: CommentViewModel[] | null;
+  activities?: LogActivityViewModel[] | null;
+  createdAt?: string;
+  files?: TicketAttacmentViewModel[] | null;
+};
+export type CategoriesPageViewModel = {
+  category?: CategoryViewModel;
+  completedTicketCount?: number;
+  pendingTicketCount?: number;
+  waitingTicketCount?: number;
+  cancelledTicketCount?: number;
+  tickets?: TicketViewModel[] | null;
+};
+export type CategoriesPageViewModelIDataResult = {
+  data?: CategoriesPageViewModel;
+};
+export type CategoriesPageViewModelIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: CategoriesPageViewModel;
+};
 export type MonthlySupportRequest = {
   month?: string | null;
   openedCount?: number;
@@ -78,18 +158,6 @@ export type DashboardViewModelIDataResultRead = {
   data?: DashboardViewModel;
 };
 export type AdminPanelTicketsTableViewModelListIDataResult = {};
-export type CategoryViewModel = {
-  id?: number;
-  name?: string | null;
-};
-export type RoleViewModel = {
-  name?: string | null;
-};
-export type HelpdeskViewModel = {
-  id?: number;
-  fullName?: string | null;
-  role?: RoleViewModel;
-};
 export type CreatorViewModel = {
   id?: number;
   username?: string | null;

@@ -50,6 +50,17 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.updateCategoryRequestModel,
       }),
     }),
+    getApiTicketGetTicketsByCategory: build.query<
+      GetApiTicketGetTicketsByCategoryApiResponse,
+      GetApiTicketGetTicketsByCategoryApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/Ticket/GetTicketsByCategory`,
+        params: {
+          categoryId: queryArg.categoryId,
+        },
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -76,6 +87,11 @@ export type PutApiCategoryUpdateCategoryApiResponse =
   /** status 200 OK */ CategoryViewModelIDataResultRead;
 export type PutApiCategoryUpdateCategoryApiArg = {
   updateCategoryRequestModel: UpdateCategoryRequestModel;
+};
+export type GetApiTicketGetTicketsByCategoryApiResponse =
+  /** status 200 OK */ TicketViewModelListIDataResultRead;
+export type GetApiTicketGetTicketsByCategoryApiArg = {
+  categoryId?: number;
 };
 export type CategoryViewModelListIDataResult = {};
 export type CategoryViewModel = {
@@ -104,4 +120,54 @@ export type CreateCategoryRequestModel = {
 export type UpdateCategoryRequestModel = {
   id?: number;
   name?: string | null;
+};
+export type TicketViewModelListIDataResult = {};
+export type RoleViewModel = {
+  name?: string | null;
+};
+export type HelpdeskViewModel = {
+  id?: number;
+  fullName?: string | null;
+  role?: RoleViewModel;
+};
+export type UserViewModel = {
+  id?: number;
+  fullName?: string | null;
+  userName?: string | null;
+  profileImage?: string | null;
+};
+export type CommentViewModel = {
+  id?: number;
+  message?: string | null;
+  creator?: UserViewModel;
+  createdAt?: string;
+};
+export type LogActivityViewModel = {
+  id?: number;
+  description?: string | null;
+  createdAt?: string;
+};
+export type TicketAttacmentViewModel = {
+  fileName?: string | null;
+  file?: string | null;
+  fileType?: string | null;
+};
+export type TicketViewModel = {
+  id?: number;
+  title?: string | null;
+  content?: string | null;
+  status?: string | null;
+  assignedTo?: HelpdeskViewModel;
+  category?: CategoryViewModel;
+  creator?: UserViewModel;
+  comments?: CommentViewModel[] | null;
+  activities?: LogActivityViewModel[] | null;
+  createdAt?: string;
+  files?: TicketAttacmentViewModel[] | null;
+};
+export type TicketViewModelListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: TicketViewModel[] | null;
 };

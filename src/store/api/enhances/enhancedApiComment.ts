@@ -1,6 +1,10 @@
 import { generatedComment } from "../generated/generatedApiComment";
 
 export const apiComment = generatedComment.enhanceEndpoints({
-  addTagTypes: [],
-  endpoints: {},
+  addTagTypes: ["DeleteComment", "GetTicketById"],
+  endpoints: {
+    deleteApiCommentDeleteComment: {
+      invalidatesTags: ["GetTicketById"],
+    },
+  },
 });

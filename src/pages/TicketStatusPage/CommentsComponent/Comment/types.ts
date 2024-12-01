@@ -1,4 +1,4 @@
-import { CommentViewModel } from "../../../store/api/generated/generatedApiTicket";
+import { CommentViewModel } from "../../../../store/api/generated/generatedApiTicket";
 
 interface CommentComponentProps {
   data: CommentViewModel;

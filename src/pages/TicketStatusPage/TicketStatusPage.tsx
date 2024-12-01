@@ -57,11 +57,11 @@ export default function TicketStatusPage() {
       <div className="grid grid-cols-6 w-full gap-2 items-center justify-center p-4 mt-4 text-sm">
         <div className="col-span-4 col-start-2 flex flex-col items-center gap-4 border border-gray-400 p-8">
           <div className="flex w-full gap-2 font-bold text-xl">
-            <h1 className="text-gray-700">Subject:</h1>
+            <h1 className="text-gray-700">Title:</h1>
             <h1 className="text-gray-700 italic">"{ticketData.title}"</h1>
           </div>
           {/* Properties */}
-          <div className="w-full grid grid-cols-3 gap-2">
+          <div className="w-full grid md:grid-cols-3 gap-2">
             <div className="flex flex-col gap-2  border border-gray-400 px-4 py-2">
               <h1 className="font-semibold">Creator: </h1>
               {ticketData.creator && (

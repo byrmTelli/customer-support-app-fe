@@ -85,7 +85,7 @@ export default function CreateNewSupport() {
       <div className="w-full flex justify-center px-4 py-4">
         <div className="lg:w-3/5 flex flex-col gap-4 py-4">
           <div className="p-2">
-            <h1 className="font-semibold">Bilgilendirme</h1>
+            <h1 className="font-semibold">Information</h1>
             <p className="mt-4">
               Yaşadığınız problemle ilgili bu sayfa üzerinde bir kayıt
               oluşturabilirsiniz. Kayıt oluşturulduktan sonra en kısa sürede
@@ -107,7 +107,7 @@ export default function CreateNewSupport() {
             className="flex flex-col gap-2"
           >
             <div className="flex flex-col gap-2">
-              <h1 className="font-semibold pl-2">Başlık</h1>
+              <h1 className="font-semibold pl-2">Title</h1>
               <div className=" p-2 rounded-lg focus-within:border-teal-700">
                 <Controller
                   name="title"
@@ -140,7 +140,7 @@ export default function CreateNewSupport() {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <h1 className="font-semibold pl-2">Açıklama</h1>
+              <h1 className="font-semibold pl-2">Description</h1>
               <div className=" p-2 flex flex-col gap-2 focus-within:border-teal-700">
                 <p className="pl-2">
                   Sorununuzu aşağıda sizin için ayırılan alanda lütfen açık bir

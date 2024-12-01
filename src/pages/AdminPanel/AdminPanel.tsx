@@ -22,7 +22,10 @@ export default function AdminPanel() {
           <h1 className="text-xl">Dashboard</h1>
         </div>
         <div className="grid grid-cols-2 grid-rows-2 gap-2">
-          <div className="rounded-lg flex flex-col items-center justify-center bg-purple-800 hover:bg-purple-700 text-gray-200 font-semibold">
+          <div
+            onClick={() => navigate("/admin/categories/1")}
+            className="rounded-lg flex flex-col items-center justify-center bg-purple-800 hover:bg-purple-700 text-gray-200 font-semibold"
+          >
             <TbCategoryPlus className="text-2xl lg:text-5xl" />
             <h1 className="text-sm lg:text-lg">Categories</h1>
           </div>
@@ -39,7 +42,7 @@ export default function AdminPanel() {
           </div>
           <div className="rounded-lg flex flex-col items-center justify-center bg-teal-700 hover:bg-teal-600 text-gray-200 font-semibold">
             <MdErrorOutline className="text-2xl lg:text-5xl" />
-            <h1 className="text-sm lg:text-lg">Logs</h1>
+            <h1 className="text-sm lg:text-lg">Notifications</h1>
           </div>
         </div>
         <div

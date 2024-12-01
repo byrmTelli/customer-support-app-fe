@@ -18,7 +18,7 @@ export default function MonthlyPieCharts() {
     <div className="flex">
       {/* TwoLevelPieChart */}
       <div style={{ width: "50%", height: 300 }}>
-        <h3>Two Level Pie Chart</h3>
+        <h3 className="font-semibold">Two Level Pie Chart</h3>
         <ResponsiveContainer>
           <PieChart>
             <Tooltip />
@@ -62,7 +62,7 @@ export default function MonthlyPieCharts() {
 
       {/* PieChartWithPaddingAngle */}
       <div style={{ width: "50%", height: 300 }}>
-        <h3>Pie Chart with Padding Angle</h3>
+        <h3 className="font-semibold">Pie Chart with Padding Angle</h3>
         <ResponsiveContainer>
           <PieChart>
             <Tooltip />

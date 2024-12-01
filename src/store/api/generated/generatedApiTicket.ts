@@ -11,6 +11,17 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.addCommentToTicketRequestModel,
       }),
     }),
+    getApiTicketGetTicketsByCategory: build.query<
+      GetApiTicketGetTicketsByCategoryApiResponse,
+      GetApiTicketGetTicketsByCategoryApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/Ticket/GetTicketsByCategory`,
+        params: {
+          categoryId: queryArg.categoryId,
+        },
+      }),
+    }),
     getApiTicketGetTicketsOfHelpdesk: build.query<
       GetApiTicketGetTicketsOfHelpdeskApiResponse,
       GetApiTicketGetTicketsOfHelpdeskApiArg
@@ -111,6 +122,11 @@ export type PostApiCommentAddCommentToTicketApiResponse =
 export type PostApiCommentAddCommentToTicketApiArg = {
   addCommentToTicketRequestModel: AddCommentToTicketRequestModel;
 };
+export type GetApiTicketGetTicketsByCategoryApiResponse =
+  /** status 200 OK */ TicketViewModelListIDataResultRead;
+export type GetApiTicketGetTicketsByCategoryApiArg = {
+  categoryId?: number;
+};
 export type GetApiTicketGetTicketsOfHelpdeskApiResponse =
   /** status 200 OK */ HelpdeskTicketsTableViewModelListIDataResultRead;
 export type GetApiTicketGetTicketsOfHelpdeskApiArg = void;
@@ -170,32 +186,7 @@ export type AddCommentToTicketRequestModel = {
   message?: string | null;
   creatorId?: number;
 };
-export type HelpdeskTicketsTableViewModelListIDataResult = {};
-export type CategoryViewModel = {
-  id?: number;
-  name?: string | null;
-};
-export type CreatorViewModel = {
-  id?: number;
-  username?: string | null;
-  fullName?: string | null;
-};
-export type HelpdeskTicketsTableViewModel = {
-  id?: number;
-  title?: string | null;
-  content?: string | null;
-  category?: CategoryViewModel;
-  status?: string | null;
-  creator?: CreatorViewModel;
-  createdAt?: string;
-};
-export type HelpdeskTicketsTableViewModelListIDataResultRead = {
-  success?: boolean;
-  message?: string | null;
-  code?: number;
-  data?: HelpdeskTicketsTableViewModel[] | null;
-};
-export type AdminPanelTicketsTableViewModelListIDataResult = {};
+export type TicketViewModelListIDataResult = {};
 export type RoleViewModel = {
   name?: string | null;
 };
@@ -204,23 +195,10 @@ export type HelpdeskViewModel = {
   fullName?: string | null;
   role?: RoleViewModel;
 };
-export type AdminPanelTicketsTableViewModel = {
+export type CategoryViewModel = {
   id?: number;
-  title?: string | null;
-  content?: string | null;
-  category?: CategoryViewModel;
-  status?: string | null;
-  assignedTo?: HelpdeskViewModel;
-  creator?: CreatorViewModel;
-  createdAt?: string;
+  name?: string | null;
 };
-export type AdminPanelTicketsTableViewModelListIDataResultRead = {
-  success?: boolean;
-  message?: string | null;
-  code?: number;
-  data?: AdminPanelTicketsTableViewModel[] | null;
-};
-export type TicketViewModelListIDataResult = {};
 export type UserViewModel = {
   id?: number;
   fullName?: string | null;
@@ -261,6 +239,44 @@ export type TicketViewModelListIDataResultRead = {
   message?: string | null;
   code?: number;
   data?: TicketViewModel[] | null;
+};
+export type HelpdeskTicketsTableViewModelListIDataResult = {};
+export type CreatorViewModel = {
+  id?: number;
+  username?: string | null;
+  fullName?: string | null;
+};
+export type HelpdeskTicketsTableViewModel = {
+  id?: number;
+  title?: string | null;
+  content?: string | null;
+  category?: CategoryViewModel;
+  status?: string | null;
+  creator?: CreatorViewModel;
+  createdAt?: string;
+};
+export type HelpdeskTicketsTableViewModelListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: HelpdeskTicketsTableViewModel[] | null;
+};
+export type AdminPanelTicketsTableViewModelListIDataResult = {};
+export type AdminPanelTicketsTableViewModel = {
+  id?: number;
+  title?: string | null;
+  content?: string | null;
+  category?: CategoryViewModel;
+  status?: string | null;
+  assignedTo?: HelpdeskViewModel;
+  creator?: CreatorViewModel;
+  createdAt?: string;
+};
+export type AdminPanelTicketsTableViewModelListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: AdminPanelTicketsTableViewModel[] | null;
 };
 export type TicketViewModelIDataResult = {
   data?: TicketViewModel;
