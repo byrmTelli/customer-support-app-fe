@@ -12,6 +12,7 @@ import UpdateModalButton from "../../../components/Buttons/UpdateModalButton/Upd
 import { FaPenToSquare } from "react-icons/fa6";
 import { useState } from "react";
 import ProfileUpdateModal from "./ProfileUpdateModal/ProfileUpdateModal";
+import HelpdeskProfileTabs from "./HelpdeskProfileTabs/HelpdeskProfileTabs";
 
 export default function HelpdeskProfile() {
   // States
@@ -27,10 +28,9 @@ export default function HelpdeskProfile() {
   // Memorize
   const tickets = getTickets.data?.data ?? [];
 
-  console.log(user);
   // Handlers
 
-  var tableData = tickets.map((item) => ({
+  const tableData = tickets.map((item) => ({
     ...item,
     createdAt: formatDateTime(item.createdAt ?? ""),
   }));
@@ -102,15 +102,7 @@ export default function HelpdeskProfile() {
         </div>
         <div className="col-span-3 grid w-full p-4 gap-2">
           <div className="w-full row-span-1 gap-2 flex flex-col shadow border border-gray-400">
-            <div className="w-full flex items-center justify-between p-4 bg-teal-700">
-              <h1 className="font-semibold text-gray-200">System Messages</h1>
-            </div>
-            <div className="p-4">
-              <p>
-                Buraya sistemle ilgili admin tarafınan giirlen mesajlar
-                görünmeli.
-              </p>
-            </div>
+            <HelpdeskProfileTabs userId = {user.id ?? 0}/>
           </div>
           <div className="w-full border border-gray-400 row-span-3 shadow">
             <div className="w-full">

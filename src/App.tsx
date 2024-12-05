@@ -23,6 +23,7 @@ import CustomerProfile from "./pages/CustomerPanel/CustomerProfile/CustomerProfi
 import HelpdeskProfile from "./pages/HelpdeskPanel/HelpdeskProfile/HelpdeskProfile";
 import AdminProfile from "./pages/AdminPanel/AdminProfile/AdminProfile";
 import CategoriesPage from "./pages/AdminPanel/CategoriesPage/CategoriesPage";
+import NotificationsPage from "./pages/AdminPanel/NotificationsPage/NotificationsPage";
 
 export const pages = [
   {
@@ -108,6 +109,12 @@ export const pages = [
     path: "/admin/tickets",
     breadCrum: "/admin/tickets",
     component: <TicketListPage />,
+    auth: ["Admin"],
+  },
+  {
+    path: "/admin/notifications",
+    breadCrum: "/admin/notifications",
+    component: <NotificationsPage />,
     auth: ["Admin"],
   },
   {

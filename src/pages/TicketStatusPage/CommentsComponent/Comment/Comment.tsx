@@ -8,7 +8,7 @@ export default function Comment({ data }: CommentProps) {
   // States
   const currentUser = useAppSelector((state) => state.user);
   // Queries
-  const [removeComment, removeCommentMutation] =
+  const [removeComment] =
     apiComment.useDeleteApiCommentDeleteCommentMutation();
   // Utils
   const date = formatDateTime(data.createdAt ?? "");
@@ -37,12 +37,14 @@ export default function Comment({ data }: CommentProps) {
           <h1 className="font-semibold text-sm">{data.creator?.fullName}</h1>
           <h1 className="text-xs text-gray-600 italic font-semibold">{date}</h1>
         </div>
-        <div
-          onClick={() => handleRemoveComment(data.id ?? 0)}
-          className="text-gray-600 text-xs hover:bg-gray-300 p-2 rounded-full"
-        >
-          {data.creator?.id == currentUser.id ? <FaTrashCan /> : ""}
-        </div>
+        {currentUser.id == data.creator?.id ?
+                <div
+                onClick={() => handleRemoveComment(data.id ?? 0)}
+                className="text-gray-600 text-xs hover:bg-gray-300 p-2 rounded-full"
+              >
+                <FaTrashCan /> 
+              </div>
+        : ""}
       </div>
       <p className="">{data.message}</p>
     </div>

@@ -12,6 +12,7 @@ import UpdateModalButton from "../../../components/Buttons/UpdateModalButton/Upd
 import { FaPenToSquare } from "react-icons/fa6";
 import { useState } from "react";
 import ProfileUpdateModal from "./ProfileUpdateModal/ProfileUpdateModal";
+import CustomerProfileTabs from "./CustomerProfileTabs/CustomerProfileTabs";
 
 export default function CustomerProfile() {
   // States
@@ -26,13 +27,12 @@ export default function CustomerProfile() {
     id: user.id,
   });
 
+
   // Memorize
   const tickets = getTickets.data?.data ?? [];
-
-  console.log(user);
   // Handlers
 
-  var tableData = tickets.map((item) => ({
+  const tableData = tickets.map((item) => ({
     ...item,
     createdAt: formatDateTime(item.createdAt ?? ""),
   }));
@@ -47,7 +47,7 @@ export default function CustomerProfile() {
       )}
       <BreadCrum />
       <div className="grid grid-cols-4 p-4 border border-gray-400 gap-2">
-        <div className="col-span-1 w-full shadow p-4">
+        <div className="col-span-1 w-full shadow p-4 flex-1">
           <div className="w-full grid place-items-end bg-teal-700 p-2">
             <UpdateModalButton
               icon={<FaPenToSquare />}
@@ -103,18 +103,8 @@ export default function CustomerProfile() {
           </div>
         </div>
         <div className="col-span-3 grid w-full p-4 gap-2">
-          <div className="w-full row-span-1 gap-2 flex flex-col shadow border border-gray-400">
-            <div className="w-full flex items-center justify-between p-4 bg-teal-700">
-              <h1 className="font-semibold text-gray-200">System Messages</h1>
-            </div>
-            <div className="p-4">
-              <p>
-                Buraya sistemle ilgili admin tarafınan giirlen mesajlar
-                görünmeli.
-              </p>
-            </div>
-          </div>
-          <div className="w-full border border-gray-400 row-span-3 shadow">
+        <CustomerProfileTabs userId = {user.id ?? 0}/>
+          <div className="w-full row-span-3 shadow">
             <div className="w-full">
               <SimpleTable
                 title="Tickets"

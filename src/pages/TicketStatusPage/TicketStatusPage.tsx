@@ -1,17 +1,18 @@
 import { useState } from "react";
 import BreadCrum from "../../components/BreadCrum/BreadCrum";
-import { IoSendSharp } from "react-icons/io5";
-import { AiFillFilePdf, AiFillFile } from "react-icons/ai";
+import { AiFillFilePdf } from "react-icons/ai";
 import { apiTicket } from "../../store/api/enhances/enhancedApiTicket";
 import { useParams } from "react-router-dom";
 import { formatDateTime } from "../../utils/utilsDate";
-import { TicketStatusTypes } from "../../constants/ticketStatus";
 import CommentsComponent from "./CommentsComponent/CommentsComponent";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import UnauthorizedPage from "../UnauthorizedPage/UnauthorizedPage";
 import TicketFileModal from "./TicketFileModal/TicketFileModal";
 import { TicketAttacmentViewModel } from "../../store/api/generated/generatedApiTicket";
 import AddCommentForm from "./AddCommentForm/AddCommentForm";
+import Button from "../../components/Buttons/Button/Button";
+import { toast } from "react-toastify";
+import { useAppSelector } from "../../store/hooks";
 
 export default function TicketStatusPage() {
   // States
@@ -20,12 +21,14 @@ export default function TicketStatusPage() {
     useState<TicketAttacmentViewModel | null>(null);
   const params = useParams();
   const ticketId = Number(params.id);
-
+  const currentUser = useAppSelector(state => state.user);
   // Queries
   const { data: getTicketByIdQuery, error } =
     apiTicket.useGetApiTicketGetTicketByIdQuery({
       ticketId: ticketId,
     });
+
+    const [updateTicketStatus] = apiTicket.usePostApiTicketUpdateTicketStatusMutation();
 
   if (error) {
     const errorStatus = error as FetchBaseQueryError;
@@ -41,6 +44,21 @@ export default function TicketStatusPage() {
     setSelectedFile(file);
     setIsTicketFileModalOpen(true);
   };
+  const handleTicketStatusUpdateButtonClick = (ticketStatus:string) => {
+    updateTicketStatus({
+      status : ticketStatus,
+      ticketId : ticketData.id
+    }).unwrap()
+    .then((res) => {if(res.code == 200){
+      toast.success(`ticket status successfully updated as ${ticketStatus}`);
+    }}
+  )
+    .catch((err) => {
+      toast.error(err.message);
+    })
+    .finally()
+  }
+
   // Utils
   const date = formatDateTime(ticketData.createdAt ?? "");
 
@@ -56,9 +74,46 @@ export default function TicketStatusPage() {
       <BreadCrum />
       <div className="grid grid-cols-6 w-full gap-2 items-center justify-center p-4 mt-4 text-sm">
         <div className="col-span-4 col-start-2 flex flex-col items-center gap-4 border border-gray-400 p-8">
-          <div className="flex w-full gap-2 font-bold text-xl">
+          <div className="flex w-full gap-2 justify-between">
+            <div className="flex gap-2 items-center text-xl font-semibold">
             <h1 className="text-gray-700">Title:</h1>
             <h1 className="text-gray-700 italic">"{ticketData.title}"</h1>
+            </div>
+            {
+              currentUser.role?.name != 'Customer' ?
+              <div className ="flex items-center gap-2">
+                {
+                (ticketData.status == "Pending" && currentUser.role?.name == "Admin") ?
+                <Button 
+                onClick={() => handleTicketStatusUpdateButtonClick("Waiting")}
+                title={"Active"} varient="info" />
+                  :""
+              }
+              {
+                ticketData.status == "Waiting" && currentUser.role?.name == "Customer Support" ?
+                <Button 
+                onClick={() => handleTicketStatusUpdateButtonClick("Pending")}
+                title={"Send Admin"} varient="dark" />
+                  :""
+              }
+                {
+                (ticketData.status == "Waiting") || (ticketData.status == "Pending" && currentUser.role?.name == "Admin") ?
+                <Button 
+                onClick={() => handleTicketStatusUpdateButtonClick("Cancelled")}
+                title={"Cancel"} varient="danger" />
+                  :""
+              }
+              {
+                (ticketData.status == "Waiting") ?
+                <Button 
+                onClick={() => handleTicketStatusUpdateButtonClick("Completed")}
+                title={"Complete"} varient="info" />
+                  :""
+              }
+              </div>              
+              :
+                ""
+            }
           </div>
           {/* Properties */}
           <div className="w-full grid md:grid-cols-3 gap-2">

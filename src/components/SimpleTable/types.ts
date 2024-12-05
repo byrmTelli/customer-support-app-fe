@@ -13,7 +13,7 @@ export interface TablePaginationActionsProps {
 export interface SimpleTableProps<T> {
   data: T[];
   columns: ColumnDef<T>[];
-  title: string;
+  title?: string;
   filterable?: boolean;
   exportable?: boolean;
   toolbarActions?: React.ReactNode;

@@ -4,12 +4,13 @@ import { DashboardViewModel } from "../../../store/api/generated/generatedApiAdm
 import DashboardCard from "./DashboardCard/DashboardCard";
 import MonthlySupportRequestsBarChart from "./MonthlySupportRequestBarChart/MonthlySupportRequestBarChart";
 import { PiUsersFourLight } from "react-icons/pi";
+
 export default function Dashboard() {
   // States
   const getDashBoardData = apiAdmin.useGetApiAdminGetDashboardStatsQuery();
   const dashboardData =
     getDashBoardData.data?.data ?? ({} as DashboardViewModel);
-  console.log(dashboardData);
+
 
   return (
     <div className="w-full h-full flex flex-col p-4">

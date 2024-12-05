@@ -7,12 +7,14 @@ import { apiUser } from "./api/enhances/enhancedApiUser";
 import { userSlice } from "./slices/user/userSlice";
 import { apiAdmin } from "./api/enhances/enhancedApiAdmin";
 import { extendedCustomerSupportAppApi } from "./api/extendedCSApi";
+import { apiNotification } from "./api/enhances/enhancedApiAdmin copy";
 const middlewares: Middleware[] = [
   apiAuth.middleware,
   apiCategory.middleware,
   apiComment.middleware,
   apiTicket.middleware,
   apiUser.middleware,
+  apiNotification.middleware,
   extendedCustomerSupportAppApi.middleware,
 ];
 
@@ -25,6 +27,7 @@ export const store = configureStore({
     [apiTicket.reducerPath]: apiTicket.reducer,
     [apiUser.reducerPath]: apiUser.reducer,
     [apiAdmin.reducerPath]: apiAdmin.reducer,
+    [apiNotification.reducerPath]: apiAdmin.reducer,
     [extendedCustomerSupportAppApi.reducerPath]:
       extendedCustomerSupportAppApi.reducer,
   },

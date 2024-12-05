@@ -7,6 +7,17 @@ const injectedRtkApi = api.injectEndpoints({
     >({
       query: () => ({ url: `/api/Auth/GetUserProfile` }),
     }),
+    getApiNotificationGetTicketNotificationOfUser: build.query<
+      GetApiNotificationGetTicketNotificationOfUserApiResponse,
+      GetApiNotificationGetTicketNotificationOfUserApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/Notification/GetTicketNotificationOfUser`,
+        params: {
+          userId: queryArg.userId,
+        },
+      }),
+    }),
     getApiTicketGetTicketsOfUser: build.query<
       GetApiTicketGetTicketsOfUserApiResponse,
       GetApiTicketGetTicketsOfUserApiArg
@@ -118,6 +129,11 @@ export { injectedRtkApi as generatedUser };
 export type GetApiAuthGetUserProfileApiResponse =
   /** status 200 OK */ UserProfileViewModelIDataResultRead;
 export type GetApiAuthGetUserProfileApiArg = void;
+export type GetApiNotificationGetTicketNotificationOfUserApiResponse =
+  /** status 200 OK */ TicketNotificationVmListIDataResultRead;
+export type GetApiNotificationGetTicketNotificationOfUserApiArg = {
+  userId?: number;
+};
 export type GetApiTicketGetTicketsOfUserApiResponse =
   /** status 200 OK */ TicketViewModelListIDataResultRead;
 export type GetApiTicketGetTicketsOfUserApiArg = {
@@ -187,6 +203,20 @@ export type UserProfileViewModelIDataResultRead = {
   message?: string | null;
   code?: number;
   data?: UserProfileViewModel;
+};
+export type TicketNotificationVmListIDataResult = {};
+export type TicketNotificationVm = {
+  id?: number;
+  title?: string | null;
+  message?: string | null;
+  createdAt?: string;
+  ticketId?: number;
+};
+export type TicketNotificationVmListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: TicketNotificationVm[] | null;
 };
 export type TicketViewModelListIDataResult = {};
 export type HelpdeskViewModel = {

@@ -1,7 +1,7 @@
 import { generatedTicket } from "../generated/generatedApiTicket";
 
 export const apiTicket = generatedTicket.enhanceEndpoints({
-  addTagTypes: ["GetTicketsOfUser", "GetTicketById"],
+  addTagTypes: ["GetTicketsOfUser", "GetTicketById","UpdateTicketStatus"],
   endpoints: {
     getApiTicketGetTicketById: {
       providesTags: ["GetTicketById"],
@@ -12,5 +12,8 @@ export const apiTicket = generatedTicket.enhanceEndpoints({
     postApiCommentAddCommentToTicket: {
       invalidatesTags: ["GetTicketById"],
     },
+    postApiTicketUpdateTicketStatus: {
+      invalidatesTags:["GetTicketById"]
+    }
   },
 });

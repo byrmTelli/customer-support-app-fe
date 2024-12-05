@@ -12,6 +12,8 @@ import UpdateModalButton from "../../../components/Buttons/UpdateModalButton/Upd
 import { FaPenToSquare } from "react-icons/fa6";
 import { useState } from "react";
 import ProfileUpdateModal from "./ProfileUpdateModal/ProfileUpdateModal";
+import AdminProfileTabs from "./AdminProfileTabs/AdminProfileTabs";
+
 
 export default function AdminProfile() {
   // States
@@ -28,17 +30,16 @@ export default function AdminProfile() {
 
   // Memorize
   const tickets = getTickets.data?.data ?? [];
-
   console.log(user);
   // Handlers
 
-  var tableData = tickets.map((item) => ({
+  const tableData = tickets.map((item) => ({
     ...item,
     createdAt: formatDateTime(item.createdAt ?? ""),
   }));
 
   return (
-    <div className="w-full p-4">
+    <div className="w-full h-full p-4">
       {isProfileUpdateModalOpen && (
         <ProfileUpdateModal
           isOpen={isProfileUpdateModalOpen}
@@ -84,35 +85,27 @@ export default function AdminProfile() {
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div className="col-span-2">
-                <p className="font-semibold bg-slate-300 p-2">Email</p>
+                <p className="font-semibold bg-gray-200 p-2">Email</p>
                 <p className="p-2">{user.email}</p>
               </div>
               <div className="">
-                <p className="font-semibold bg-slate-300 p-2">Date</p>
+                <p className="font-semibold bg-gray-200 p-2">Date</p>
                 <p className="p-2">{formatDateTime(user.createdAt ?? "")}</p>
               </div>
               <div className="">
-                <p className="font-semibold bg-slate-300 p-2">Phone</p>
+                <p className="font-semibold bg-gray-200 p-2">Phone</p>
                 <p className="p-2">{user.phoneNumber}</p>
               </div>
               <div className="col-span-2">
-                <p className="font-semibold bg-slate-300 p-2">Adress</p>
+                <p className="font-semibold bg-gray-200 p-2">Adress</p>
                 <p className="p-2">{user.adress}</p>
               </div>
             </div>
           </div>
         </div>
         <div className="col-span-3 grid w-full p-4 gap-2">
-          <div className="w-full row-span-1 gap-2 flex flex-col shadow border border-gray-400">
-            <div className="w-full flex items-center justify-between p-4 bg-teal-700">
-              <h1 className="font-semibold text-gray-200">System Messages</h1>
-            </div>
-            <div className="p-4">
-              <p>
-                Buraya sistemle ilgili admin tarafınan giirlen mesajlar
-                görünmeli.
-              </p>
-            </div>
+          <div className="w-full row-span-3 flex flex-col shadow border border-gray-400">
+              <AdminProfileTabs userId ={user.id ?? 0}/>
           </div>
           <div className="w-full border border-gray-400 row-span-3 shadow">
             <div className="w-full">

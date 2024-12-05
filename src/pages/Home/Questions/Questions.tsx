@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -8,14 +8,6 @@ import QuestionCard from "../../PopularQuestions/QuestionCard/QuestionCard";
 import { popularQuestions } from "../../PopularQuestions/QuestionCard/constants";
 
 const Questions = forwardRef<HTMLDivElement>((props, ref) => {
-  // State tanımlamaları
-  const [openCard, setOpenCard] = useState<number | null>(0);
-
-  // Kart açma/kapatma işlevi
-  const handleCardClick = (index: number) => {
-    setOpenCard(openCard === index ? null : index);
-  };
-
   const settings = {
     spaceBetween: 20,
     slidesPerView: 3,

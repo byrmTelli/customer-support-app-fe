@@ -11,6 +11,46 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.addCommentToTicketRequestModel,
       }),
     }),
+    postApiNotificationCreateTicketNotification: build.mutation<
+      PostApiNotificationCreateTicketNotificationApiResponse,
+      PostApiNotificationCreateTicketNotificationApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/Notification/CreateTicketNotification`,
+        method: "POST",
+        body: queryArg.createTicketNotificationRm,
+      }),
+    }),
+    getApiNotificationGetAllTickeTNotifications: build.query<
+      GetApiNotificationGetAllTickeTNotificationsApiResponse,
+      GetApiNotificationGetAllTickeTNotificationsApiArg
+    >({
+      query: () => ({ url: `/api/Notification/GetAllTickeTNotifications` }),
+    }),
+    getApiNotificationGetTicketNotificationOfUser: build.query<
+      GetApiNotificationGetTicketNotificationOfUserApiResponse,
+      GetApiNotificationGetTicketNotificationOfUserApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/Notification/GetTicketNotificationOfUser`,
+        params: {
+          userId: queryArg.userId,
+        },
+      }),
+    }),
+    postApiTicketUpdateTicketStatus: build.mutation<
+      PostApiTicketUpdateTicketStatusApiResponse,
+      PostApiTicketUpdateTicketStatusApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/Ticket/UpdateTicketStatus`,
+        method: "POST",
+        params: {
+          ticketId: queryArg.ticketId,
+          status: queryArg.status,
+        },
+      }),
+    }),
     getApiTicketGetTicketsByCategory: build.query<
       GetApiTicketGetTicketsByCategoryApiResponse,
       GetApiTicketGetTicketsByCategoryApiArg
@@ -122,6 +162,25 @@ export type PostApiCommentAddCommentToTicketApiResponse =
 export type PostApiCommentAddCommentToTicketApiArg = {
   addCommentToTicketRequestModel: AddCommentToTicketRequestModel;
 };
+export type PostApiNotificationCreateTicketNotificationApiResponse =
+  /** status 200 OK */ IResultRead;
+export type PostApiNotificationCreateTicketNotificationApiArg = {
+  createTicketNotificationRm: CreateTicketNotificationRm;
+};
+export type GetApiNotificationGetAllTickeTNotificationsApiResponse =
+  /** status 200 OK */ TicketNotificationVmListIDataResultRead;
+export type GetApiNotificationGetAllTickeTNotificationsApiArg = void;
+export type GetApiNotificationGetTicketNotificationOfUserApiResponse =
+  /** status 200 OK */ TicketNotificationVmListIDataResultRead;
+export type GetApiNotificationGetTicketNotificationOfUserApiArg = {
+  userId?: number;
+};
+export type PostApiTicketUpdateTicketStatusApiResponse =
+  /** status 200 OK */ TicketViewModelListIDataResultRead;
+export type PostApiTicketUpdateTicketStatusApiArg = {
+  ticketId?: number;
+  status?: string;
+};
 export type GetApiTicketGetTicketsByCategoryApiResponse =
   /** status 200 OK */ TicketViewModelListIDataResultRead;
 export type GetApiTicketGetTicketsByCategoryApiArg = {
@@ -185,6 +244,25 @@ export type AddCommentToTicketRequestModel = {
   ticketId?: number;
   message?: string | null;
   creatorId?: number;
+};
+export type TicketNotificationType = 1 | 2 | 3;
+export type CreateTicketNotificationRm = {
+  ticketId?: number;
+  notificationType?: TicketNotificationType;
+};
+export type TicketNotificationVmListIDataResult = {};
+export type TicketNotificationVm = {
+  id?: number;
+  title?: string | null;
+  message?: string | null;
+  createdAt?: string;
+  ticketId?: number;
+};
+export type TicketNotificationVmListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: TicketNotificationVm[] | null;
 };
 export type TicketViewModelListIDataResult = {};
 export type RoleViewModel = {

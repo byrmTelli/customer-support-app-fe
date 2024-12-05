@@ -25,6 +25,7 @@ const config: ConfigFile = {
     ...generateOutputFile("Comment"),
     ...generateOutputFile("Ticket"),
     ...generateOutputFile("User"),
+    ...generateOutputFile("Notification"),
   },
   exportName: "customerSupportAppApi",
 };

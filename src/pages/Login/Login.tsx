@@ -68,7 +68,7 @@ export default function Login() {
 
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="size-96 border border-gray-400 rounded-lg shadow-lg p-4">
+      <div className="size-96 border border-gray-400 rounded-lg shadow-lg p-4 m-8">
         <div className="h-1/3 flex flex-col items-center justify-center select-none">
           <h1 className="font-semibold text-teal-700">
             Customer Support Service
