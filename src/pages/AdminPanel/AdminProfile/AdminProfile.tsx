@@ -14,7 +14,6 @@ import { useState } from "react";
 import ProfileUpdateModal from "./ProfileUpdateModal/ProfileUpdateModal";
 import AdminProfileTabs from "./AdminProfileTabs/AdminProfileTabs";
 
-
 export default function AdminProfile() {
   // States
   const navigate = useNavigate();
@@ -39,7 +38,7 @@ export default function AdminProfile() {
   }));
 
   return (
-    <div className="w-full h-full p-4">
+    <div className="w-full p-4">
       {isProfileUpdateModalOpen && (
         <ProfileUpdateModal
           isOpen={isProfileUpdateModalOpen}
@@ -83,14 +82,16 @@ export default function AdminProfile() {
                 {user.username}
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2 text-xs 2xl:text-base">
               <div className="col-span-2">
                 <p className="font-semibold bg-gray-200 p-2">Email</p>
                 <p className="p-2">{user.email}</p>
               </div>
               <div className="">
                 <p className="font-semibold bg-gray-200 p-2">Date</p>
-                <p className="p-2">{formatDateTime(user.createdAt ?? "")}</p>
+                <p className="p-2 text-xs 2xl:text-base">
+                  {formatDateTime(user.createdAt ?? "")}
+                </p>
               </div>
               <div className="">
                 <p className="font-semibold bg-gray-200 p-2">Phone</p>
@@ -98,14 +99,14 @@ export default function AdminProfile() {
               </div>
               <div className="col-span-2">
                 <p className="font-semibold bg-gray-200 p-2">Adress</p>
-                <p className="p-2">{user.adress}</p>
+                <p className="p-2 text-xs 2xl:text-base">{user.adress}</p>
               </div>
             </div>
           </div>
         </div>
         <div className="col-span-3 grid w-full p-4 gap-2">
           <div className="w-full row-span-3 flex flex-col shadow border border-gray-400">
-              <AdminProfileTabs userId ={user.id ?? 0}/>
+            <AdminProfileTabs userId={user.id ?? 0} />
           </div>
           <div className="w-full border border-gray-400 row-span-3 shadow">
             <div className="w-full">

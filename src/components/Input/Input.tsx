@@ -51,8 +51,6 @@ function Input(
                 isInvalid === false,
               "bg-red-50 border border-red-500 text-red-900 placeholder-red-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500":
                 isInvalid,
-              "bg-gray-100 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400":
-                disabled,
             }
           ),
           inputClassName

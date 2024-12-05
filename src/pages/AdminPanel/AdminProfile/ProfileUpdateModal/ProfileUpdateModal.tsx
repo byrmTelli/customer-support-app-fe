@@ -140,6 +140,7 @@ export default function ProfileUpdateModal({
                       {...field}
                       invalid={fieldState.error?.message}
                       label={"Username"}
+                      disabled
                     />
                   )}
                 />
