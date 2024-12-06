@@ -27,7 +27,6 @@ export default function CustomerProfile() {
     id: user.id,
   });
 
-
   // Memorize
   const tickets = getTickets.data?.data ?? [];
   // Handlers
@@ -47,7 +46,7 @@ export default function CustomerProfile() {
       )}
       <BreadCrum />
       <div className="grid grid-cols-4 p-4 border border-gray-400 gap-2">
-        <div className="col-span-1 w-full shadow p-4 flex-1">
+        <div className="col-span-4 xl:col-span-1 w-full h-full p-4 flex flex-col shadow">
           <div className="w-full grid place-items-end bg-teal-700 p-2">
             <UpdateModalButton
               icon={<FaPenToSquare />}
@@ -102,8 +101,8 @@ export default function CustomerProfile() {
             </div>
           </div>
         </div>
-        <div className="col-span-3 grid w-full p-4 gap-2">
-        <CustomerProfileTabs userId = {user.id ?? 0}/>
+        <div className="col-span-4 xl:col-span-3 grid w-full p-4 gap-2">
+          <CustomerProfileTabs userId={user.id ?? 0} />
           <div className="w-full row-span-3 shadow">
             <div className="w-full">
               <SimpleTable

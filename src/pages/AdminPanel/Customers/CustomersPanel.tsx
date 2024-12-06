@@ -17,7 +17,7 @@ export default function CustomersPanel() {
   // Forms
   // Handlers
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <BreadCrum />
       <div className="p-4">
         <SimpleTable

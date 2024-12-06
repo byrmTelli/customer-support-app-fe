@@ -11,9 +11,9 @@ import { BsEnvelopeDashFill } from "react-icons/bs";
 export default function AdminPanel() {
   const navigate = useNavigate();
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full flex flex-col">
       <BreadCrum />
-      <div className="w-full grid md:grid-cols-4 md:grid-rows-4 p-2 gap-2">
+      <div className="w-full h-full grid md:grid-cols-4 md:grid-rows-4 p-2 gap-2">
         <div
           onClick={() => navigate("/admin/dashboard")}
           className="w-full h-[7rem] md:h-full col-span-2 row-span-4 bg-sky-600 text-gray-200 text-8xl rounded-lg flex flex-col items-center justify-center hover:bg-sky-500"

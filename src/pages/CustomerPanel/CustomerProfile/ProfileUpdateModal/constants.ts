@@ -6,7 +6,12 @@ export const ProfileUpdateFormSchema = yup.object({
   surname: yup.string().required("Soyisim gereklidir"),
   adress: yup.string(),
   username: yup.string().required(),
-  phone: yup.string(),
+  phone: yup
+    .string()
+    .matches(
+      /^[1-9]\d{2}\s\d{3}\s\d{2}\s\d{2}$/,
+      "Telefon numarası geçerli bir formatta olmalıdır (örn. 555 444 33 22)"
+    ),
   image: yup
     .mixed<File | string>()
     .test(

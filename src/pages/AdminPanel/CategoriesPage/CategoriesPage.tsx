@@ -12,7 +12,7 @@ import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton"
 
 export default function CategoriesPage() {
   // States
-  var pathname = useParams();
+  const pathname = useParams();
   const navigate = useNavigate();
   // Queries
   const categoriesQuery = apiCategory.useGetApiCategoryGetCategoriesQuery();
@@ -20,7 +20,7 @@ export default function CategoriesPage() {
 
   const getCategoriesPageStatisticsQuery =
     apiAdmin.useGetApiAdminGetCategoriesPageStatisticsQuery({
-      categoryId: Number(pathname.id) ?? 1,
+      categoryId: Number(pathname.id),
     });
 
   const categoriesPageStatisticsData =
@@ -58,28 +58,28 @@ export default function CategoriesPage() {
               score={categoriesPageStatisticsData.completedTicketCount ?? 0}
               icon={<div></div>}
               hint="Completed ticket count OVERALL"
-              className="flex flex-col items-center justify-center h-full"
+              className="grid grid-row-4 p-4 gap-4 place-items-center justify-center h-full"
             />
             <DashboardCard
               title="Waitings"
               score={categoriesPageStatisticsData.waitingTicketCount ?? 0}
               icon={<div></div>}
               hint="Waiting ticket count OVERALL"
-              className="flex flex-col items-center justify-center h-full"
+              className="grid grid-row-4 p-4 gap-4 place-items-center justify-center h-full"
             />
             <DashboardCard
               title="Pendings"
               score={categoriesPageStatisticsData.pendingTicketCount ?? 0}
               icon={<div></div>}
               hint="Pendings ticket count OVERALL"
-              className="flex flex-col items-center justify-center h-full"
+              className="grid grid-row-4 p-4 gap-4 place-items-center justify-center h-full"
             />
             <DashboardCard
               title="Cancelleds"
               score={categoriesPageStatisticsData.cancelledTicketCount ?? 0}
               icon={<div></div>}
               hint="Cancelled ticket count OVERALL"
-              className="flex flex-col items-center justify-center h-full"
+              className="grid grid-row-4 p-4 gap-4 place-items-center justify-center h-full"
             />
           </div>
         </div>

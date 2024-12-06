@@ -10,7 +10,7 @@ import { popularQuestions } from "../../PopularQuestions/QuestionCard/constants"
 const Questions = forwardRef<HTMLDivElement>((props, ref) => {
   const settings = {
     spaceBetween: 20,
-    slidesPerView: 3,
+    slidesPerView: 2,
     centeredSlides: true,
     pagination: { clickable: true },
     autoplay: { delay: 3000 },
