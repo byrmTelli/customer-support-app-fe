@@ -9,6 +9,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { apiUser } from "../../../store/api/enhances/enhancedApiUser";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Checkbox from "../../../components/Checkbox/Checkbox";
+import { ChangeEventHandler } from "react";
 
 export default function RegisterForm() {
   // States
@@ -21,6 +23,15 @@ export default function RegisterForm() {
     resolver: yupResolver(registerUserFormSchema),
   });
   // Handlers
+
+  const handlePrivacyPolicyCheckboxSelected: ChangeEventHandler<
+    HTMLInputElement
+  > = (e) => {
+    form.setValue("privacyPolicy", e.currentTarget.checked, {
+      shouldDirty: true,
+    });
+  };
+
   const handleRegisterButtonClick = () => {
     const f = form.getValues();
 
@@ -60,6 +71,7 @@ export default function RegisterForm() {
             <Input
               {...field}
               autoComplete="off"
+              tabIndex={1}
               invalid={fieldState.error?.message}
               label="Username"
             />
@@ -74,6 +86,7 @@ export default function RegisterForm() {
             <Input
               {...field}
               autoComplete="off"
+              tabIndex={5}
               invalid={fieldState.error?.message}
               label="Name"
             />
@@ -88,6 +101,7 @@ export default function RegisterForm() {
             <Input
               {...field}
               autoComplete="off"
+              tabIndex={2}
               invalid={fieldState.error?.message}
               label="Email"
             />
@@ -102,6 +116,7 @@ export default function RegisterForm() {
             <Input
               {...field}
               autoComplete="off"
+              tabIndex={6}
               invalid={fieldState.error?.message}
               label="Surname"
             />
@@ -117,6 +132,7 @@ export default function RegisterForm() {
               {...field}
               autoComplete="off"
               type="password"
+              tabIndex={3}
               invalid={fieldState.error?.message}
               label="Password"
             />
@@ -131,6 +147,7 @@ export default function RegisterForm() {
             <Input
               {...field}
               autoComplete="off"
+              tabIndex={7}
               invalid={fieldState.error?.message}
               label="Phone"
             />
@@ -146,6 +163,7 @@ export default function RegisterForm() {
               {...field}
               autoComplete="off"
               type="password"
+              tabIndex={4}
               invalid={fieldState.error?.message}
               label="Password Confirm"
             />
@@ -160,6 +178,7 @@ export default function RegisterForm() {
             <Input
               {...field}
               autoComplete="off"
+              tabIndex={8}
               invalid={fieldState.error?.message}
               label="Adress"
             />
@@ -169,8 +188,19 @@ export default function RegisterForm() {
 
       <div className="w-full sm:col-start-2 flex gap-2 justify-between text-xs">
         <div className="flex items-center gap-1">
-          <input type="checkbox" name="" id="" />
-          <p>Privacy Policy</p>
+          <Controller
+            name="privacyPolicy"
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Checkbox
+                invalid={fieldState.error?.message}
+                tabIndex={9}
+                defaultChecked={field.value}
+                onChange={(e) => field.onChange(e.target.checked)}
+                text="Privacy Policy"
+              />
+            )}
+          />
         </div>
         <button className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-teal-700 font-semibold text-gray-200 w-[7rem] h-[2.3rem]">
           Submit
