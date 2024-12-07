@@ -4,7 +4,7 @@ import { formatDateTime } from "../../../../../utils/utilsDate";
 import { UserProfileSideMenuProps } from "./types";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 import { FaBan } from "react-icons/fa6";
-
+import placeholder from "../../../../../assets/placeholder.jpg";
 export default function UserProfileSideMenu({
   user,
 }: UserProfileSideMenuProps) {
@@ -25,7 +25,7 @@ export default function UserProfileSideMenu({
   };
   return (
     <div className="w-full">
-      <div className="w-full grid items-center text-center bg-teal-700 p-2 h-[3rem]">
+      <div className="w-full grid items-center text-center bg-sky-800 p-2 h-[3rem]">
         <h1 className="text-sm text-gray-200">
           <span className="font-semibold uppercase">Role: </span>
           {user.role?.name}
@@ -34,31 +34,38 @@ export default function UserProfileSideMenu({
       <div className="w-full flex items-center justify-center relative border border-gray-400 ">
         <img
           className="p-4 rounded-full object-cover size-[200px]"
-          src={user.profileImage ?? ""}
+          src={user.profileImage ?? placeholder}
           alt=""
         />
       </div>
-      <div className="w-full grid bg-teal-700">
-        <div className="p-3 flex flex-col items-center justify-center cursor-pointer text-gray-200 hover:bg-teal-600">
-          {user.isApproved && user.isApproved == true ? (
-            <button className="flex flex-col items-center gap-1">
-              <FaBan />
-              <p className="text-xs">Ban User</p>
-            </button>
-          ) : (
-            <button
-              onClick={() => handleApproveUserButtonClick(user.id ?? 0)}
-              className="flex flex-col items-center gap-1"
-            >
-              <HiOutlineBadgeCheck />
-              <p className="text-xs">Approve</p>
-            </button>
-          )}
+      <div className="w-full grid bg-sky-800">
+        <div className="p-3 grid grid-cols-2 items-center text-gray-200">
+          <div>
+            <p className="capitalize font-semibold select-none">
+              User Informations
+            </p>
+          </div>
+          <div className="place-items-end px-4">
+            {user.isApproved && user.isApproved == true ? (
+              <button className="flex flex-col items-center gap-1 hover:bg-teal-600 p-1 rounded-full">
+                <FaBan />
+                <p className="text-xs">Ban User</p>
+              </button>
+            ) : (
+              <button
+                onClick={() => handleApproveUserButtonClick(user.id ?? 0)}
+                className="flex flex-col items-center gap-1 hover:bg-teal-600 p-1 rounded-full size-[4rem] justify-center"
+              >
+                <HiOutlineBadgeCheck />
+                <p className="text-xs">Approve</p>
+              </button>
+            )}
+          </div>
         </div>
       </div>
       <div className="w-full p-4 flex flex-col gap-4 border border-gray-400 text-sm">
         <div className="flex items-end gap-2">
-          <p className="text-xl font-semibold">{user.fullName}</p>
+          <p className="text-xl font-semibold capitalize">{user.fullName}</p>
           <p>
             <span className="font-semibold">@</span>
             {user.username}{" "}

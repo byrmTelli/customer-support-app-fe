@@ -1,10 +1,10 @@
 import { forwardRef } from "react";
-
+import callCenterImage from "../../../assets/callcenter.jpg";
 const CallCenter = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <div
       ref={ref}
-      className="h-screen bg-teal-700 w-full flex flex-col items-center gap-4 p-4"
+      className="h-screen bg-sky-800 w-full flex flex-col items-center gap-4 p-4"
       id="call-center"
     >
       <div className="p-4">
@@ -22,7 +22,7 @@ const CallCenter = forwardRef<HTMLDivElement>((props, ref) => {
             Dolorum reiciendis tenetur odio architecto nulla?
           </p>
           <div className="w-full p-2 flex items-center justify-center">
-            <button className="p-2 bg-gray-200 text-teal-800 w-[10rem]">
+            <button className="p-2 bg-gray-200 text-sky-800 w-[10rem] hover:bg-sky-800 hover:text-gray-200 hover:border-gray-200 font-semibold border border-sky-800 g">
               Call Center
             </button>
           </div>
@@ -30,7 +30,7 @@ const CallCenter = forwardRef<HTMLDivElement>((props, ref) => {
         <div className="rounded-lg p-4 h-full flex items-center justify-center w-full size-[300px] md:size-[450px] lg:size-[500px] order-1 md:order-2">
           <img
             className="rounded-full size-[300px] md:size-[450px] lg:size-[500px] object-cover p-4"
-            src="https://img.freepik.com/free-vector/customer-service-concept-illustration_114360-22120.jpg?t=st=1729796119~exp=1729799719~hmac=7153d6ff1717840abaa2994b3432b53e4269b5a6e9af236380ceb54e18a2bfd7&w=1380"
+            src={callCenterImage}
             alt=""
           />
         </div>

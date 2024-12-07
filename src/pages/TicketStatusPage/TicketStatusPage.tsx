@@ -21,14 +21,15 @@ export default function TicketStatusPage() {
     useState<TicketAttacmentViewModel | null>(null);
   const params = useParams();
   const ticketId = Number(params.id);
-  const currentUser = useAppSelector(state => state.user);
+  const currentUser = useAppSelector((state) => state.user);
   // Queries
   const { data: getTicketByIdQuery, error } =
     apiTicket.useGetApiTicketGetTicketByIdQuery({
       ticketId: ticketId,
     });
 
-    const [updateTicketStatus] = apiTicket.usePostApiTicketUpdateTicketStatusMutation();
+  const [updateTicketStatus] =
+    apiTicket.usePostApiTicketUpdateTicketStatusMutation();
 
   if (error) {
     const errorStatus = error as FetchBaseQueryError;
@@ -44,20 +45,24 @@ export default function TicketStatusPage() {
     setSelectedFile(file);
     setIsTicketFileModalOpen(true);
   };
-  const handleTicketStatusUpdateButtonClick = (ticketStatus:string) => {
+  const handleTicketStatusUpdateButtonClick = (ticketStatus: string) => {
     updateTicketStatus({
-      status : ticketStatus,
-      ticketId : ticketData.id
-    }).unwrap()
-    .then((res) => {if(res.code == 200){
-      toast.success(`ticket status successfully updated as ${ticketStatus}`);
-    }}
-  )
-    .catch((err) => {
-      toast.error(err.message);
+      status: ticketStatus,
+      ticketId: ticketData.id,
     })
-    .finally()
-  }
+      .unwrap()
+      .then((res) => {
+        if (res.code == 200) {
+          toast.success(
+            `ticket status successfully updated as ${ticketStatus}`
+          );
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      })
+      .finally();
+  };
 
   // Utils
   const date = formatDateTime(ticketData.createdAt ?? "");
@@ -76,44 +81,63 @@ export default function TicketStatusPage() {
         <div className="col-span-4 col-start-2 flex flex-col items-center gap-4 border border-gray-400 p-8">
           <div className="flex w-full gap-2 justify-between">
             <div className="flex gap-2 items-center text-xl font-semibold">
-            <h1 className="text-gray-700">Title:</h1>
-            <h1 className="text-gray-700 italic">"{ticketData.title}"</h1>
+              <h1 className="text-gray-700">Title:</h1>
+              <h1 className="text-gray-700 italic">"{ticketData.title}"</h1>
             </div>
-            {
-              currentUser.role?.name != 'Customer' ?
-              <div className ="flex items-center gap-2">
-                {
-                (ticketData.status == "Pending" && currentUser.role?.name == "Admin") ?
-                <Button 
-                onClick={() => handleTicketStatusUpdateButtonClick("Waiting")}
-                title={"Active"} varient="info" />
-                  :""
-              }
-              {
-                ticketData.status == "Waiting" && currentUser.role?.name == "Customer Support" ?
-                <Button 
-                onClick={() => handleTicketStatusUpdateButtonClick("Pending")}
-                title={"Send Admin"} varient="dark" />
-                  :""
-              }
-                {
-                (ticketData.status == "Waiting") || (ticketData.status == "Pending" && currentUser.role?.name == "Admin") ?
-                <Button 
-                onClick={() => handleTicketStatusUpdateButtonClick("Cancelled")}
-                title={"Cancel"} varient="danger" />
-                  :""
-              }
-              {
-                (ticketData.status == "Waiting") ?
-                <Button 
-                onClick={() => handleTicketStatusUpdateButtonClick("Completed")}
-                title={"Complete"} varient="info" />
-                  :""
-              }
-              </div>              
-              :
-                ""
-            }
+            {currentUser.role?.name != "Customer" ? (
+              <div className="flex items-center gap-2">
+                {ticketData.status == "Pending" &&
+                currentUser.role?.name == "Admin" ? (
+                  <Button
+                    onClick={() =>
+                      handleTicketStatusUpdateButtonClick("Waiting")
+                    }
+                    title={"Active"}
+                    varient="info"
+                  />
+                ) : (
+                  ""
+                )}
+                {ticketData.status == "Waiting" &&
+                currentUser.role?.name == "Customer Support" ? (
+                  <Button
+                    onClick={() =>
+                      handleTicketStatusUpdateButtonClick("Pending")
+                    }
+                    title={"Send Admin"}
+                    varient="dark"
+                  />
+                ) : (
+                  ""
+                )}
+                {ticketData.status == "Waiting" ||
+                (ticketData.status == "Pending" &&
+                  currentUser.role?.name == "Admin") ? (
+                  <Button
+                    onClick={() =>
+                      handleTicketStatusUpdateButtonClick("Cancelled")
+                    }
+                    title={"Cancel"}
+                    varient="danger"
+                  />
+                ) : (
+                  ""
+                )}
+                {ticketData.status == "Waiting" ? (
+                  <Button
+                    onClick={() =>
+                      handleTicketStatusUpdateButtonClick("Completed")
+                    }
+                    title={"Complete"}
+                    varient="info"
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           {/* Properties */}
           <div className="w-full grid md:grid-cols-3 gap-2">
@@ -133,7 +157,7 @@ export default function TicketStatusPage() {
 
             <div className="flex flex-col gap-2 border border-gray-400 px-4 py-2">
               <h1 className="font-semibold">Status: </h1>
-              <p className="text-teal-700">{ticketData.status}</p>
+              <p className="text-sky-800">{ticketData.status}</p>
             </div>
             <div className="flex flex-col gap-2 border border-gray-400 px-4 py-2">
               <h1 className="font-semibold">Date: </h1>

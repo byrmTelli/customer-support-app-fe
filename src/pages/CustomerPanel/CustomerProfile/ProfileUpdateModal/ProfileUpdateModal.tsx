@@ -12,7 +12,7 @@ import { useAppDispatch } from "../../../../store/hooks";
 import { updateUserProfile } from "../../../../store/slices/user/userSlice";
 import useSetSafeTimeout from "use-set-safe-timeout";
 import { Spinner } from "../../../../components/Spinner";
-
+import placeholder from "../../../../assets/placeholder.jpg";
 export default function ProfileUpdateModal({
   ...props
 }: UpdateProfileModalProps) {
@@ -25,7 +25,7 @@ export default function ProfileUpdateModal({
   const setSafeTimeout = useSetSafeTimeout();
   const dispatch = useAppDispatch();
   const [imagePreview, setImagePreview] = useState<string>(
-    userData?.profileImage ?? ""
+    userData?.profileImage ?? placeholder
   );
   // Forms
   const userFullName = userData?.fullName?.split(" ") || [];
@@ -78,16 +78,18 @@ export default function ProfileUpdateModal({
     })
       .unwrap()
       .then((res) => {
-        toast.success(res.message);
-        dispatch(
-          updateUserProfile({
-            username: f.username,
-            fullName: `${f.name} ${f.surname}`,
-            profileImage: userNewImage,
-            phoneNumber: f.phone ?? "",
-            adress: f.adress ?? "",
-          })
-        );
+        if (res.success) {
+          toast.success(res.message);
+          dispatch(
+            updateUserProfile({
+              username: f.username,
+              fullName: `${f.name} ${f.surname}`,
+              profileImage: userNewImage,
+              phoneNumber: f.phone ?? "",
+              adress: f.adress ?? "",
+            })
+          );
+        }
 
         setSafeTimeout(props.onClose, 500);
       })
@@ -123,9 +125,9 @@ export default function ProfileUpdateModal({
                       type="file"
                       onChange={(e) => {
                         handleFileChange(e);
-                        field.onChange(e.target.files?.[0]); // Form'un image alanını güncelle
+                        field.onChange(e.target.files?.[0]);
                       }}
-                      className="file:mr-4 file:w-full file:py-2 file:px-4 file:border file:border-teal-700 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-700 hover:file:text-gray-200"
+                      className="file:mr-4 file:w-full file:py-2 file:px-4 file:border file:border-teal-700 file:text-sm file:font-semibold file:bg-teal-50 file:text-sky-800 hover:file:bg-sky-800 hover:file:text-gray-200"
                     />
                   )}
                 />
@@ -140,6 +142,7 @@ export default function ProfileUpdateModal({
                     <Input
                       {...field}
                       invalid={fieldState.error?.message}
+                      disabled
                       label={"Username"}
                     />
                   )}
@@ -199,7 +202,7 @@ export default function ProfileUpdateModal({
               </div>
             </div>
             <div className="w-full col-span-2 flex">
-              <button className="bg-teal-700 w-full p-2 text-gray-200 font-semibold flex items-center justify-center">
+              <button className="bg-sky-800 w-full p-2 text-gray-200 font-semibold flex items-center justify-center">
                 {updateUserMutation.isLoading ? (
                   <Spinner color={"success"} />
                 ) : (

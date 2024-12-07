@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserProfileViewModel } from "../../api/generated/generatedApiAuth";
+import placeholder from "../../../assets/placeholder.jpg";
+
 interface UserProfileExtraProps {
   accessToken: string | null;
   isAuthenticated: boolean;
@@ -19,7 +21,7 @@ const initialState: UserProfileInitialProps = {
   fullName: "",
   email: "",
   phoneNumber: "",
-  profileImage: "",
+  profileImage: placeholder,
   adress: "",
   role: {},
   accessToken: "",

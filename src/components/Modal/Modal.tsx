@@ -47,7 +47,7 @@ Modal.Header = function Header({ children }: ModalHeaderProps) {
   const context = useContext(ModalContext);
 
   return (
-    <div className="flex justify-between items-center px-6 py-6 bg-teal-700 text-gray-200 rounded-t-lg">
+    <div className="flex justify-between items-center px-6 py-6 bg-sky-800 text-gray-200 rounded-t-lg">
       <div className="w-2/3">{children}</div>
       <button
         className="text-gray-200 hover:text-gray-300"

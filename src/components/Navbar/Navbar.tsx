@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { userLogout } from "../../store/slices/user/userSlice";
 import { RoleViewModel } from "../../store/api/generated/generatedApiAuth";
 import { FaPowerOff } from "react-icons/fa6";
-
+import placeholder from "../../assets/placeholder.jpg";
 export default function Navbar() {
   const user = useAppSelector((state) => state.user);
 
@@ -57,7 +57,7 @@ export default function Navbar() {
           </div>
         )}
       </div>
-      <div className="md:h-[90px] shadow flex flex-col gap-2 md:flex-row items-center justify-between p-4 bg-teal-700 text-gray-200">
+      <div className="md:h-[90px] shadow flex flex-col gap-2 md:flex-row items-center justify-between p-4 bg-sky-800 text-gray-200">
         <div onClick={() => navigate("/")} className="cursor-pointer order-1">
           <span className="text-xl font-bold">CSS</span>
         </div>
@@ -91,17 +91,12 @@ export default function Navbar() {
         </div>
         {user.isAuthenticated ? (
           <div className="flex gap-4 items-center justify-center py-2 px-8 rounded-lg bg-teal-100 text-gray-800 order-2 md:order-3">
-            <div className="text-gray-800">
+            <div className="text-gray-800 capitalize">
               <p className="text-sm font-semibold">{user.fullName}</p>
               <p className="text-xs font-semibold">{user.role?.name}</p>
             </div>
             <img
-              src={
-                user.profileImage != null
-                  ? user.profileImage
-                  : "https://www.strasys.uk/wp-content/uploads/2022/02/Depositphotos_484354208_S.jpg"
-              }
-              alt=""
+              src={user.profileImage != null ? user.profileImage : placeholder}
               className="size-[50px] rounded-full object-cover"
             />
           </div>

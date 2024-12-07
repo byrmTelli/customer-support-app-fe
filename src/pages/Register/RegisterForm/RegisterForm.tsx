@@ -202,7 +202,7 @@ export default function RegisterForm() {
             )}
           />
         </div>
-        <button className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-teal-700 font-semibold text-gray-200 w-[7rem] h-[2.3rem]">
+        <button className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-sky-800 font-semibold text-gray-200 w-[7rem] h-[2.3rem]">
           Submit
         </button>
       </div>

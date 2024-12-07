@@ -1,5 +1,3 @@
-import { FaBell } from "react-icons/fa";
-import { FaHandshakeAngle } from "react-icons/fa6";
 import SimpleTable from "../../../components/SimpleTable/SimpleTable";
 import { apiTicket } from "../../../store/api/enhances/enhancedApiTicket";
 import Button from "../../../components/Buttons/Button/Button";
@@ -13,6 +11,12 @@ import { FaPenToSquare } from "react-icons/fa6";
 import { useState } from "react";
 import ProfileUpdateModal from "./ProfileUpdateModal/ProfileUpdateModal";
 import CustomerProfileTabs from "./CustomerProfileTabs/CustomerProfileTabs";
+import placeholder from "../../../assets/placeholder.jpg";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { IoLocationSharp } from "react-icons/io5";
+import { FaRegUserCircle } from "react-icons/fa";
 
 export default function CustomerProfile() {
   // States
@@ -47,7 +51,7 @@ export default function CustomerProfile() {
       <BreadCrum />
       <div className="grid grid-cols-4 p-4 border border-gray-400 gap-2">
         <div className="col-span-4 xl:col-span-1 w-full h-full p-4 flex flex-col shadow">
-          <div className="w-full grid place-items-end bg-teal-700 p-2">
+          <div className="w-full grid place-items-end bg-sky-800 p-2">
             <UpdateModalButton
               icon={<FaPenToSquare />}
               varient="dark"
@@ -59,44 +63,71 @@ export default function CustomerProfile() {
           <div className="w-full flex items-center justify-center relative border border-gray-400 ">
             <img
               className="p-4 rounded-full object-cover size-[200px]"
-              src={user.profileImage ?? ""}
+              src={user.profileImage ?? placeholder}
               alt=""
             />
           </div>
-          <div className="w-full grid grid-cols-5 bg-teal-700">
-            <div className="p-3 flex flex-col items-center justify-center cursor-pointer text-gray-200 hover:bg-teal-600">
-              <FaBell />
-              <p className="text-xs">Informations</p>
+          <div className="w-full grid grid-cols-2 bg-sky-800">
+            <div className="flex items-center p-4 border-r border-gray-200">
+              <p className="text-gray-200 font-semibold">User Informations</p>
             </div>
-            <div className="p-3 flex flex-col items-center justify-center cursor-pointer text-gray-200 hover:bg-teal-600">
-              <FaHandshakeAngle />
-              <p className="text-xs">Tickets (2)</p>
-            </div>
-          </div>
-          <div className="w-full p-4 flex flex-col gap-4 border border-gray-400 text-sm">
-            <div className="flex items-end gap-2">
-              <p className="text-xl font-semibold">{user.fullName}</p>
-              <p>
-                <span className="font-semibold">@</span>
-                {user.username}
+            <div className="flex items-center">
+              <p className="text-gray-200 font-semibold p-4">
+                Actions will be here...
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+          </div>
+          <div className="w-full flex flex-col gap-4 border border-gray-400 text-sm">
+            <div className="flex mt-3">
+              <div className="flex items-center p-2">
+                <FaRegUserCircle className="text-gray-700 text-xl" />
+              </div>
+              <div className="flex items-center gap-2">
+                <p className="text-xl capitalize font-semibold">
+                  {user.fullName}
+                </p>
+                <p className="">
+                  <span className="font-semibold">@</span>
+                  {user.username}
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2">
               <div className="col-span-2">
-                <p className="font-semibold bg-slate-300 p-2">Email</p>
-                <p className="p-2">{user.email}</p>
+                <p className="font-semibold bg-sky-800 p-2 text-gray-200">
+                  Email
+                </p>
+                <p className="px-2 py-4 flex items-center gap-2">
+                  <MdEmail className="text-gray-700 text-xl" />
+                  {user.email}
+                </p>
               </div>
               <div className="">
-                <p className="font-semibold bg-slate-300 p-2">Date</p>
-                <p className="p-2">{formatDateTime(user.createdAt ?? "")}</p>
+                <p className="font-semibold bg-sky-800 text-gray-200 p-2">
+                  Date
+                </p>
+                <p className="px-2 py-4 flex items-center gap-2">
+                  <FaRegCalendarAlt className="text-gray-700 text-xl" />
+                  {formatDateTime(user.createdAt ?? "")}
+                </p>
               </div>
               <div className="">
-                <p className="font-semibold bg-slate-300 p-2">Phone</p>
-                <p className="p-2">{user.phoneNumber}</p>
+                <p className="font-semibold bg-sky-800 text-gray-200 p-2">
+                  Phone
+                </p>
+                <p className="px-2 py-4 flex items-center gap-4">
+                  <FaPhoneAlt className="text-gray-700 text-xl" />{" "}
+                  {user.phoneNumber}
+                </p>
               </div>
               <div className="col-span-2">
-                <p className="font-semibold bg-slate-300 p-2">Adress</p>
-                <p className="p-2">{user.adress}</p>
+                <p className="font-semibold bg-sky-800 text-gray-200 p-2">
+                  Adress
+                </p>
+                <p className="px-2 py-4 flex items-center gap-2">
+                  <IoLocationSharp className="text-gray-700 text-xl" />
+                  {user.adress}
+                </p>
               </div>
             </div>
           </div>

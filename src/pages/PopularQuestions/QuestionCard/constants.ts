@@ -1,47 +1,47 @@
 export const popularQuestions = [
   {
-    title: "Ürün iadesi nasıl yapılır?",
+    title: "How to return a product?",
     content:
-      "Ürün iadesi yapmak için siparişinizi aldıktan sonra 14 gün içinde iade talebi oluşturabilirsiniz. Ürünü, orijinal ambalajında ve faturasıyla birlikte göndermeniz gerekmektedir. İade işlemi, ürün tarafımıza ulaştıktan sonra 5 iş günü içerisinde tamamlanır.",
+      "To return a product, you can create a return request within 14 days after receiving your order. You must send the product in its original packaging along with the invoice. The return process will be completed within 5 business days after the product is received by us.",
   },
   {
-    title: "Kargo ücreti ne kadar?",
+    title: "How much is the shipping fee?",
     content:
-      "Kargo ücreti siparişin ağırlığına ve teslimat adresine göre değişiklik gösterebilir. 500 TL üzeri alışverişlerde kargo ücretsizdir. Kargo takip bilgileri, siparişiniz kargoya verildiğinde e-posta yoluyla iletilir.",
+      "The shipping fee may vary depending on the weight of the order and the delivery address. Shipping is free for orders over 500 TL. Shipping tracking information will be sent to you via email when your order is shipped.",
   },
   {
-    title: "Üyelik oluşturmak zorunda mıyım?",
+    title: "Do I have to create an account?",
     content:
-      "Üyelik oluşturmadan da sipariş verebilirsiniz. Ancak, üyelik oluşturmak size sipariş takibi, geçmiş siparişlerinize erişim ve özel indirim fırsatlarından yararlanma imkanı sunar.",
+      "You can place an order without creating an account. However, creating an account allows you to track your orders, access your order history, and benefit from exclusive discounts.",
   },
   {
-    title: "Ürünlerin garantisi var mı?",
+    title: "Are the products under warranty?",
     content:
-      "Evet, tüm elektronik ürünler 2 yıl üretici garantisi altındadır. Garanti süresi boyunca, ürünlerde yaşanan arızalar için yetkili servislere başvurabilirsiniz.",
+      "Yes, all electronic products are covered by a 2-year manufacturer warranty. During the warranty period, you can contact authorized services for any malfunctions.",
   },
   {
-    title: "Siparişim ne zaman ulaşır?",
+    title: "When will my order arrive?",
     content:
-      "Siparişler, kargoya verildikten sonra 2-5 iş günü içerisinde teslim edilir. Kargo firmalarının çalışma saatlerine ve bölgesel yoğunluklara göre teslimat süresi değişiklik gösterebilir.",
+      "Orders are delivered within 2-5 business days after being shipped. The delivery time may vary depending on the working hours of courier companies and regional workloads.",
   },
   {
-    title: "Ödeme seçenekleri nelerdir?",
+    title: "What are the payment options?",
     content:
-      "Kredi kartı, banka kartı, havale/EFT ve kapıda ödeme gibi seçenekler sunulmaktadır. Tüm ödemeler, 256-bit SSL şifreleme ile güvenli bir şekilde alınır.",
+      "We offer payment options such as credit card, debit card, bank transfer/EFT, and cash on delivery. All payments are securely processed with 256-bit SSL encryption.",
   },
   {
-    title: "Siparişimi iptal edebilir miyim?",
+    title: "Can I cancel my order?",
     content:
-      "Evet, siparişinizi kargoya verilmeden önce iptal edebilirsiniz. Sipariş durumunu 'Hesabım' sayfasından takip ederek iptal işlemi gerçekleştirebilirsiniz.",
+      "Yes, you can cancel your order before it is shipped. You can track your order status and cancel it from the 'My Account' page.",
   },
   {
-    title: "Ürün stokta yoksa ne yapabilirim?",
+    title: "What should I do if the product is out of stock?",
     content:
-      "Stokta olmayan ürünler için 'Stoğa Gelince Haber Ver' seçeneğini kullanabilirsiniz. Ürün tekrar stoğa girdiğinde size e-posta veya SMS ile bilgi verilir.",
+      "For out-of-stock products, you can use the 'Notify Me When Back in Stock' option. You will be notified via email or SMS when the product is back in stock.",
   },
   {
-    title: "İndirim kuponumu nasıl kullanırım?",
+    title: "How do I use my discount coupon?",
     content:
-      "Ödeme ekranında, 'İndirim Kuponu' bölümüne sahip olduğunuz kupon kodunu girip ",
+      "On the payment screen, enter your coupon code in the 'Discount Coupon' section to redeem it.",
   },
 ];

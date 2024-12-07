@@ -218,7 +218,7 @@ export default function CreateNewSupport() {
                   <>
                     <label
                       htmlFor="file-upload"
-                      className="cursor-pointer flex items-center gap-4 justify-center px-4 py-2 bg-teal-700 text-white font-semibold rounded-lg hover:bg-teal-600"
+                      className="cursor-pointer flex items-center gap-4 justify-center px-4 py-2 bg-sky-800 text-white font-semibold rounded-lg hover:bg-teal-600"
                     >
                       <FaFileImport />
                       Dosya Seç
@@ -242,7 +242,7 @@ export default function CreateNewSupport() {
             <div className="w-full">
               <button
                 onClick={form.handleSubmit(handleCreateNewSupportButtonClick)}
-                className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-teal-700 font-semibold text-gray-200 w-full h-[2.3rem]"
+                className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-sky-800 font-semibold text-gray-200 w-full h-[2.3rem]"
               >
                 Onayla
               </button>

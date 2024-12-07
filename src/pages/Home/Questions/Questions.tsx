@@ -10,7 +10,7 @@ import { popularQuestions } from "../../PopularQuestions/QuestionCard/constants"
 const Questions = forwardRef<HTMLDivElement>((props, ref) => {
   const settings = {
     spaceBetween: 20,
-    slidesPerView: 2,
+    slidesPerView: 1,
     centeredSlides: true,
     pagination: { clickable: true },
     autoplay: { delay: 3000 },
@@ -20,10 +20,10 @@ const Questions = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <div
       ref={ref}
-      className="w-full min-h-screen bg-[url('https://img.freepik.com/free-photo/3d-rendering-business-meeting-working-room-office-building_105762-1972.jpg?t=st=1730138537~exp=1730142137~hmac=6e57c470b65555dbc0b2eae9eb77a247b91f1c9ad29cb82e04b259e35c625d12&w=1380')] flex flex-col items-center py-4 gap-4"
+      className="w-full min-h-screen bg-[url('/src/assets/mostpopularquestions.jpg')] bg-no-repeat bg-cover bg-center flex flex-col items-center py-4 gap-4"
     >
-      <div className="w-full h-full bg-slate-300 bg-opacity-60 flex flex-col items-center justify-center p-4">
-        <h1 className="text-teal-700 font-semibold text-4xl">
+      <div className="w-full h-full bg-sky-800 bg-opacity-50 flex flex-col items-center justify-center p-4">
+        <h1 className="text-gray-200 font-semibold text-4xl p-4 border border-gray-200 rounded-xl">
           Popular Questions
         </h1>
         <div className="w-full h-full flex items-center justify-center">

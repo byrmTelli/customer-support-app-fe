@@ -48,7 +48,7 @@ export default function AdminProfile() {
       <BreadCrum />
       <div className="grid grid-cols-4 p-4 border border-gray-400 gap-2">
         <div className="col-span-4 xl:col-span-1 w-full shadow p-4">
-          <div className="w-full grid place-items-end bg-teal-700 p-2">
+          <div className="w-full grid place-items-end bg-sky-800 p-2">
             <UpdateModalButton
               icon={<FaPenToSquare />}
               varient="dark"
@@ -64,7 +64,7 @@ export default function AdminProfile() {
               alt=""
             />
           </div>
-          <div className="w-full grid grid-cols-5 bg-teal-700">
+          <div className="w-full grid grid-cols-5 bg-sky-800">
             <div className="p-3 flex flex-col items-center justify-center cursor-pointer text-gray-200 hover:bg-teal-600">
               <FaBell />
               <p className="text-xs">Informations</p>

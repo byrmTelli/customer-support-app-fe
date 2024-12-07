@@ -124,7 +124,7 @@ export default function ProfileUpdateModal({
                         handleFileChange(e);
                         field.onChange(e.target.files?.[0]); // Form'un image alanını güncelle
                       }}
-                      className="file:mr-4 file:w-full file:py-2 file:px-4 file:border file:border-teal-700 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-700 hover:file:text-gray-200"
+                      className="file:mr-4 file:w-full file:py-2 file:px-4 file:border file:border-teal-700 file:text-sm file:font-semibold file:bg-teal-50 file:text-sky-800 hover:file:bg-sky-800 hover:file:text-gray-200"
                     />
                   )}
                 />
@@ -199,7 +199,7 @@ export default function ProfileUpdateModal({
               </div>
             </div>
             <div className="w-full col-span-2 flex">
-              <button className="bg-teal-700 w-full p-2 text-gray-200 font-semibold flex items-center justify-center">
+              <button className="bg-sky-800 w-full p-2 text-gray-200 font-semibold flex items-center justify-center">
                 {updateUserMutation.isLoading ? (
                   <Spinner color={"success"} />
                 ) : (

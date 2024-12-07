@@ -39,7 +39,7 @@ export default function SimpleTable<T extends Record<string, any>>({
 
   return (
     <div className="w-full flex flex-col ">
-      <div className="w-full pr-[0.5px] bg-teal-700 border-b border-b-gray-200">
+      <div className="w-full pr-[0.5px] bg-sky-800 border-b border-b-gray-200">
         <div className=" flex items-center  ml-[0.5px]">
           <div className="w-1/2   p-3">
             <h1 className="font-semibold text-gray-200">{title}</h1>
@@ -60,7 +60,7 @@ export default function SimpleTable<T extends Record<string, any>>({
         </div>
       </div>
       <table className="table-auto">
-        <thead className="bg-teal-700 text-gray-200 font-semibold">
+        <thead className="bg-sky-800 text-gray-200 font-semibold">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
@@ -128,14 +128,14 @@ export default function SimpleTable<T extends Record<string, any>>({
             <button
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
-              className="bg-teal-700 text-gray-200 font-semibold p-2 w-[5rem]"
+              className="bg-sky-800 text-gray-200 font-semibold p-2 w-[5rem]"
             >
               Previous
             </button>
             <button
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
-              className="bg-teal-700 text-gray-200 font-semibold p-2 w-[5rem]"
+              className="bg-sky-800 text-gray-200 font-semibold p-2 w-[5rem]"
             >
               Next
             </button>

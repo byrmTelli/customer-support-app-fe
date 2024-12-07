@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="min-h-[300px] bg-teal-700 text-gray-200 flex flex-col gap-4 items-center p-4">
+    <div className="min-h-[300px] bg-sky-800 text-gray-200 flex flex-col gap-4 items-center p-4">
       <h1 className="text-sm">
         {" "}
         Bu proje 2024-2025 Güz Dönemi grup web projesidir. Bayram Telli & Yeşim

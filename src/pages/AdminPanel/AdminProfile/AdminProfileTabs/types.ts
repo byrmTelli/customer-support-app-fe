@@ -1,5 +1,5 @@
-interface AdminProfileTabsComponentProps{
-    userId:number;
+interface AdminProfileTabsComponentProps {
+  userId: number;
 }
 
 export type AdminProfileTabsProps = AdminProfileTabsComponentProps;

@@ -81,7 +81,7 @@ export default function AddCommentForm({
             <button
               type="submit"
               onClick={form.handleSubmit(handleSubmitButtonClick)}
-              className="border border-gray-400 rounded-r-lg p-2 w-[6rem] flex items-center justify-center text-gray-200 bg-teal-700"
+              className="border border-gray-400 rounded-r-lg p-2 w-[6rem] flex items-center justify-center text-gray-200 bg-sky-800"
             >
               <FaRegArrowAltCircleUp className="text-2xl" />
             </button>

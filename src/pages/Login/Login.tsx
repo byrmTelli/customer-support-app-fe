@@ -70,14 +70,14 @@ export default function Login() {
     <div className="w-full h-full flex items-center justify-center">
       <div className="size-96 border border-gray-400 rounded-lg shadow-lg p-4 m-8">
         <div className="h-1/3 flex flex-col items-center justify-center select-none">
-          <h1 className="font-semibold text-teal-700">
+          <h1 className="font-semibold text-sky-800">
             Customer Support Service
           </h1>
           <h1 className="font-bold text-2xl">Login Panel</h1>
         </div>
         <form onSubmit={handleFormSubmit}>
           <div className="flex flex-col items-center justify-center gap-2 ">
-            <div className="border border-gray-400 rounded-lg p-2 flex gap-2 items-center text-gray-800 w-3/4 focus-within:border-teal-700 focus-within:text-teal-700">
+            <div className="border border-gray-400 rounded-lg p-2 flex gap-2 items-center text-gray-800 w-3/4 focus-within:border-teal-700 focus-within:text-sky-800">
               <FaRegCircleUser />
 
               <Controller
@@ -95,7 +95,7 @@ export default function Login() {
                 )}
               />
             </div>
-            <div className="border border-gray-400 rounded-lg p-2 flex gap-2 items-center text-gray-800 w-3/4 focus-within:border-teal-700 focus-within:text-teal-700">
+            <div className="border border-gray-400 rounded-lg p-2 flex gap-2 items-center text-gray-800 w-3/4 focus-within:border-teal-700 focus-within:text-sky-800">
               <FaRegCircleUser className="" />
               <Controller
                 name="password"
@@ -116,7 +116,7 @@ export default function Login() {
             <div className="flex text-xs items-center gap-2 justify-between w-3/4 px-2">
               <span
                 onClick={() => navigate("/forget-password")}
-                className="cursor-pointer font-semibold hover:text-teal-600"
+                className="cursor-pointer font-semibold hover:text-sky-600"
               >
                 Forget Password
               </span>
@@ -140,7 +140,7 @@ export default function Login() {
                 size="sm"
                 varient="success"
                 onClick={() => navigate("/register")}
-                className="w-full border border-teal-700 py-2 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-teal-700 font-semibold text-gray-200"
+                className="w-full border border-teal-700 py-2 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-sky-800 font-semibold text-gray-200"
                 title="Register"
               />
             </div>

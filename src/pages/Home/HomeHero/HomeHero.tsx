@@ -2,6 +2,8 @@ import { FaHandsHelping } from "react-icons/fa";
 import { TbMessageQuestion } from "react-icons/tb";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { HomeHeroProps } from "./types";
+import hemoHeroImage from "../../../assets/homepageheroimage.jpg";
+
 const fastLink = [
   {
     title: "Call Center",
@@ -16,14 +18,14 @@ const fastLink = [
     path: "/popular-questions",
   },
 ];
-
+console.log(hemoHeroImage);
 export default function HomeHero({ ...props }: HomeHeroProps) {
   return (
-    <div className="w-full min-h-screen grid grid-rows-3 bg-[url('https://img.freepik.com/free-photo/colleagues-working-together-call-center-with-headphones_23-2149256081.jpg?t=st=1730119912~exp=1730123512~hmac=91d294786dc14117be758078d568a25bbea2576eb34c8fc7e053c95f90bfcd07&w=1380')] relative">
+    <div className="w-full min-h-screen grid grid-rows-3 bg-[url('/src/assets/homepageheroimage.jpg')] relative">
       <div className="lg:h-1/4 p-4 w-full lg:w-1/3 gap-2 bg-white bg-opacity-20 absolute top-3/4 z-10 rounded-full  left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid grid-cols-2">
         <div
           onClick={props.scrollToCallCenter}
-          className=" p-2 bg-teal-700 hover:bg-teal-600 rounded-full flex flex-col items-center justify-center"
+          className=" p-2 bg-sky-800 hover:bg-teal-600 rounded-full flex flex-col items-center justify-center"
         >
           <div className="w-full p-2 flex items-center justify-center lg:h-1/2">
             <FaPhoneVolume className="text-5xl lg:text-7xl text-gray-200" />
@@ -36,7 +38,7 @@ export default function HomeHero({ ...props }: HomeHeroProps) {
         </div>
         <div
           onClick={props.scrollToQuestions}
-          className=" p-2 bg-teal-700 rounded-full flex flex-col items-center justify-center"
+          className=" p-2 bg-sky-800 hover:bg-teal-600  rounded-full flex flex-col items-center justify-center"
         >
           <div className="w-full p-2 flex items-center justify-center lg:h-1/2">
             <TbMessageQuestion className="text-5xl lg:text-7xl text-gray-200" />
@@ -48,7 +50,7 @@ export default function HomeHero({ ...props }: HomeHeroProps) {
           </div>
         </div>
       </div>
-      <div className="row-span-2 flex items-center justify-center bg-opacity-50 bg-teal-700 relative">
+      <div className="row-span-2 flex items-center justify-center bg-opacity-50 bg-sky-800 relative">
         <div className="h-2/4">
           <h1 className="text-6xl text-gray-200">
             <span className="text-teal-500 font-bold">67 </span> Country,{" "}

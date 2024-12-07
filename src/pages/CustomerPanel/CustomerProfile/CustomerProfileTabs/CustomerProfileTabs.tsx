@@ -3,11 +3,13 @@ import { TabList, Tabs, Tab, TabPanel } from "../../../../components/Tab/Tab";
 import { formatDateTime } from "../../../../utils/utilsDate";
 import { apiNotification } from "../../../../store/api/enhances/enhancedApiAdmin copy";
 import { CustomerProfileTabsProps } from "./types";
+import { useNavigate } from "react-router-dom";
 
 export default function CustomerProfileTabs({
   userId,
 }: CustomerProfileTabsProps) {
   // States
+  const navigate = useNavigate();
   // Queries
   const ticketNotificationtsQuery =
     apiNotification.useGetApiNotificationGetTicketNotificationOfUserQuery({
@@ -51,6 +53,7 @@ export default function CustomerProfileTabs({
           {ticketNotificationts.map((item, key) => (
             <div
               key={key}
+              onClick={() => navigate(`/ticket-status/${item.ticketId}`)}
               className="w-full flex border border-gray-300 p-4 text-sm hover:bg-gray-100"
             >
               <div className="w-3/4 grid grid-cols-3 items-center">

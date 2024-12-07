@@ -12,8 +12,18 @@ export const CreateNewSupportFormDefaults = {
 
 export const CreateNewSupportFormSchema = yup.object().shape({
   id: yup.number().required("id field is required."),
-  title: yup.string().required("title field is required."),
-  content: yup.string().required("content field is required."),
+  title: yup
+    .string()
+    .required("Title field is required.")
+    .matches(/^[a-zA-Z\s]+$/, "Title can only contain letters and spaces")
+    .min(3, "Title must be at least 3 characters")
+    .max(50, "Title must be at most 50 characters"),
+  content: yup
+    .string()
+    .required("Content field is required.")
+    .matches(/^[a-zA-Z\s]+$/, "Title can only contain letters and spaces")
+    .min(3, "Content must be at least 3 characters")
+    .max(300, "Content must be at most 50 characters"),
   category: yup
     .object()
     .required("Category field is required.")

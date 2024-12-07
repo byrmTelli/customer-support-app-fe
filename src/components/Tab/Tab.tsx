@@ -1,4 +1,4 @@
-import  { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 // Prop Tanımlamaları
 interface TabsComponentProps {
@@ -18,7 +18,7 @@ interface TabComponentProps {
 interface TabPanelComponentProps {
   children: ReactNode;
   index: number;
-  className?:string;
+  className?: string;
 }
 
 interface TabContextProps {
@@ -55,7 +55,9 @@ export const Tabs = ({ children, defaultIndex = 0 }: TabsComponentProps) => {
 
   return (
     <TabsContext.Provider value={value}>
-      <div className="tabs flex flex-col w-full border h-full border-gray-200 p-2">{children}</div>
+      <div className="tabs flex flex-col w-full border h-full border-gray-200 p-2">
+        {children}
+      </div>
     </TabsContext.Provider>
   );
 };
@@ -84,10 +86,20 @@ export const Tab = ({ children, index }: TabComponentProps) => {
 };
 
 // TabPanel Bileşeni
-export const TabPanel = ({ children, index,className }: TabPanelComponentProps) => {
+export const TabPanel = ({
+  children,
+  index,
+  className,
+}: TabPanelComponentProps) => {
   const { activeIndex } = useTabsContext();
 
   if (activeIndex !== index) return null;
 
-  return <div className={`tab-panel flex-1 overflow-auto p-2 border border-gray-300 rounded-br-lg ${className}`}>{children}</div>;
+  return (
+    <div
+      className={`tab-panel flex-1 overflow-auto p-2 border border-gray-300 rounded-br-lg ${className}`}
+    >
+      {children}
+    </div>
+  );
 };

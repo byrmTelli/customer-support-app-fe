@@ -15,11 +15,10 @@ export default function Button({
       "border-gray-600 text-gray-600 hover:bg-gray-700 hover:text-gray-200",
     dark: "bg-gray-700 text-gray-200 border-gray-700 hover:bg-gray-50 hover:text-gray-700",
     success:
-      "bg-teal-700 text-gray-200 border-teal-700 hover:bg-gray-50 hover:text-teal-700",
+      "bg-sky-800 text-gray-200 border-teal-700 hover:bg-gray-50 hover:text-sky-800",
     danger:
       "bg-rose-700 text-gray-200 border-rose-700 hover:bg-gray-50 hover:text-rose-700",
-      info:
-      "bg-sky-700 text-gray-200 border-sky-700 hover:bg-gray-50 hover:text-sky-700",
+    info: "bg-sky-800 text-gray-200 border-sky-700 hover:bg-gray-50 hover:text-sky-700",
   };
 
   const sizes = {

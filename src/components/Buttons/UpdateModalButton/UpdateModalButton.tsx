@@ -11,11 +11,10 @@ export default function UpdateModalButton({
   ...props
 }: UpdateModalButtonProps) {
   const varients = {
-    light:
-      "border-teal-600 text-teal-600 hover:bg-teal-700 hover:text-teal-200",
-    dark: "bg-teal-700 text-teal-200 border-teal-700 hover:bg-teal-50 hover:text-teal-700",
+    light: "border-teal-600 text-sky-600 hover:bg-sky-800 hover:text-teal-200",
+    dark: "bg-sky-800 text-teal-200 border-teal-700 hover:bg-teal-50 hover:text-sky-800",
     success:
-      "bg-teal-700 text-teal-200 border-teal-700 hover:bg-teal-50 hover:text-teal-700",
+      "bg-sky-800 text-teal-200 border-teal-700 hover:bg-teal-50 hover:text-sky-800",
   };
 
   const sizes = {

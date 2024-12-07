@@ -35,7 +35,7 @@ export default function CategoriesPage() {
           <div
             key={index}
             onClick={() => navigate(`/admin/categories/${item.id}`)}
-            className="w-full flex items-center gap-1 justify-center text-gray-200 font-semibold hover:bg-teal-700 border-r border-gray-200 "
+            className="w-full flex items-center gap-1 justify-center text-gray-200 font-semibold hover:bg-sky-800 border-r border-gray-200 "
           >
             <p className="text-center text-sm p-2">{item.name}</p>
           </div>
