@@ -7,7 +7,6 @@ import { Select } from "../../../../components/Select";
 import { apiAdmin } from "../../../../store/api/enhances/enhancedApiAdmin";
 import { toast } from "react-toastify";
 import Button from "../../../../components/Buttons/Button/Button";
-import { AssignRoleViewModel } from "../../../../store/api/generated/generatedApiAdmin";
 
 export default function AssignRoleModal({ ...props }: ASsignRoleModalProps) {
   // States
@@ -39,6 +38,7 @@ export default function AssignRoleModal({ ...props }: ASsignRoleModalProps) {
       .then((res) => {
         if (res.code == 200) {
           toast.success(res.message);
+          props.onClose();
         }
       })
       .catch((err) => {

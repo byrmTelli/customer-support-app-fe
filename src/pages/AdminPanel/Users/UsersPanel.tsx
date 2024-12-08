@@ -4,10 +4,18 @@ import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton"
 import InspectButton from "../../../components/Buttons/InspectButton/InspectButton";
 import SimpleTable from "../../../components/SimpleTable/SimpleTable";
 import { apiUser } from "../../../store/api/enhances/enhancedApiUser";
+import { useState } from "react";
+import Button from "../../../components/Buttons/Button/Button";
+import AssignRoleModal from "../Customers/AssignRoleModal/AssignRoleModal";
 
 export default function UsersPanel() {
   // States
   const navigate = useNavigate();
+  const [selectedUsersRole, setSelectedUsersRole] = useState({
+    id: 0,
+    roleName: "",
+  });
+  const [isAssignRoleModalOpen, setIsAssignRoleModalOpen] = useState(false);
   // Queries
   const getHelpdesksQuery =
     apiUser.useGetApiUserGetHeldesksProfileListForAdminPanelQuery();
@@ -19,6 +27,13 @@ export default function UsersPanel() {
   return (
     <div className="w-full h-full">
       <BreadCrum />
+      {isAssignRoleModalOpen && (
+        <AssignRoleModal
+          requestModel={selectedUsersRole}
+          isOpen={isAssignRoleModalOpen}
+          onClose={() => setIsAssignRoleModalOpen(false)}
+        />
+      )}
       <div className="p-4">
         <SimpleTable
           title="Users"
@@ -52,6 +67,18 @@ export default function UsersPanel() {
                     onClick={() => {
                       navigate(`/admin/user/${cell.row.original.id}`);
                     }}
+                  />
+                  <Button
+                    onClick={() => {
+                      setSelectedUsersRole({
+                        id: cell.row.original.id ?? 0,
+                        roleName: cell.row.original.role?.name ?? "",
+                      });
+                      setIsAssignRoleModalOpen(true);
+                    }}
+                    color="primary"
+                    title="Manage Role"
+                    size="sm"
                   />
                   <DeleteButton className="" />
                 </div>
