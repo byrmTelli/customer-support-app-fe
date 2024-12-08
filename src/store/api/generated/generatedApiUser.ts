@@ -1,6 +1,19 @@
 import { customerSupportAppApi as api } from "../customerSupportAppApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
+    postApiAdminAssignRoleToUser: build.mutation<
+      PostApiAdminAssignRoleToUserApiResponse,
+      PostApiAdminAssignRoleToUserApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/Admin/AssignRoleToUser`,
+        method: "POST",
+        params: {
+          UserId: queryArg.userId,
+          RoleId: queryArg.roleId,
+        },
+      }),
+    }),
     getApiAuthGetUserProfile: build.query<
       GetApiAuthGetUserProfileApiResponse,
       GetApiAuthGetUserProfileApiArg
@@ -126,6 +139,12 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as generatedUser };
+export type PostApiAdminAssignRoleToUserApiResponse =
+  /** status 200 OK */ IResultRead;
+export type PostApiAdminAssignRoleToUserApiArg = {
+  userId?: number;
+  roleId?: number;
+};
 export type GetApiAuthGetUserProfileApiResponse =
   /** status 200 OK */ UserProfileViewModelIDataResultRead;
 export type GetApiAuthGetUserProfileApiArg = void;
@@ -180,6 +199,12 @@ export type PostApiUserSendPasswordResetEmailApiResponse =
   /** status 200 OK */ string;
 export type PostApiUserSendPasswordResetEmailApiArg = {
   emailAdress?: string;
+};
+export type IResult = {};
+export type IResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
 };
 export type RoleViewModel = {
   name?: string | null;
@@ -268,12 +293,6 @@ export type TicketViewModelListIDataResultRead = {
   message?: string | null;
   code?: number;
   data?: TicketViewModel[] | null;
-};
-export type IResult = {};
-export type IResultRead = {
-  success?: boolean;
-  message?: string | null;
-  code?: number;
 };
 export type UserProfileForAdminPanelViewModel = {
   id?: number;

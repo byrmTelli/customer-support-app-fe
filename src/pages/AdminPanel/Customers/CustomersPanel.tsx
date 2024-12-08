@@ -5,10 +5,18 @@ import InspectButton from "../../../components/Buttons/InspectButton/InspectButt
 import SimpleTable from "../../../components/SimpleTable/SimpleTable";
 import { apiUser } from "../../../store/api/enhances/enhancedApiUser";
 import { formatDateTime } from "../../../utils/utilsDate";
+import Button from "../../../components/Buttons/Button/Button";
+import { useState } from "react";
+import AssignRoleModal from "./AssignRoleModal/AssignRoleModal";
 
 export default function CustomersPanel() {
   // States
   const navigate = useNavigate();
+  const [selectedUsersRole, setSelectedUsersRole] = useState({
+    id: 0,
+    roleName: "",
+  });
+  const [isAssignRoleModalOpen, setIsAssignRoleModalOpen] = useState(false);
   // Queries
   const getCustomersProfileListQuery =
     apiUser.useGetApiUserGetCustomerProfileListForAdminPanelQuery();
@@ -19,6 +27,13 @@ export default function CustomersPanel() {
   return (
     <div className="w-full h-full">
       <BreadCrum />
+      {isAssignRoleModalOpen && (
+        <AssignRoleModal
+          requestModel={selectedUsersRole}
+          isOpen={isAssignRoleModalOpen}
+          onClose={() => setIsAssignRoleModalOpen(false)}
+        />
+      )}
       <div className="p-4">
         <SimpleTable
           title="Customers"
@@ -57,6 +72,18 @@ export default function CustomersPanel() {
                     }
                     color="primary"
                     title="Inspect"
+                    size="sm"
+                  />
+                  <Button
+                    onClick={() => {
+                      setSelectedUsersRole({
+                        id: cell.row.original.id ?? 0,
+                        roleName: cell.row.original.role?.name ?? "",
+                      });
+                      setIsAssignRoleModalOpen(true);
+                    }}
+                    color="primary"
+                    title="Manage Role"
                     size="sm"
                   />
                   <DeleteButton size="sm" title="Delete" className="" />

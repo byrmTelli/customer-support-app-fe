@@ -1,6 +1,25 @@
 import { customerSupportAppApi as api } from "../customerSupportAppApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
+    getApiAdminGetRoles: build.query<
+      GetApiAdminGetRolesApiResponse,
+      GetApiAdminGetRolesApiArg
+    >({
+      query: () => ({ url: `/api/Admin/GetRoles` }),
+    }),
+    postApiAdminAssignRoleToUser: build.mutation<
+      PostApiAdminAssignRoleToUserApiResponse,
+      PostApiAdminAssignRoleToUserApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/Admin/AssignRoleToUser`,
+        method: "POST",
+        params: {
+          UserId: queryArg.userId,
+          RoleId: queryArg.roleId,
+        },
+      }),
+    }),
     getApiAdminGetCategoriesPageStatistics: build.query<
       GetApiAdminGetCategoriesPageStatisticsApiResponse,
       GetApiAdminGetCategoriesPageStatisticsApiArg
@@ -51,6 +70,15 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as generatedAdmin };
+export type GetApiAdminGetRolesApiResponse =
+  /** status 200 OK */ AssignRoleViewModelListIDataResultRead;
+export type GetApiAdminGetRolesApiArg = void;
+export type PostApiAdminAssignRoleToUserApiResponse =
+  /** status 200 OK */ IResultRead;
+export type PostApiAdminAssignRoleToUserApiArg = {
+  userId?: number;
+  roleId?: number;
+};
 export type GetApiAdminGetCategoriesPageStatisticsApiResponse =
   /** status 200 OK */ CategoriesPageViewModelIDataResultRead;
 export type GetApiAdminGetCategoriesPageStatisticsApiArg = {
@@ -73,6 +101,23 @@ export type GetApiUserGetCustomerProfileListForAdminPanelApiArg = void;
 export type GetApiUserGetHeldesksProfileListForAdminPanelApiResponse =
   /** status 200 OK */ UserProfileViewModelListIDataResultRead;
 export type GetApiUserGetHeldesksProfileListForAdminPanelApiArg = void;
+export type AssignRoleViewModelListIDataResult = {};
+export type AssignRoleViewModel = {
+  id?: number;
+  name?: string | null;
+};
+export type AssignRoleViewModelListIDataResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+  data?: AssignRoleViewModel[] | null;
+};
+export type IResult = {};
+export type IResultRead = {
+  success?: boolean;
+  message?: string | null;
+  code?: number;
+};
 export type CategoryViewModel = {
   id?: number;
   name?: string | null;

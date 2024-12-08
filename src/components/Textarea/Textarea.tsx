@@ -19,7 +19,7 @@ function Textarea(
             className={classNames(
               "block mb-2 text-sm font-medium w-full truncate",
               {
-                "text-gray-900 dark:text-gray-300": isInvalid === false,
+                "text-gray-600 dark:text-gray-300": isInvalid === false,
                 "text-red-700 dark:text-red-500": isInvalid,
               }
             )}
@@ -33,8 +33,8 @@ function Textarea(
         disabled={disabled}
         {...textareaProps}
         className={twMerge(
-          classNames(" sm:text-sm block w-full p-2.5", {
-            "bg-gray-50 border border-gray-400 text-gray-900 focus:ring-cyan-600 focus:border-cyan-600":
+          classNames(" sm:text-sm block w-full p-2.5 rounded-lg", {
+            "bg-gray-50 border border-gray-300 text-gray-900 focus:ring-cyan-600 focus:border-cyan-600":
               isInvalid === false,
             "bg-red-50 border border-red-500 text-red-900 placeholder-red-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500":
               isInvalid,
