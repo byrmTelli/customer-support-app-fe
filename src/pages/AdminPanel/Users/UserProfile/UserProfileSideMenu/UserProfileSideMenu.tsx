@@ -47,7 +47,7 @@ export default function UserProfileSideMenu({
           </div>
           <div className="place-items-end px-4">
             {user.isApproved && user.isApproved == true ? (
-              <button className="flex flex-col items-center gap-1 hover:bg-teal-600 p-1 rounded-full">
+              <button className="flex flex-col items-center gap-1 hover:bg-teal-600 p-1 rounded-full size-[4rem] justify-center">
                 <FaBan />
                 <p className="text-xs">Ban User</p>
               </button>

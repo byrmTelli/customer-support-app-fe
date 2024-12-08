@@ -13,10 +13,12 @@ import { FaPenToSquare } from "react-icons/fa6";
 import { useState } from "react";
 import ProfileUpdateModal from "./ProfileUpdateModal/ProfileUpdateModal";
 import AdminProfileTabs from "./AdminProfileTabs/AdminProfileTabs";
+import { useAppSelector } from "../../../store/hooks";
 
 export default function AdminProfile() {
   // States
   const navigate = useNavigate();
+  const currentUser = useAppSelector((state) => state.user);
   const [isProfileUpdateModalOpen, setIsProfileUpdateModalOpen] =
     useState<boolean>(false);
   // Queries
@@ -24,12 +26,11 @@ export default function AdminProfile() {
   const user = getUsersProfile.data?.data ?? {};
 
   const getTickets = apiTicket.useGetApiTicketGetTicketsOfUserQuery({
-    id: user.id,
+    id: currentUser.id,
   });
 
   // Memorize
   const tickets = getTickets.data?.data ?? [];
-  console.log(user);
   // Handlers
 
   const tableData = tickets.map((item) => ({
@@ -107,7 +108,7 @@ export default function AdminProfile() {
 
         <div className="col-span-4 xl:col-span-3 grid w-full p-4 gap-2">
           <div className="w-full row-span-3 flex flex-col shadow border border-gray-400">
-            <AdminProfileTabs userId={user.id ?? 0} />
+            <AdminProfileTabs userId={currentUser.id ?? 0} />
           </div>
           <div className="w-full border border-gray-400 row-span-3 shadow">
             <div className="w-full">

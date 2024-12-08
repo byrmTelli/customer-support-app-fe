@@ -8,6 +8,7 @@ export default function Button({
   icon,
   varient,
   size,
+  isLoading,
   ...props
 }: ButtonProps) {
   const varients = {
@@ -31,12 +32,12 @@ export default function Button({
   const currentSize = sizes[size ? size : "md"];
   return (
     <button
-      disabled={props.isLoading ? true : false}
+      disabled={isLoading ? true : false}
       className={`px-3 py-1  select-none group border font-semibold lg:min-w-[6rem] flex items-center justify-center gap-2 transition-color duration-200 rounded-md ${className} ${currentVarient} ${currentSize}`}
       type={type}
       {...props}
     >
-      {props.isLoading == true ? (
+      {isLoading == true ? (
         <Spinner className="w-4" color={"success"} />
       ) : (
         <p className="text-xs flex gap-2 items-center py-1">

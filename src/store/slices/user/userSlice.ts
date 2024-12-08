@@ -56,7 +56,7 @@ export const userSlice = createSlice({
       }
     },
     logout: (state) => {
-      state.isAuthenticated = false;
+      Object.assign(state, initialState);
       localStorage.removeItem("accessToken");
     },
     setAccessToken: (state, action: PayloadAction<string>) => {

@@ -10,7 +10,6 @@ import { apiUser } from "../../../store/api/enhances/enhancedApiUser";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Checkbox from "../../../components/Checkbox/Checkbox";
-import { ChangeEventHandler } from "react";
 
 export default function RegisterForm() {
   // States
@@ -23,14 +22,6 @@ export default function RegisterForm() {
     resolver: yupResolver(registerUserFormSchema),
   });
   // Handlers
-
-  const handlePrivacyPolicyCheckboxSelected: ChangeEventHandler<
-    HTMLInputElement
-  > = (e) => {
-    form.setValue("privacyPolicy", e.currentTarget.checked, {
-      shouldDirty: true,
-    });
-  };
 
   const handleRegisterButtonClick = () => {
     const f = form.getValues();
@@ -60,7 +51,10 @@ export default function RegisterForm() {
   };
   return (
     <form
-      onSubmit={form.handleSubmit(handleRegisterButtonClick)}
+      onSubmit={(e) => {
+        e.preventDefault();
+        form.handleSubmit(handleRegisterButtonClick)();
+      }}
       className="grid sm:grid-cols-2 gap-2 md:gap-4 w-full h-full pt-4"
     >
       <div className="">
@@ -196,13 +190,20 @@ export default function RegisterForm() {
                 invalid={fieldState.error?.message}
                 tabIndex={9}
                 defaultChecked={field.value}
-                onChange={(e) => field.onChange(e.target.checked)}
+                onChange={(e) => {
+                  form.setValue("privacyPolicy", e.target.checked, {
+                    shouldDirty: true,
+                  });
+                }}
                 text="Privacy Policy"
               />
             )}
           />
         </div>
-        <button className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-sky-800 font-semibold text-gray-200 w-[7rem] h-[2.3rem]">
+        <button
+          type="submit"
+          className="border border-teal-700 py-1 px-4 rounded-lg hover:bg-teal-600 hover:border-teal-600 bg-sky-800 font-semibold text-gray-200 w-[7rem] h-[2.3rem]"
+        >
           Submit
         </button>
       </div>
