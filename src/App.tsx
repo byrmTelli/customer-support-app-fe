@@ -41,7 +41,7 @@ export const pages = [
   },
   {
     path: "/admin",
-    breadCrum: "admin",
+    breadCrum: "admin panel",
     component: <AdminPanel />,
     auth: ["Admin"],
   },

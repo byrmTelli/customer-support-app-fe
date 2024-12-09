@@ -6,7 +6,8 @@ import hemoHeroImage from "../../../assets/homepageheroimage.jpg";
 console.log(hemoHeroImage);
 export default function HomeHero({ ...props }: HomeHeroProps) {
   return (
-    <div className="w-full min-h-screen grid grid-rows-3 bg-[url('/src/assets/homepageheroimage.jpg')] relative">
+    <div className="w-full min-h-screen grid grid-rows-3 relative">
+      <div className="bg-[url('/src/assets/homepageheroimage.jpg')]  absolute t-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat -z-10"></div>
       <div className="lg:h-1/3 p-4 w-full lg:w-1/3 gap-2 bg-white bg-opacity-20 absolute top-3/4 z-10 rounded-full  left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid grid-cols-2">
         <div
           onClick={props.scrollToCallCenter}

@@ -68,7 +68,6 @@ export default function CreateNewSupport() {
   };
 
   useEffect(() => {
-    // selectedFiles değiştiğinde form value'yu günceller
     form.setValue("files", selectedFiles);
   }, [selectedFiles, form.setValue]);
 
@@ -83,7 +82,7 @@ export default function CreateNewSupport() {
     <div>
       <BreadCrum />
       <div className="w-full flex justify-center px-4 py-4">
-        <div className="lg:w-3/5 flex flex-col gap-4 py-4">
+        <div className="lg:w-3/5 flex flex-col gap-4 p-6 shadow-md rounded-lg">
           <div className="p-2">
             <h1 className="font-semibold">Information</h1>
             <p className="mt-4">

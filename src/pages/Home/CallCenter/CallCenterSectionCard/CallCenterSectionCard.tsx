@@ -27,9 +27,9 @@ export default function CallCenterSectionCard({
           </button>
         </div>
       </div>
-      <div className="rounded-lg p-4 h-full flex items-center justify-center w-full size-[300px] md:size-[450px] lg:size-[500px] order-1 md:order-2">
+      <div className="p-1 h-full flex items-center justify-center w-full size-[300px] md:size-[450px] lg:size-[500px] order-1 md:order-2 bg-white rounded-full">
         <img
-          className="rounded-full size-[300px] md:size-[450px] lg:size-[500px] object-cover p-4"
+          className="rounded-full h-full object-cover p-4"
           src={item.image}
           alt=""
         />

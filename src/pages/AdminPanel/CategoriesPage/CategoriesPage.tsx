@@ -30,7 +30,7 @@ export default function CategoriesPage() {
 
   return (
     <div className="w-full flex flex-col">
-      <div className="bg-teal-600 h-full grid grid-cols-10 py-1">
+      <div className="bg-sky-700 h-full grid grid-cols-10 py-1">
         {categoryData.map((item, index) => (
           <div
             key={index}
@@ -48,7 +48,7 @@ export default function CategoriesPage() {
             {categoriesPageStatisticsData.category?.name ?? ""}
           </h1>
         </div>
-        <div className="w-full bg-teal-600 text-gray-200 py-4">
+        <div className="w-full bg-sky-700 text-gray-200 py-4">
           <h1 className="font-semibold text-xl pl-4">Stats</h1>
         </div>
         <div className="grid grid-cols-4 gap-4">
@@ -83,7 +83,7 @@ export default function CategoriesPage() {
             />
           </div>
         </div>
-        <div className="w-full bg-teal-600 text-gray-200 py-4">
+        <div className="w-full bg-sky-700 text-gray-200 py-4">
           <h1 className="font-semibold text-xl pl-4">Charts</h1>
         </div>
         <div className="grid grid-cols-2 gap-4">
