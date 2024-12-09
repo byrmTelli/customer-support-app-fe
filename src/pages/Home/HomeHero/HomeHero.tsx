@@ -1,28 +1,13 @@
-import { FaHandsHelping } from "react-icons/fa";
 import { TbMessageQuestion } from "react-icons/tb";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { HomeHeroProps } from "./types";
 import hemoHeroImage from "../../../assets/homepageheroimage.jpg";
 
-const fastLink = [
-  {
-    title: "Call Center",
-    icon: <FaHandsHelping />,
-    content: "Content here",
-    path: "/support/create",
-  },
-  {
-    title: "Popular Questions",
-    icon: <TbMessageQuestion />,
-    content: "Content here",
-    path: "/popular-questions",
-  },
-];
 console.log(hemoHeroImage);
 export default function HomeHero({ ...props }: HomeHeroProps) {
   return (
     <div className="w-full min-h-screen grid grid-rows-3 bg-[url('/src/assets/homepageheroimage.jpg')] relative">
-      <div className="lg:h-1/4 p-4 w-full lg:w-1/3 gap-2 bg-white bg-opacity-20 absolute top-3/4 z-10 rounded-full  left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid grid-cols-2">
+      <div className="lg:h-1/3 p-4 w-full lg:w-1/3 gap-2 bg-white bg-opacity-20 absolute top-3/4 z-10 rounded-full  left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid grid-cols-2">
         <div
           onClick={props.scrollToCallCenter}
           className=" p-2 bg-sky-800 hover:bg-teal-600 rounded-full flex flex-col items-center justify-center"

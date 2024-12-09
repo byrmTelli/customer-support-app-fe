@@ -56,6 +56,7 @@ export const userSlice = createSlice({
       }
     },
     logout: (state) => {
+      document.location.href = "/";
       Object.assign(state, initialState);
       localStorage.removeItem("accessToken");
     },
